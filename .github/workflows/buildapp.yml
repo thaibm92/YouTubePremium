@@ -49,6 +49,13 @@ jobs:
           ref: 4bcc52914e0eeca719288522938185decaa8a1cb
           path: theos
           submodules: recursive
+
+      - name: Checkout PoomSmart/YouTubeHeader
+        uses: actions/checkout@main
+        with:
+          repository: PoomSmart/YouTubeHeader
+          ref: main
+          path: YouTubeHeader
       
       - name: SDK Caching
         id: SDK
