@@ -91,12 +91,12 @@ jobs:
           sudo ln -sf ~/Azule/azule /usr/local/bin/azule
 
       - name: Prepare YouTube iPA
-        id: prepare_youtube_music
+        id: prepare_youtube
         run: |
           wget "$YOUTUBE_MUSIC_URL" --no-verbose -O main/YouTube.ipa
 
         env:
-          YOUTUBE_MUSIC_URL: ${{ inputs.decrypted_youtube_music_url }}    
+          YOUTUBE_MUSIC_URL: ${{ inputs.decrypted_youtube_url }}    
 
       - name: Build Tweak for Sideloading
         id: build_package
@@ -112,17 +112,17 @@ jobs:
           cd ${{ github.workspace }}/main/packages
           tweakName=$(ls)
           cd ${{ github.workspace }}/main
-          ./Azule/azule -i $PWD/YouTubeMusic.ipa -o $PWD/packages/YTMusicUltimate.ipa -f $PWD/packages/$tweakName 
+          ./Azule/azule -i $PWD/YouTube.ipa -o $PWD/packages/YouTubePremium.ipa -f $PWD/packages/$tweakName 
 
       - name: Remove the Watch folder
         run: |
           cd ${{ github.workspace }}/main/packages
-          mv YTMusicUltimate.ipa YTMusicUltimate.zip
-          unzip YTMusicUltimate.zip
-          cd Payload/YoutubeMusic.app
+          mv YouTubePremium.ipa YouTubePremium.zip
+          unzip YouTubePremium.zip
+          cd Payload/YouTube.app
           rm -rf Watch
           cd ../..
-          zip -r YouTube_Music_Premium_v.ipa Payload
+          zip -r YouTube_Premium_v.ipa Payload
           rm -rf Payload    
 
       - name: Create Release
