@@ -24,31 +24,25 @@ concurrency:
 jobs:
   build:
     name: Build YouTube Premium
-    runs-on: macos-12
-    permissions:
-      contents: write
-
+    runs-on: macos-latest
     steps:
-      - name: Checkout Main
-        uses: actions/checkout@v4.1.1
+      - uses: actions/checkout@main
+      
+      - name: Checkout RootHide/theos
+        uses: actions/checkout@main
         with:
-          path: main
+          repository: RootHide/theos
+          ref: master
           submodules: recursive
-
-      - name: Install Dependencies
-        run: brew install ldid dpkg make
-              
-
-      - name: Set PATH environment variable
-        run: echo "$(brew --prefix make)/libexec/gnubin" >> $GITHUB_PATH 
-
-      - name: Setup Theos
-        uses: actions/checkout@v4.1.1
-        with:
-          repository: theos/theos
-          ref: 4bcc52914e0eeca719288522938185decaa8a1cb
           path: theos
-          submodules: recursive
+
+      - name: Checkout chrisharper22/sdks
+        uses: actions/checkout@main
+        with:
+          repository: chrisharper22/sdks
+          ref: main
+          sparse-checkout: iPhoneOS16.2.sdk
+          path: theos/sdks
 
       - name: Checkout PoomSmart/YouTubeHeader
         uses: actions/checkout@main
@@ -56,41 +50,6 @@ jobs:
           repository: PoomSmart/YouTubeHeader
           ref: main
           path: YouTubeHeader
-      
-      - name: SDK Caching
-        id: SDK
-        uses: actions/cache@v4.0.1
-        env:
-          cache-name: iOS-${{ inputs.sdk_version }}-SDK
-        with:
-          path: theos/sdks/
-          key: ${{ env.cache-name }}
-          restore-keys: ${{ env.cache-name }}
-
-      - name: Download iOS SDK
-        if: steps.SDK.outputs.cache-hit != 'true'
-        run: |
-          git clone --quiet -n --depth=1 --filter=tree:0 https://github.com/arichorn/sdks/
-          cd sdks
-          git sparse-checkout set --no-cone iPhoneOS${{ inputs.sdk_version }}.sdk
-          git checkout
-          mv *.sdk $THEOS/sdks
-        env:
-          THEOS: ${{ github.workspace }}/theos
-
-      - name: Setup Theos Jailed
-        uses: actions/checkout@v4.1.1
-        with:
-          repository: qnblackcat/theos-jailed
-          ref: master
-          path: theos-jailed
-          submodules: recursive
-
-      - name: Install Theos Jailed
-        run: |
-          ./theos-jailed/install
-        env:
-          THEOS: ${{ github.workspace }}/theos
           
       - name: Install Azule
         run: |
