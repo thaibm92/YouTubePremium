@@ -11,7 +11,7 @@ on:
         default: "16.2"
         required: true
         type: string   
-      decrypted_youtube_music_url:
+      decrypted_youtube_url:
         description: "The direct URL to the decrypted YouTube ipa (I recommend using Dropbox, Google Drive is causing errors)"
         default: "https://iosmod.net/IPAs/YouTube_19.22.6.ipa"
         required: true
