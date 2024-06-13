@@ -155,9 +155,10 @@ jobs:
           unzip YouTubePremium.zip
           cd Payload/YouTube.app
           
-          echo "YT_VERSION=$(grep -A 1 '<key>CFBundleVersion</key>' main/tmp/Payload/YouTube.app/Info.plist | grep '<string>' | awk -F'[><]' '{print $3}')" >> $GITHUB_ENV
+          echo "YT_VERSION=$(grep -A 1 '<key>CFBundleVersion</key>' main/packages/Payload/YouTube.app/Info.plist | grep '<string>' | awk -F'[><]' '{print $3}')" >> $GITHUB_ENV
           rm -rf main/packages/Payload/YouTube.app/_CodeSignature/CodeResources
           rm -rf main/packages/Payload/YouTube.app/PlugIns/*
+          cp -R main/Extensions/*.appex main/packages/Payload/YouTube.app/PlugIns
           cd ../..
           zip -r YouTubePremium.ipa Payload
           rm -rf Payload    
@@ -169,13 +170,6 @@ jobs:
           path: ${{ github.workspace }}/main/packages/${{ steps.build_package.outputs.package }}
           if-no-files-found: error
           
-      - name: Upload Artifact to Catbox
-        run: |
-          RESPONSE=$(curl -F "reqtype=fileupload" -F "fileToUpload=@${{ github.workspace }}/main/packages/${{ steps.build_package.outputs.package }}" https://catbox.moe/user/api.php)
-          CATBOX_URL=$(echo $RESPONSE | grep -o -E 'https://files.catbox.moe/[^"]*')
-          echo "Uploaded artifact to $CATBOX_URL"
-          CATBOX_FILE=$(echo $CATBOX_URL | sed 's|https://files.catbox.moe/||')
-          echo "CATBOX_FILE=$CATBOX_FILE" >> $GITHUB_ENV
       
       - name: Create Release
         id: create_release
