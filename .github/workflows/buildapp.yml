@@ -36,11 +36,15 @@ jobs:
       contents: write
 
     steps:
-      - name: Checkout Main
-        uses: actions/checkout@v4.1.1
+      - uses: actions/checkout@main
+
+      - name: Checkout RootHide/theos
+        uses: actions/checkout@main
         with:
-          path: main
+          repository: RootHide/theos
+          ref: master
           submodules: recursive
+          path: theos
 
       - name: Checkout PoomSmart/YouTubeHeader
         uses: actions/checkout@v4.1.1
