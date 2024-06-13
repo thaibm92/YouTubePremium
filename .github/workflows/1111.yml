@@ -121,7 +121,7 @@ jobs:
           make package FINALPACKAGE=1
           cd ${{ github.workspace }}/main/packages
           tweakName=$(ls)
-          mv $tweakName.deb YouTubePremium.deb
+          mv $tweakName YouTubePremium.deb
         env:
           THEOS: ${{ github.workspace }}/theos
           BUNDLE_ID: ${{ inputs.bundle_id }}
