@@ -57,7 +57,7 @@ jobs:
           submodules: recursive
 
       - name: Install Dependencies
-        run: brew install ldid dpkg make coreutils
+        run: brew install ldid dpkg make
 
       - name: Setup Theos
         uses: actions/checkout@v4.1.6
@@ -96,7 +96,7 @@ jobs:
           submodules: recursive
         
       - name: Set PATH environment variable
-        run: echo "$(brew --prefix coreutils)/libexec/gnubin:$(brew --prefix make)/libexec/gnubin" >> $GITHUB_PATH
+        run: echo "$(brew --prefix make)/libexec/gnubin" >> $GITHUB_PATH 
 
       - name: Install Theos Jailed
         run: |
@@ -134,17 +134,15 @@ jobs:
           YOUTUBE_URL: ${{ inputs.decrypted_youtube_url }}
           YOUPIP_DEB_URL: ${{ inputs.deb_youpip_url }}
 
-      - name: Install Azule
-        run: |
-          cd ${{ github.workspace }}/main
-          git clone https://github.com/Al4ise/Azule 
-          sudo ln -sf ~/Azule/azule /usr/local/bin/azule
+#      - name: Install Azule
+#        run: |
+#          cd ${{ github.workspace }}/main
+#          git clone https://github.com/Al4ise/Azule 
+#          sudo ln -sf ~/Azule/azule /usr/local/bin/azule
           
-      - name: Create Directories
-        run: mkdir -p ${{ github.workspace }}/main/lib
-
       - name: Inject Tweak into IPA
         run: |
+          brew install coreutils
           cd ${{ github.workspace }}/main
           ./Azule/azule -i $PWD/YouTube.ipa -o $PWD/packages/YouTubePremium.ipa -f $PWD/packages/YouTubePreminum.deb $PWD/packages/YouPIP.deb
 
