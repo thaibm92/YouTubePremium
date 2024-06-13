@@ -104,7 +104,13 @@ jobs:
           cd ${{ github.workspace }}/main
           git clone https://github.com/Al4ise/Azule 
           sudo ln -sf ~/Azule/azule /usr/local/bin/azule
-
+          
+      - name: Build Tweak YouTubePremium
+        run: |
+          brew install make xz ldid 
+          export THEOS=theos
+          gmake clean package
+          
       - name: Downloading YouTube IPA & DEB
         id: prepare_youtube_music
         run: |
