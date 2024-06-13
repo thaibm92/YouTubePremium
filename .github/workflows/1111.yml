@@ -150,7 +150,7 @@ jobs:
 
       - name: Prepare YouTube iPA
         run: |
-          cd ${{ github.workspace }}/main
+          cd ${{ github.workspace }}/main/packages
           mv YouTubePremium.ipa YouTubePremium.zip
           unzip YouTubePremium.zip
           cd Payload/YouTube.app
