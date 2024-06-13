@@ -86,6 +86,13 @@ jobs:
           path: theos-jailed
           submodules: recursive
 
+       - name: Checkout PoomSmart/YouTubeHeader
+        uses: actions/checkout@main
+        with:
+          repository: PoomSmart/YouTubeHeader
+          ref: main
+          path: YouTubeHeader
+    
       - name: Install Theos Jailed
         run: |
           ./theos-jailed/install
