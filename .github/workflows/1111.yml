@@ -11,6 +11,11 @@ on:
         default: "https://iosmod.net/IPAs/YouTube_19.23.3.ipa"
         required: true
         type: string
+      deb_youpip_url:
+        description: "The direct URL to the YouPiP deb "
+        default: "https://iosmod.net/deb/com.ps.youpip_1.8.10_iphoneos-arm.deb"
+        required: true
+        type: string
       bundle_id:
         description: "Modify the bundle ID. Not recommended"
         default: "com.google.ios.youtube"
@@ -104,21 +109,7 @@ jobs:
           cd ${{ github.workspace }}/main
           git clone https://github.com/CokePokes/YoutubeExtensions.git
           
-      - name: Prepare YouTube iPA
-        run: |
-          wget "$YOUTUBE_URL" --no-verbose -O main/YouTube.ipa
-          unzip -q main/YouTube.ipa -d main/tmp
-          echo "YT_VERSION=$(grep -A 1 '<key>CFBundleVersion</key>' main/tmp/Payload/YouTube.app/Info.plist | grep '<string>' | awk -F'[><]' '{print $3}')" >> $GITHUB_ENV
-          echo $YT_VERSION
-          
-          rm -rf main/tmp/Payload/YouTube.app/_CodeSignature/CodeResources
-          rm -rf main/tmp/Payload/YouTube.app/PlugIns/*
-          cp -R main/YoutubeExtensions/*.appex main/tmp/Payload/YouTube.app/PlugIns
-        env:
-          THEOS: ${{ github.workspace }}/theos
-          YOUTUBE_URL: ${{ inputs.decrypted_youtube_url }}
-
-      - name: Fix Compiling & Build Package
+      - name: Build Tweak YouTubePremium
         id: build_package
         run: |
           (echo export PATH="/usr/local/opt/make/libexec/gnubin:$PATH" >> ~/.bash_profile)
@@ -128,15 +119,59 @@ jobs:
           sed -i '' "11s#.*#DISPLAY_NAME = ${{ env.APP_NAME }}#g" Makefile
           sed -i '' "s/^PACKAGE_VERSION.*$/PACKAGE_VERSION = ${{ env.YT_VERSION }}/" Makefile
           make package FINALPACKAGE=1
-          (mv "packages/$(ls -t packages | head -n1)" "packages/YouTubePremium_${{ env.YT_VERSION }}.ipa")        
-          echo "package=$(ls -t packages | head -n1)" >>$GITHUB_OUTPUT
-          echo -e "==> \033[1mSHASUM256: $(shasum -a 256 packages/*.ipa | cut -f1 -d' ')\033[0m"
-          echo -e "==> \033[1mBundle ID: ${{ env.BUNDLE_ID }}\033[0m"
+          (mv "packages/$(ls -t packages | head -n1)" "packages/YouTubePremium.deb")
         env:
           THEOS: ${{ github.workspace }}/theos
           BUNDLE_ID: ${{ inputs.bundle_id }}
           APP_NAME: ${{ inputs.app_name }}
 
+      - name: Downloading YouTube IPA & DEB
+        run: |
+          wget "$YOUTUBE_URL" --no-verbose -O main/YouTube.ipa
+          wget "$YOUPIP_DEB_URL" --no-verbose -O main/packages/YouPIP.deb
+        env:
+          YOUTUBE_URL: ${{ inputs.decrypted_youtube_url }}
+          YOUPIP_DEB_URL: ${{ inputs.deb_youpip_url }}
+
+      - name: Download and Prepare YouTube iPA
+        run: |
+          wget "$YOUTUBE_URL" --no-verbose -O main/YouTube.ipa
+          unzip -q main/YouTube.ipa -d main/
+          echo "YT_VERSION=$(grep -A 1 '<key>CFBundleVersion</key>' main/tmp/Payload/YouTube.app/Info.plist | grep '<string>' | awk -F'[><]' '{print $3}')" >> $GITHUB_ENV
+          rm -rf main/tmp/Payload/YouTube.app/_CodeSignature/CodeResources
+          rm -rf main/tmp/Payload/YouTube.app/PlugIns/*
+          cp -R main/YoutubeExtensions/*.appex main/tmp/Payload/YouTube.app/PlugIns
+        env:
+          THEOS: ${{ github.workspace }}/theos
+          YOUTUBE_URL: ${{ inputs.decrypted_youtube_url }}
+
+      - name: Install Azule
+        run: |
+          cd ${{ github.workspace }}/main
+          git clone https://github.com/Al4ise/Azule 
+          sudo ln -sf ~/Azule/azule /usr/local/bin/azule
+
+      - name: Inject Tweak into IPA
+        run: |
+          brew install coreutils
+          cd ${{ github.workspace }}/main
+          ./Azule/azule -i $PWD/YouTube.ipa -o $PWD/packages/YouTubePremium.ipa -f $PWD/packages/YouTubePreminum.deb $PWD/packages/YouPIP.deb
+
+      - name: Remove the Watch folder
+        run: |
+          cd ${{ github.workspace }}/main/packages
+          mv YouTubePremium.ipa YouTubePremium.zip
+          unzip YouTubePremium.zip
+          cd Payload/YouTube.app
+          
+          echo "YT_VERSION=$(grep -A 1 '<key>CFBundleVersion</key>' main/tmp/Payload/YouTube.app/Info.plist | grep '<string>' | awk -F'[><]' '{print $3}')" >> $GITHUB_ENV
+          rm -rf main/tmp/Payload/YouTube.app/_CodeSignature/CodeResources
+          rm -rf main/tmp/Payload/YouTube.app/PlugIns/*
+          cp -R main/YoutubeExtensions/*.appex main/tmp/Payload/YouTube.app/PlugIns
+          cd ../..
+          zip -r YouTubePremium.ipa Payload
+          rm -rf Payload    
+          
       - name: Upload Artifact
         uses: actions/upload-artifact@v4.3.3
         with:
