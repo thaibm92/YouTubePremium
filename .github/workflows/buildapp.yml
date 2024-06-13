@@ -36,7 +36,7 @@ jobs:
       contents: write
 
     steps:
-     - name: Checkout Main
+      - name: Checkout Main
         uses: actions/checkout@v4.1.1
         with:
           path: main
@@ -44,17 +44,10 @@ jobs:
 
       - name: Install Dependencies
         run: brew install ldid dpkg make
+              
 
       - name: Set PATH environment variable
         run: echo "$(brew --prefix make)/libexec/gnubin" >> $GITHUB_PATH 
-
-      
-      - name: Checkout PoomSmart/YouTubeHeader
-        uses: actions/checkout@v4.1.1
-        with:
-          repository: PoomSmart/YouTubeHeader
-          ref: main
-          path: YouTubeHeader
 
       - name: Setup Theos
         uses: actions/checkout@v4.1.1
@@ -92,7 +85,7 @@ jobs:
           ref: master
           path: theos-jailed
           submodules: recursive
-    
+
       - name: Install Theos Jailed
         run: |
           ./theos-jailed/install
