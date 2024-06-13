@@ -92,11 +92,6 @@ jobs:
         env:
           THEOS: ${{ github.workspace }}/theos
           
-      - name: Install Azule
-        run: |
-          cd ${{ github.workspace }}/main
-          git clone https://github.com/Al4ise/Azule 
-          sudo ln -sf ~/Azule/azule /usr/local/bin/azule
           
       - name: Build Tweak YouTubePremium
         run: |
@@ -113,6 +108,12 @@ jobs:
         env:
           YOUTUBE_URL: ${{ inputs.decrypted_youtube_url }}
           YOUPIP_DEB_URL: ${{ inputs.deb_youpip_url }}    
+
+       - name: Install Azule
+        run: |
+          cd ${{ github.workspace }}/main
+          git clone https://github.com/Al4ise/Azule 
+          sudo ln -sf ~/Azule/azule /usr/local/bin/azule
 
       - name: Inject tweak into provided IPA
         run: |
