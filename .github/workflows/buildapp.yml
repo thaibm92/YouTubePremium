@@ -50,7 +50,7 @@ jobs:
 
       
       - name: Checkout PoomSmart/YouTubeHeader
-        uses: actions/checkout@main
+        uses: actions/checkout@v4.1.1
         with:
           repository: PoomSmart/YouTubeHeader
           ref: main
