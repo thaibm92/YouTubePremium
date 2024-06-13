@@ -42,6 +42,13 @@ jobs:
           path: main
           submodules: recursive
 
+      - name: Checkout PoomSmart/YouTubeHeader
+        uses: actions/checkout@v4.1.1
+        with:
+          repository: PoomSmart/YouTubeHeader
+          ref: main
+          path: YouTubeHeader
+
       - name: Install Dependencies
         run: brew install ldid dpkg make
               
@@ -85,13 +92,6 @@ jobs:
           ref: master
           path: theos-jailed
           submodules: recursive
-
-       - name: Checkout PoomSmart/YouTubeHeader
-        uses: actions/checkout@main
-        with:
-          repository: PoomSmart/YouTubeHeader
-          ref: main
-          path: YouTubeHeader
     
       - name: Install Theos Jailed
         run: |
