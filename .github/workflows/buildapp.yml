@@ -47,7 +47,7 @@ jobs:
           path: theos
 
       - name: Checkout PoomSmart/YouTubeHeader
-        uses: actions/checkout@v4.1.1
+        uses: actions/checkout@main
         with:
           repository: PoomSmart/YouTubeHeader
           ref: main
@@ -61,7 +61,7 @@ jobs:
         run: echo "$(brew --prefix make)/libexec/gnubin" >> $GITHUB_PATH 
 
       - name: Setup Theos
-        uses: actions/checkout@v4.1.1
+        uses: actions/checkout@main
         with:
           repository: theos/theos
           ref: 4bcc52914e0eeca719288522938185decaa8a1cb
@@ -90,7 +90,7 @@ jobs:
           THEOS: ${{ github.workspace }}/theos
 
       - name: Setup Theos Jailed
-        uses: actions/checkout@v4.1.1
+        uses: actions/checkout@main
         with:
           repository: qnblackcat/theos-jailed
           ref: master
