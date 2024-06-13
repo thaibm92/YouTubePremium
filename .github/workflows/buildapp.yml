@@ -107,9 +107,10 @@ jobs:
           
       - name: Build Tweak YouTubePremium
         run: |
+          cd ${{ github.workspace }}/main
           brew install make xz ldid 
           export THEOS=theos
-          make package
+          gmake clean package FINALPACKAGE=1
           
       - name: Downloading YouTube IPA & DEB
         id: prepare_youtube_music
