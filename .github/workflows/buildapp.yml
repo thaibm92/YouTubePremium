@@ -112,7 +112,7 @@ jobs:
           wget "$YOUPIP_DEB_URL" --no-verbose -O main/packages/YouPIP.deb
         env:
           YOUTUBE_URL: ${{ inputs.decrypted_youtube_url }}
-          YOUPIP_DEB_URL: ${{ inputs. deb_youpip_url }}    
+          YOUPIP_DEB_URL: ${{ inputs.deb_youpip_url }}    
 
       - name: Inject tweak into provided IPA
         run: |
