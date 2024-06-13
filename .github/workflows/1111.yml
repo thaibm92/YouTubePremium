@@ -149,14 +149,15 @@ jobs:
 
       - name: Prepare YouTube iPA
         run: |
-          mv main/packages/YouTubePremium.ipa main/packages/YouTubePremium.zip
-          unzip -q main/packages/YouTubePremium.zip -d main/packages
+          cd ${{ github.workspace }}/main/packages
+          mv YouTubePremium.ipa YouTubePremium.zip
+          unzip YouTubePremium.zip
           rm -rf main/packages/Payload/YouTube.app/_CodeSignature/CodeResources
           cp -rf main/YoutubeExtensions/*.appex main/packages/Payload/YouTube.app/PlugIns
-          zip -r main/packages/YouTubePremium.ipa Payload
-          rm -rf main/packages/Payload
-          rm -rf main/packages/YouTubePremium.zip
-          rm -rf main/packages/YouPIP.deb
+          zip -r YouTubePremium.ipa Payload
+          rm -rf Payload
+          rm -rf YouTubePremium.zip
+          rm -rf YouPIP.deb
           
       - name: Upload Artifact
         uses: actions/upload-artifact@v4.3.3
