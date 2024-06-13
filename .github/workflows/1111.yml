@@ -142,26 +142,26 @@ jobs:
           git clone https://github.com/Al4ise/Azule 
           sudo ln -sf ~/Azule/azule /usr/local/bin/azule
           
-#      - name: Inject Tweak into IPA
-#        run: |
-#          brew install coreutils
-#          cd ${{ github.workspace }}/main
-#          ./Azule/azule -i $PWD/YouTube.ipa -o $PWD/packages/YouTubePremium.ipa -f $PWD/packages/YouTubePreminum.deb $PWD/packages/YouPIP.deb
+      - name: Inject Tweak into IPA
+        run: |
+          brew install coreutils
+          cd ${{ github.workspace }}/main
+          ./Azule/azule -i $PWD/YouTube.ipa -o $PWD/packages/YouTubePremium.ipa -f $PWD/packages/YouTubePreminum.deb $PWD/packages/YouPIP.deb
 
-#      - name: Prepare YouTube iPA
-#        run: |
-#          cd ${{ github.workspace }}/main/packages
-#          mv YouTubePremium.ipa YouTubePremium.zip
-#          unzip YouTubePremium.zip
-#          cd Payload/YouTube.app
+      - name: Prepare YouTube iPA
+        run: |
+          cd ${{ github.workspace }}/main/packages
+          mv YouTubePremium.ipa YouTubePremium.zip
+          unzip YouTubePremium.zip
+          cd Payload/YouTube.app
           
- #         echo "YT_VERSION=$(grep -A 1 '<key>CFBundleVersion</key>' main/tmp/Payload/YouTube.app/Info.plist | grep '<string>' | awk -F'[><]' '{print $3}')" >> $GITHUB_ENV
- #         rm -rf main/tmp/Payload/YouTube.app/_CodeSignature/CodeResources
- #         rm -rf main/tmp/Payload/YouTube.app/PlugIns/*
- #         cp -R main/YoutubeExtensions/*.appex main/tmp/Payload/YouTube.app/PlugIns
- # #        cd ../..
- #         zip -r YouTubePremium.ipa Payload
- #         rm -rf Payload    
+          echo "YT_VERSION=$(grep -A 1 '<key>CFBundleVersion</key>' main/tmp/Payload/YouTube.app/Info.plist | grep '<string>' | awk -F'[><]' '{print $3}')" >> $GITHUB_ENV
+          rm -rf main/tmp/Payload/YouTube.app/_CodeSignature/CodeResources
+          rm -rf main/tmp/Payload/YouTube.app/PlugIns/*
+          cp -R main/YoutubeExtensions/*.appex main/tmp/Payload/YouTube.app/PlugIns
+          cd ../..
+          zip -r YouTubePremium.ipa Payload
+          rm -rf Payload    
           
       - name: Upload Artifact
         uses: actions/upload-artifact@v4.3.3
