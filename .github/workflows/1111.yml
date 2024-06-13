@@ -99,6 +99,11 @@ jobs:
         env:
           THEOS: ${{ github.workspace }}/theos
 
+      - name: Clone Extensions
+        run: |
+          cd ${{ github.workspace }}/main
+          git clone https://github.com/CokePokes/YoutubeExtensions.git
+          
       - name: Prepare YouTube iPA
         run: |
           wget "$YOUTUBE_URL" --no-verbose -O main/YouTube.ipa
