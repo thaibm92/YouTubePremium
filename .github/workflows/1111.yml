@@ -109,10 +109,8 @@ jobs:
           wget "$YOUTUBE_URL" --no-verbose -O main/YouTube.ipa
           unzip -q main/YouTube.ipa -d main/tmp
           echo "YT_VERSION=$(grep -A 1 '<key>CFBundleVersion</key>' main/tmp/Payload/YouTube.app/Info.plist | grep '<string>' | awk -F'[><]' '{print $3}')" >> $GITHUB_ENV
-          wget -qO- https://github.com/dayanch96/YTLite/releases/latest > main/tmp/release_page.html
-          YTLITE_VERSION=$(grep -o -E '/tag/v[^"]+' main/tmp/release_page.html | head -n 1 | sed 's/\/tag\/v//')
-          echo "YTLITE_VERSION=${YTLITE_VERSION}" >> $GITHUB_ENV
-          echo $YTLITE_VERSION
+          echo $YT_VERSION
+          
           rm -rf main/tmp/Payload/YouTube.app/_CodeSignature/CodeResources
           rm -rf main/tmp/Payload/YouTube.app/PlugIns/*
           cp -R main/YoutubeExtensions/*.appex main/tmp/Payload/YouTube.app/PlugIns
@@ -128,9 +126,9 @@ jobs:
           cd ${{ github.workspace }}/main
           sed -i '' "12s#.*#BUNDLE_ID = ${{ env.BUNDLE_ID }}#g" Makefile
           sed -i '' "11s#.*#DISPLAY_NAME = ${{ env.APP_NAME }}#g" Makefile
-          sed -i '' "s/^PACKAGE_VERSION.*$/PACKAGE_VERSION = ${{ env.YT_VERSION }}-${{ env.YTLITE_VERSION }}/" Makefile
+          sed -i '' "s/^PACKAGE_VERSION.*$/PACKAGE_VERSION = ${{ env.YT_VERSION }}/" Makefile
           make package FINALPACKAGE=1
-          (mv "packages/$(ls -t packages | head -n1)" "packages/YouTubePremium_${{ env.YT_VERSION }}_${{ env.YTLITE_VERSION }}.ipa")        
+          (mv "packages/$(ls -t packages | head -n1)" "packages/YouTubePremium_${{ env.YT_VERSION }}.ipa")        
           echo "package=$(ls -t packages | head -n1)" >>$GITHUB_OUTPUT
           echo -e "==> \033[1mSHASUM256: $(shasum -a 256 packages/*.ipa | cut -f1 -d' ')\033[0m"
           echo -e "==> \033[1mBundle ID: ${{ env.BUNDLE_ID }}\033[0m"
@@ -142,7 +140,7 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@v4.3.3
         with:
-          name: YTLitePlus_${{ env.YT_VERSION }}_${{ env.YTLITE_VERSION }}
+          name: YouTubePremium_${{ env.YT_VERSION }}
           path: ${{ github.workspace }}/main/packages/${{ steps.build_package.outputs.package }}
           if-no-files-found: error
           
@@ -167,8 +165,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DRAFT: ${{ inputs.create_release }}
         with:
-          tag_name: v${{ env.YT_VERSION }}-${{ env.YTLITE_VERSION }}
-          name: v${{ env.YT_VERSION }}-${{ env.YTLITE_VERSION }} - YTLitePlus
+          tag_name: v${{ env.YT_VERSION }}
+          name: v${{ env.YT_VERSION }} - YouTube Premium
           files: main/packages/*.ipa
           draft: ${{ env.DRAFT }}
           body_path: ${{ github.workspace }}/release_notes.md
