@@ -119,7 +119,9 @@ jobs:
           sed -i '' "11s#.*#DISPLAY_NAME = ${{ env.APP_NAME }}#g" Makefile
           sed -i '' "s/^PACKAGE_VERSION.*$/PACKAGE_VERSION = ${{ env.YT_VERSION }}/" Makefile
           make package FINALPACKAGE=1
-          (mv "packages/$(ls -t packages | head -n1)" "packages/YouTubePremium.deb")
+          cd ${{ github.workspace }}/main/packages
+          tweakName=$(ls)
+          mv $tweakName.deb YouTubePremium.deb
         env:
           THEOS: ${{ github.workspace }}/theos
           BUNDLE_ID: ${{ inputs.bundle_id }}
