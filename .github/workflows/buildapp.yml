@@ -17,7 +17,7 @@ on:
         default: "https://iosmod.net/IPAs/YouTube_19.23.3.ipa"
         required: true
         type: string
-
+        
       deb_youpip_url:
         description: "The direct URL to the YouPiP deb (I recommend using Dropbox, Google Drive is causing errors)"
         default: "https://iosmod.net/deb/com.ps.youpip_1.8.10_iphoneos-arm.deb"
@@ -44,6 +44,7 @@ jobs:
 
       - name: Install Dependencies
         run: brew install ldid dpkg make
+              
 
       - name: Set PATH environment variable
         run: echo "$(brew --prefix make)/libexec/gnubin" >> $GITHUB_PATH 
@@ -101,26 +102,16 @@ jobs:
         id: prepare_youtube_music
         run: |
           wget "$YOUTUBE_URL" --no-verbose -O main/YouTube.ipa
+          wget "$YOUTUBE_PREMIUM_DEB_URL" --no-verbose -O main/packages/YouTubePreminum.deb
           wget "$YOUPIP_DEB_URL" --no-verbose -O main/packages/YouPIP.deb
         env:
-          YOUTUBE_URL: ${{ inputs.decrypted_youtube_url }}     
+          YOUTUBE_URL: ${{ inputs.decrypted_youtube_url }}    
+          YOUTUBE_PREMIUM_DEB_URL: ${{ inputs.deb_youtubepremium_url }}    
           YOUPIP_DEB_URL: ${{ inputs. deb_youpip_url }}    
-          
-       - name: Build Tweak
-        id: build_package
-        run: |
-          cd ${{ github.workspace }}/main
-          make clean package
-        env:
-          THEOS: ${{ github.workspace }}/theos
 
       - name: Inject tweak into provided IPA
         run: |
           brew install coreutils
-          cd ${{ github.workspace }}/main/packages
-          tweakName=$(ls)
-          mv $tweakName.deb YouTubePremium.deb
-          
           cd ${{ github.workspace }}/main
           ./Azule/azule -i $PWD/YouTube.ipa -o $PWD/packages/YouTubePremium.ipa -f $PWD/packages/YouTubePreminum.deb $PWD/packages/YouPIP.deb
 
