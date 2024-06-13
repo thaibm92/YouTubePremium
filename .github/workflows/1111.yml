@@ -112,9 +112,9 @@ jobs:
       - name: Build Tweak YouTubePremium
         id: build_package
         run: |
-          brew install make xz ldid 
-          export THEOS=theos
-          gmake clean package FINALPACKAGE=1
+         brew install make xz ldid 
+         export THEOS=theos
+         gmake clean package FINALPACKAGE=1
 #          (echo export PATH="/usr/local/opt/make/libexec/gnubin:$PATH" >> ~/.bash_profile)
 #          cd ${{ github.workspace }}/main
 #          sed -i '' "12s#.*#BUNDLE_ID = ${{ env.BUNDLE_ID }}#g" Makefile
