@@ -155,8 +155,8 @@ jobs:
       - name: Prepare Release Notes
         run: |
           export TODAY=$(date '+%Y-%m-%d')
-          sed "s/%ytliteplus_version%/${{ env.YTLITE_VERSION }}/g; s/%youtube_version%/${{ env.YT_VERSION }}/g; s/%catbox_url%/${{ env.CATBOX_FILE }}/g; s/%date%/$TODAY/g" \
-          .github/RELEASE_TEMPLATE/Release.md > ${{ github.workspace }}/release_notes.md
+          sed "s/%ytliteplus_version%/g; s/%youtube_version%/${{ env.YT_VERSION }}/g; s/%catbox_url%/${{ env.CATBOX_FILE }}/g; s/%date%/$TODAY/g" \
+          main/.github/RELEASE_TEMPLATE/Release.md > ${{ github.workspace }}/release_notes.md
 
       - name: Create Release
         id: create_release
