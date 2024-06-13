@@ -4,7 +4,7 @@ ARCHS = arm64
 
 include $(THEOS)/makefiles/common.mk
 
-TWEAK_NAME = YouTubeX
+TWEAK_NAME = YouTubePremium
 
 $(TWEAK_NAME)_FILES = Tweak.x
 $(TWEAK_NAME)_CFLAGS = -fobjc-arc
