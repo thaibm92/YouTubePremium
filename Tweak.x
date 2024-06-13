@@ -90,6 +90,11 @@ static NSString *accessGroupID() {
 - (BOOL)shouldShowUpgradeDialog { return NO;}
 %end
 
+// No YouTube Ads
+%hook YTHotConfig
+- (BOOL)disableAfmaIdfaCollection { return NO; }
+%end
+
 // NOYTPremium
 %hook YTCommerceEventGroupHandler
 - (void)addEventHandlers {}
