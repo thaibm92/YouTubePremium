@@ -36,29 +36,25 @@ jobs:
       contents: write
 
     steps:
-      - uses: actions/checkout@main
-
-      - name: Checkout RootHide/theos
+     - name: Checkout Main
         uses: actions/checkout@main
         with:
-          repository: RootHide/theos
-          ref: master
+          path: main
           submodules: recursive
-          path: theos
 
+      - name: Install Dependencies
+        run: brew install ldid dpkg make
+
+      - name: Set PATH environment variable
+        run: echo "$(brew --prefix make)/libexec/gnubin" >> $GITHUB_PATH 
+
+      
       - name: Checkout PoomSmart/YouTubeHeader
         uses: actions/checkout@main
         with:
           repository: PoomSmart/YouTubeHeader
           ref: main
           path: YouTubeHeader
-
-      - name: Install Dependencies
-        run: brew install ldid dpkg make
-              
-
-      - name: Set PATH environment variable
-        run: echo "$(brew --prefix make)/libexec/gnubin" >> $GITHUB_PATH 
 
       - name: Setup Theos
         uses: actions/checkout@main
