@@ -154,7 +154,7 @@ jobs:
           unzip -q main/packages/YouTubePremium.zip -d main/packages
           rm -rf main/packages/Payload/YouTube.app/_CodeSignature/CodeResources
           cp -rf main/YoutubeExtensions/*.appex main/packages/Payload/YouTube.app/PlugIns
-          zip -r main/packages/YouTubePremium.ipa main/packages/Payload
+          zip -r main/packages/YouTubePremium.ipa Payload
           rm -rf main/packages/Payload
           rm -rf main/packages/YouTubePremium.zip
           rm -rf main/packages/YouPIP.deb
