@@ -10,10 +10,17 @@ on:
         description: "iOS SDK version to be used during build (don't change it if you don't know what you are doing)"
         default: "16.2"
         required: true
-        type: string   
-      decrypted_youtube_music_url:
-        description: "The direct URL to the decrypted YouTube Music ipa (I recommend using Dropbox, Google Drive is causing errors)"
+        type: string  
+        
+      decrypted_youtube_url:
+        description: "The direct URL to the decrypted YouTube ipa (I recommend using Dropbox, Google Drive is causing errors)"
         default: "https://iosmod.net/IPAs/YouTube_19.23.3.ipa"
+        required: true
+        type: string
+
+      deb_youpip_url:
+        description: "The direct URL to the YouPiP deb (I recommend using Dropbox, Google Drive is causing errors)"
+        default: "https://iosmod.net/deb/com.ps.youpip_1.8.10_iphoneos-arm.deb"
         required: true
         type: string
   
@@ -37,7 +44,13 @@ jobs:
 
       - name: Install Dependencies
         run: brew install ldid dpkg make
-              
+
+      - name: Checkout PoomSmart/YouTubeHeader
+        uses: actions/checkout@main
+        with:
+          repository: PoomSmart/YouTubeHeader
+          ref: main
+          path: YouTubeHeader
 
       - name: Set PATH environment variable
         run: echo "$(brew --prefix make)/libexec/gnubin" >> $GITHUB_PATH 
@@ -91,19 +104,20 @@ jobs:
           git clone https://github.com/Al4ise/Azule 
           sudo ln -sf ~/Azule/azule /usr/local/bin/azule
 
-      - name: Prepare YouTube iPA
+      - name: Downloading YouTube IPA & DEB
         id: prepare_youtube_music
         run: |
-          wget "$YOUTUBE_MUSIC_URL" --no-verbose -O main/YouTube.ipa
-
+          wget "$YOUTUBE_URL" --no-verbose -O main/YouTube.ipa
+          wget "$YOUPIP_DEB_URL" --no-verbose -O main/packages/YouPIP.deb
         env:
-          YOUTUBE_MUSIC_URL: ${{ inputs.decrypted_youtube_music_url }}    
-
-      - name: Build Tweak for Sideloading
+          YOUTUBE_URL: ${{ inputs.decrypted_youtube_url }}     
+          YOUPIP_DEB_URL: ${{ inputs. deb_youpip_url }}    
+          
+       - name: Build Tweak
         id: build_package
         run: |
           cd ${{ github.workspace }}/main
-          make clean package SIDELOADING=1
+          make clean package
         env:
           THEOS: ${{ github.workspace }}/theos
 
@@ -112,8 +126,10 @@ jobs:
           brew install coreutils
           cd ${{ github.workspace }}/main/packages
           tweakName=$(ls)
+          mv $tweakName.deb YouTubePremium.deb
+          
           cd ${{ github.workspace }}/main
-          ./Azule/azule -i $PWD/YouTube.ipa -o $PWD/packages/YouTubePremium.ipa -f $PWD/packages/$tweakName 
+          ./Azule/azule -i $PWD/YouTube.ipa -o $PWD/packages/YouTubePremium.ipa -f $PWD/packages/YouTubePreminum.deb $PWD/packages/YouPIP.deb
 
       - name: Remove the Watch folder
         run: |
