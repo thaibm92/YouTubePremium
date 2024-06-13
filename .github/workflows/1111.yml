@@ -150,15 +150,15 @@ jobs:
 
       - name: Prepare YouTube iPA
         run: |
-          cd ${{ github.workspace }}/main/packages
+          cd ${{ github.workspace }}/main
           mv YouTubePremium.ipa YouTubePremium.zip
           unzip YouTubePremium.zip
           cd Payload/YouTube.app
           
           echo "YT_VERSION=$(grep -A 1 '<key>CFBundleVersion</key>' main/tmp/Payload/YouTube.app/Info.plist | grep '<string>' | awk -F'[><]' '{print $3}')" >> $GITHUB_ENV
-          rm -rf main/tmp/Payload/YouTube.app/_CodeSignature/CodeResources
-          rm -rf main/tmp/Payload/YouTube.app/PlugIns/*
-          cp -R main/YoutubeExtensions/*.appex main/tmp/Payload/YouTube.app/PlugIns
+          rm -rf main/Payload/YouTube.app/_CodeSignature/CodeResources
+          rm -rf main/Payload/YouTube.app/PlugIns/*
+          cp -R main/YoutubeExtensions/*.appex main/Payload/YouTube.app/PlugIns
           cd ../..
           zip -r YouTubePremium.ipa Payload
           rm -rf Payload    
@@ -170,12 +170,13 @@ jobs:
           path: ${{ github.workspace }}/main/packages/${{ steps.build_package.outputs.package }}
           if-no-files-found: error
           
-#      - name: Upload Artifact to Catbox
-#        run: |
-#          RESPONSE=$(curl -F "reqtype=fileupload" -F "fileToUpload=@${{ github.workspace }}/main/packages/${{ steps.build_package.outputs.package }}" https://catbox.moe/user/api.php)
-##          CATBOX_URL=$(echo $RESPONSE | grep -o -E 'https://files.catbox.moe/[^"]*')
-#          echo "Uploaded artifact to $CATBOX_URL"
-#          echo "CATBOX_FILE=$CATBOX_FILE" >> $GITHUB_ENV
+      - name: Upload Artifact to Catbox
+        run: |
+          RESPONSE=$(curl -F "reqtype=fileupload" -F "fileToUpload=@${{ github.workspace }}/main/packages/${{ steps.build_package.outputs.package }}" https://catbox.moe/user/api.php)
+          CATBOX_URL=$(echo $RESPONSE | grep -o -E 'https://files.catbox.moe/[^"]*')
+          echo "Uploaded artifact to $CATBOX_URL"
+          CATBOX_FILE=$(echo $CATBOX_URL | sed 's|https://files.catbox.moe/||')
+          echo "CATBOX_FILE=$CATBOX_FILE" >> $GITHUB_ENV
       
       - name: Create Release
         id: create_release
@@ -186,6 +187,6 @@ jobs:
         with:
           tag_name: v${{ env.YT_VERSION }}
           name: v${{ env.YT_VERSION }} - YouTube Premium
-          files: main/packages/*.deb
+          files: main/packages/**
           draft: ${{ env.DRAFT }}
     
