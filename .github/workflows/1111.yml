@@ -96,7 +96,7 @@ jobs:
           submodules: recursive
         
       - name: Set PATH environment variable
-        run: echo "$(brew --prefix make)/libexec/gnubin" >> $GITHUB_PATH
+        run: echo "$(brew --prefix coreutils)/libexec/gnubin:$(brew --prefix make)/libexec/gnubin" >> $GITHUB_PATH
 
       - name: Install Theos Jailed
         run: |
@@ -144,7 +144,6 @@ jobs:
 
       - name: Inject Tweak into IPA
         run: |
-          brew install coreutils
           cd ${{ github.workspace }}/main
           ./Azule/azule -i $PWD/YouTube.ipa -o $PWD/packages/YouTubePremium.ipa -f $PWD/packages/YouTubePreminum.deb $PWD/packages/YouPIP.deb
 
