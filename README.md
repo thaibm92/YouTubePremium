@@ -83,9 +83,9 @@ Special thanks to these developer(s) for maintaining and improving YouTubePremiu
 # Features
 
 1. **YouTube Premium:**
-
-- Block all advertisements, Enable background playback.
-
+   
+- Block all advertisements.
+- Enable background playback.
 - Enable Logo Premium.
 
 2. **YouPiP:** enable YouTube's **native PiP**. More options are in YouTube Settings => General.
