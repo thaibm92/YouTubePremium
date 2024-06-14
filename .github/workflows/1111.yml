@@ -1,7 +1,7 @@
 # Original idea by @ISnackable. Many thanks to him for handling the most hardest parts!
 # https://github.com/ISnackable/CercubePlus/blob/main/.github/workflows/Build.yml
 
-name: Build and Release YTLitePlus
+name: Build and Release YouTube Premium
 
 on:
   workflow_dispatch:
@@ -43,7 +43,7 @@ concurrency:
 
 jobs:
   build:
-    name: Build YTLitePlus
+    name: Build YouTube Premium
     runs-on: macos-12
     permissions:
       contents: write
@@ -126,7 +126,7 @@ jobs:
         env:
           THEOS: ${{ github.workspace }}/theos
 
-      - name: Downloading YouTube IPA & DEB
+      - name: Downloading YouTube IPA & DEBs
         run: |
           wget "$YOUTUBE_URL" --no-verbose -O main/YouTube.ipa
           wget "$YOUPIP_DEB_URL" --no-verbose -O main/packages/YouPIP.deb
@@ -153,13 +153,10 @@ jobs:
           rm -rf main/packages/Payload/YouTube.app/_CodeSignature/CodeResources
           cp -rf main/YoutubeExtensions/*.appex main/packages/Payload/YouTube.app/PlugIns
           cd ${{ github.workspace }}/main/packages
-          echo $(ls)
           zip -r YouTubePremium.ipa Payload
-          echo $(ls)
           rm -rf Payload
           rm -rf YouTubePremium.zip
           rm -rf YouPIP.deb
-          echo $(ls)
           
       - name: Upload Artifact
         uses: actions/upload-artifact@v4.3.3
