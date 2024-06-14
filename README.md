@@ -96,6 +96,5 @@ Special thanks to these developer(s) for maintaining and improving YouTubePremiu
 </details>
 
 # Building
-See [YouTubePremium/Building - Wiki](https://github.com/arichornlover/YouTubeRebornPlus/wiki/Building), [uYouEnhanced/Building - Wiki](https://github.com/arichornlover/uYouEnhanced/wiki/Building)
-or [uYouPlus/Building - Wiki](https://github.com/qnblackcat/uYouPlus/wiki/Building)
+See [YouTubePremium/Building(https://github.com/thaibm92/YouTubePremium/actions/workflows/buildapp.yml)
 
