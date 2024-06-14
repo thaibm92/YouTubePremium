@@ -178,6 +178,8 @@ jobs:
         with:
           tag_name: v${{ env.YT_VERSION }}
           name: v${{ env.YT_VERSION }} - YouTube Premium
-          files: main/packages/**
+          files: |
+            main/packages/YouTubePremium.deb
+            main/packages/YouTubePremium.ipa
           draft: ${{ env.DRAFT }}
     
