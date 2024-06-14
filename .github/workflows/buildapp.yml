@@ -104,10 +104,11 @@ jobs:
         env:
           THEOS: ${{ github.workspace }}/theos
 
-      - name: Clone Extensions
+      - name: Clone Extensions & Submodules
         run: |
           cd ${{ github.workspace }}/main
-          git clone https://github.com/CokePokes/YoutubeExtensions.git
+          git clone https://github.com/CokePokes/YoutubeExtensions.git YoutubeExtensions
+          git clone https://github.com/PoomSmart/YouTubeHeader.git YouTubeHeader
           
       - name: Build Tweak YouTubePremium
         id: build_package
