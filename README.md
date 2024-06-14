@@ -1,10 +1,4 @@
 <p align="center">
-  <a href="https://user-images.githubusercontent.com/78001398/272768616-dd6060f8-9a75-420d-a90d-8183129ac9c2.png">
-    <img src="https://user-images.githubusercontent.com/78001398/272768287-192c1f44-06fb-402e-9381-382dad57f37a.png" alt="YOUTUBEREBORNPLUS_LOGO" width="200px" height="200px">
-  </a>
-</p>
-
-<p align="center">
   <a href="https://user-images.githubusercontent.com/78001398/217129808-4efa2213-9e01-4fa4-a9d4-04c90e7fa88b.png">
     <img src="https://user-images.githubusercontent.com/78001398/273735783-8ac8d491-fe89-4706-9406-6b82530f6f9d.png" alt="YOUTUBEREBORNPLUS_PREVIEW">
   </a>
@@ -37,8 +31,15 @@
 # Credits
 
 <table id='maintainer credit'>
-Special thanks to these developer(s) for maintaining and improving YouTubeRebornPlus!
+Special thanks to these developer(s) for maintaining and improving YouTubePremium!
 <tr>
+<td align="center">
+<a href='https://github.com/PoomSmart'>
+<img src='https://user-images.githubusercontent.com/78001398/271811615-96093202-4aec-4e50-a750-8c7b83f3862c.png' width='110px'>
+</a>
+<br>
+<a href='https://twitter.com/poomsmart'>PoomSmart</a>
+</td>
 <td align="center">
 <a href='https://github.com/arichornlover'>
 <img src='https://user-images.githubusercontent.com/78001398/271853100-d5c74be7-4890-411c-907a-dc5f7b5fa46e.png' width='110px;'>
@@ -60,20 +61,7 @@ Special thanks to these developer(s) for maintaining and improving YouTubeReborn
 <br>
 <a href='https://github.com/dayanch96'>dayanch96</a>
 </td>
-<td align="center">
-<a href='https://github.com/ssuesskind'>
-<img src='https://user-images.githubusercontent.com/78001398/271853585-77271641-b825-43b1-af57-d9f5b12fe8ff.png' width='110px;'>
-</a>
-<br>
-<a href='https://github.com/ssuesskind'>ssuesskind</a>
-</td>
-<td align="center">
-<a href='https://github.com/dodieboy'>
-<img src='https://github.com/arichornlover/YouTubeRebornPlus/assets/78001398/0d43912b-e561-4865-8312-5e241d34bf72' width='110px;'>
-</a>
-<br>
-<a href='https://github.com/dodieboy'>dodieboy</a>
-</td>
+
 <td align="center">
 <a href='https://github.com/Balackburn'>
 <img src='https://user-images.githubusercontent.com/78001398/271853318-3005deb3-b484-4b2b-a093-44c2af79b9af.png' width='110px;'>
@@ -82,120 +70,6 @@ Special thanks to these developer(s) for maintaining and improving YouTubeReborn
 <a href='https://github.com/Balackburn'>Balackburn</a>
 </td>
 
-<table id='credit'>
-Special thanks to all the developers who have orignally contributed to YouTube Reborn & CercubePlus!
-<tr>
-<td align="center">
-<a href='https://github.com/LillieH1000'>
-<img src='https://github.com/arichornlover/YouTubeRebornPlus/assets/78001398/372d2490-bbed-4714-8b9a-4e4d99127c1c' width='110px'>
-</a>
-<br>
-<a href='https://github.com/LillieH1000'>LillieH1000</a>
-</td>
-<td align="center">
-<a href='https://github.com/MiRO92'>
-<img src='https://user-images.githubusercontent.com/78001398/271811861-da79accc-095c-4cb3-b7b4-8d48b1449259.png' width='110px'>
-</a>
-<br>
-<a href='https://twitter.com/miro92'>MiRO92</a>
-</td>
-<td align="center">
-<a href='https://github.com/qnblackcat'>
-<img src='https://user-images.githubusercontent.com/78001398/271812521-e52ebf96-7272-4ec0-a149-8e721c053508.png' width='110px'>
-</a>
-<br>
-<a href='https://twitter.com/qnblackcat'>qnblackcat</a>
-</td>
-<td align="center">
-<a href='https://github.com/PoomSmart'>
-<img src='https://user-images.githubusercontent.com/78001398/271811615-96093202-4aec-4e50-a750-8c7b83f3862c.png' width='110px'>
-</a>
-<br>
-<a href='https://twitter.com/poomsmart'>PoomSmart</a>
-</td>
-<td align="center">
-<a href='https://github.com/level3tjg'>
-<img src='https://user-images.githubusercontent.com/78001398/271812596-7854996a-3825-4971-a9ff-1001b4d153cb.png' width='110px'>
-</a>
-<br>
-<a href='https://twitter.com/level3tjg'>level3tjg</a>
-</td>
-<td align="center">
-<a href='https://github.com/BandarHL'>
-<img src='https://user-images.githubusercontent.com/78001398/271812729-2bb63da0-5239-43a4-aa3e-e1daa67e8dc2.png' width='110px'>
-</a>
-<br>
-<a href='https://twitter.com/bandarhl'>BandarHelal</a>
-</td>
-</tr>
-  
-<tr>
-<td align="center">
-<a href='https://github.com/Galactic-Dev'>
-<img src='https://user-images.githubusercontent.com/78001398/271812231-5b7d5d9f-6d19-4174-8478-8f07379ee1ca.png' width='110px'>
-</a>
-<br>
-<a href='https://twitter.com/dev_galactic'>galactic</a>
-</td>
-<td align="center">
-<a href='https://github.com/julioverne'>
-<img src='https://user-images.githubusercontent.com/78001398/271812914-bf26d603-2d94-49f4-9702-f5e66af3f44a.png' width='110px'>
-</a>
-<br>
-<a href='https://twitter.com/ijulioverne'>julioverne</a>
-</td>
-<td align="center">
-<a href='https://github.com/hbang'>
-<img src='https://user-images.githubusercontent.com/78001398/271813035-2e168ee5-fc47-43a6-9307-0fc20c7fca60.png' width='110px'>
-</a>
-<br>
-<a href='https://twitter.com/hashbang'>HASHBANG</a>
-</td>
-<td align="center">
-<a href='https://github.com/Lyvendia'>
-<img src='https://user-images.githubusercontent.com/78001398/271812187-1c0d5b24-caba-4616-b875-4c458d10ca55.png' width='110px'>
-</a>
-<br>
-<a href='https://github.com/Lyvendia'>Lyvendia</a>
-</td>
-<td align="center">
-<a href='https://github.com/therealFoxster'>
-<img src='https://user-images.githubusercontent.com/78001398/271812075-923038a7-5ffa-4ea4-9de4-fdf4e5d556c2.png' width='110px'>
-</a>
-<br>
-<a href='https://twitter.com/therealFoxster'>Foxster</a>
-</td>
-<td align="center">
-<a href='https://github.com/ichitaso'>
-<img src='https://user-images.githubusercontent.com/78001398/271812398-c7e40fa3-4e0b-4be2-aa51-900444d59abd.png' width='110px'>
-</a>
-<br>
-<a href='https://twitter.com/ichitaso'>ichitaso</a>
-</td>
-</tr>
-
-<tr>
-<td align="center">
-<a href='https://github.com/AhmedBafkir'>
-<img src='https://user-images.githubusercontent.com/78001398/271813114-dcb005f7-b83b-40e6-a9cb-9b661dd6b33b.png' width='110px'>
-</a>
-<br>
-<a href='https://twitter.com/Peaceful_0'>Ahmed Bafkir</a>
-</td>
-<td align="center">
-<a href='https://github.com/CokePokes'>
-<img src='https://user-images.githubusercontent.com/78001398/271813228-d28471b4-cb67-442c-bd63-276f1641a14e.png' width='110px'>
-</a>
-<br>
-<a href='https://twitter.com/cokepokes'>CokePokes</a>
-</td>
-<td align="center">
-<a href='https://github.com/ISnackable'>
-<img src='https://user-images.githubusercontent.com/78001398/271813311-2027a8de-a08d-4f1b-97a4-167f4bcef497.png' width='110px'>
-</a>
-<br>
-<a href='https://isnackable.me/'>Tommy Teo</a>
-</td>
 <td align="center">
 <a href='https://github.com/theos/theos'>
 <img src='https://user-images.githubusercontent.com/78001398/271813393-56a63730-a56d-41ba-b473-4d37761526c9.png' width='110px'>
