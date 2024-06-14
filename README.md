@@ -9,9 +9,7 @@
 
 * [Credits](#credits)
 * [Features](#features)
-* [Known issues](#known-issues)
 * [Download](#download)
-* [Support the developers!](#support-the-developers)
 * [Building](#building)
 
 # Credits
