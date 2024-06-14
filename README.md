@@ -101,5 +101,5 @@ Special thanks to these developer(s) for maintaining and improving YouTubePremiu
 </details>
 
 # Building
-See [YouTubePremium/Building(https://github.com/thaibm92/YouTubePremium/actions/workflows/buildapp.yml)
+See YouTubePremium/Build IPA (https://github.com/thaibm92/YouTubePremium/actions/workflows/buildapp.yml) or YouTubePremium/Build deb (https://github.com/thaibm92/YouTubePremium/actions/workflows/builddeb.yml)
 
