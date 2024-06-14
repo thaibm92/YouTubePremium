@@ -130,7 +130,6 @@ jobs:
         run: |
           wget "$YOUTUBE_URL" --no-verbose -O main/YouTube.ipa
           wget "$YOUPIP_DEB_URL" --no-verbose -O main/packages/YouPIP.deb
-          echo $(ls)
         env:
           YOUTUBE_URL: ${{ inputs.decrypted_youtube_url }}
           YOUPIP_DEB_URL: ${{ inputs.deb_youpip_url }}
@@ -154,10 +153,13 @@ jobs:
           rm -rf main/packages/Payload/YouTube.app/_CodeSignature/CodeResources
           cp -rf main/YoutubeExtensions/*.appex main/packages/Payload/YouTube.app/PlugIns
           cd ${{ github.workspace }}/main/packages
+          echo $(ls)
           zip -r YouTubePremium.ipa Payload
+          echo $(ls)
           rm -rf Payload
           rm -rf YouTubePremium.zip
           rm -rf YouPIP.deb
+          echo $(ls)
           
       - name: Upload Artifact
         uses: actions/upload-artifact@v4.3.3
