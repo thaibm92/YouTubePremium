@@ -1,6 +1,6 @@
 <p align="center">
-  <a href="https://user-images.githubusercontent.com/78001398/217129808-4efa2213-9e01-4fa4-a9d4-04c90e7fa88b.png">
-    <img src="https://user-images.githubusercontent.com/78001398/273735783-8ac8d491-fe89-4706-9406-6b82530f6f9d.png" alt="YOUTUBEREBORNPLUS_PREVIEW">
+  <a href="https://user-images.githubusercontent.com/78001398/217129808-4efa2213-9e01-4fa4-a9d4-04c90e7fa88b.png](https://i.upanh.org/2024/06/14/z5537594942598_b3ef756af5a44685ff9da7a6251e1f46d557953569c05ae2.jpeg">
+    <img src="https://i.upanh.org/2024/06/14/z5537594942598_b3ef756af5a44685ff9da7a6251e1f46d557953569c05ae2.jpeg" alt="youtube premium">
   </a>
 </p>
 
