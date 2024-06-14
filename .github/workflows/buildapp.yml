@@ -117,7 +117,7 @@ jobs:
           (echo export PATH="/usr/local/opt/make/libexec/gnubin:$PATH" >> ~/.bash_profile)
           source ~/.bash_profile
           cd ${{ github.workspace }}/main
-          make package
+          make package FINALPACKAGE=1
           cd ${{ github.workspace }}/main/packages
           tweakName=$(ls *.deb)
           mv "$tweakName" YouTubePremium.deb
