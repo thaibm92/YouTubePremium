@@ -89,28 +89,6 @@ Special thanks to these developer(s) for maintaining and improving YouTubePremiu
 
 2. **YouPiP:** enable YouTube's **native PiP**. More options are in YouTube Settings => General.
 
-</details>
-
-# Known issues
-
-1. **YouTube Reborn**: 
-
-- Downloading videos/audio not working. (probably a Client-Side change, don't know why this happened.)
-
-2. **LowContrastMode**: this tweak doesn't work correctly with the ui if you use v17.39.4 or later versions of the YouTube App. [WORKAROUND - go to `Settings > YouTubeRebornPlus > Miscellaneous > Enable App Version Spoofer` and go to `Version Spoofer Picker` and select `v17.38.10`]
-
-3. **YTClassicVideoQuality**: this tweak that shows the old video quality menu has stopped working on v18.19.1 or later versions of the YouTube App. [WORKAROUND - read YTSpeed's workaround above]
-
-4. **YTUHD**: [Stuttering on 4K videos](https://github.com/qnblackcat/uYouPlus/issues/6).
-
-5. **YouPiP** (iOS 14.0 - 14.4.2): due to Apple's fault, you may encounter the *speedup-bug* as described [here](https://drive.google.com/file/d/1NKdv1fr_KRWgD8nhkMDfG2eLBnbdeVtX/view?usp=sharing). The bug also happens when you try to play multi-sources of sound at the same time. Enable **LegacyPiP** is a workaround. Keep in mind that LegacyPiP also removes UHD quality and breaks YouTube Autoplay next. Use it at your own risk!
-
-6. **Not a bug**: 
-
-- The app won't be able to receive push notifications if you use a free developer account to sideload it. 
-
-- It's impossible to fix deep-link (a.k.a Open in the YouTube app). However, you can use this [Shortcuts](https://shortcutsgallery.com/shortcuts/open-in-youtube/) as a workaround (tested on iOS 14). **Credit:** RandomAccessMemories#5025
-
 # Download
 
 - **YouTubeRebornPlus** (or you can call it YouTubeReborn+) requires iOS & iPadOS 15.0 and later. The latest version of **YouTubeRebornPlus** can be found in the [Release tab](https://github.com/arichornlover/YouTubeRebornPlus/releases/latest).
