@@ -88,7 +88,7 @@ Special thanks to these developer(s) for maintaining and improving YouTubePremiu
 | **Tweaks/App** | **Developer** | **Version** | **Open source** |
 | - | - | :-: | :-:  |
 | **YouTube** | Google Inc | 19.23.3 | ✖︎ |
-| **YouTube Premium** | [Thaibm92]([https://github.com/thaibm92/youtubepremium) | 1.6.6 | [✔︎](https://github.com/thaibm92/youtubepremium) |
+| **YouTube Premium** | [Thaibm92](https://github.com/thaibm92/youtubepremium) | 1.6.6 | [✔︎](https://github.com/thaibm92/youtubepremium) |
 | **Open in YouTube** | [CokePokes](https://github.com/CokePokes/) | 1.2 |[✔︎](https://github.com/CokePokes/)|
 | **YouPiP** | [PoomSmart](https://twitter.com/poomsmart) | 1.8.9 | [✔︎](https://github.com/PoomSmart/YouPiP) |
 
@@ -96,9 +96,6 @@ Special thanks to these developer(s) for maintaining and improving YouTubePremiu
 </details>
 
 # Building
-See [YouTubeRebornPlus/Building - Wiki](https://github.com/arichornlover/YouTubeRebornPlus/wiki/Building), [uYouEnhanced/Building - Wiki](https://github.com/arichornlover/uYouEnhanced/wiki/Building)
+See [YouTubePremium/Building - Wiki](https://github.com/arichornlover/YouTubeRebornPlus/wiki/Building), [uYouEnhanced/Building - Wiki](https://github.com/arichornlover/uYouEnhanced/wiki/Building)
 or [uYouPlus/Building - Wiki](https://github.com/qnblackcat/uYouPlus/wiki/Building)
 
-## Balackburn's YTLitePlus
-AltStore/SideStore: https://balackburn.github.io/YTLitePlus/
-Github: https://github.com/ytliteplus/ytliteplus/
