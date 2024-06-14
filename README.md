@@ -77,15 +77,10 @@ Special thanks to these developer(s) for maintaining and improving YouTubePremiu
 
 # Download
 
-- **YouTubeRebornPlus** (or you can call it YouTubeReborn+) requires iOS & iPadOS 15.0 and later. The latest version of **YouTubeRebornPlus** can be found in the [Release tab](https://github.com/arichornlover/YouTubeRebornPlus/releases/latest).
+- **YouTube Premium** requires iOS & iPadOS 15.0 and later. The latest version of **YouTube Premium** can be found in the [Release tab](https://github.com/thaibm92/YouTubePremium/releases).
 
-- The latest version of **YouTubeRebornPlus** can be found under [Releases](https://github.com/arichornlover/YouTubeRebornPlus/releases/latest).
+- The latest version of **YouTube Premium** can be found under [Releases](https://github.com/thaibm92/YouTubePremium/releases).
 - **Compatibility:** Requires iOS/iPadOS 15.0 or later.
-- For AltStore user: 
-
-  - My official AltStore repo: https://therealfoxster.github.io/altsource-viewer/view/?source=https://raw.githubusercontent.com/arichornlover/arichornlover.github.io/main/apps2.json
-
-- [Open in AltStore (v19.23.3-4.2.8)](https://tinyurl.com/42ydwwba) - It will take a while to install because AltStore needs to download the IPA first.
 
 <details>
   <summary>Version information (last updated: June 11, 2024)</summary>
@@ -93,31 +88,10 @@ Special thanks to these developer(s) for maintaining and improving YouTubePremiu
 | **Tweaks/App** | **Developer** | **Version** | **Open source** |
 | - | - | :-: | :-:  |
 | **YouTube** | Google Inc | 19.23.3 | ✖︎ |
-| **YouTube Reborn** | LillieH1000 & arichornlover | 4.2.8 | [✔︎](https://github.com/LillieH1000/YouTube-Reborn) |
-| **Open in YouTube** | [CokePokes](https://github.com/CokePokes/) | 1.2 | ✖︎ |
-| **YTNoShorts** | [MiRO92](https://twitter.com/miro92) | 1.0.2 | [✔︎](https://github.com/MiRO92/YTNoShorts) |
-| **YTNoCommunityPosts** | [michael-winay](https://github.com/michael-winay) | 0.0.2 | [✔︎](https://github.com/michael-winay/YTNoCommunityPosts) |
-| **iSponsorBlock** | [Galactic-Dev](https://github.com/Galactic-Dev) | 1.2.5 | [✔︎](https://github.com/Galactic-Dev/iSponsorBlock) |
-| **BigYTMiniPlayer** | [Galactic-Dev](https://github.com/Galactic-Dev) | 1.0-1 | [✔︎](https://github.com/Galactic-Dev/BigYTMiniPlayer) |
-| **YTNoHoverCards** | [level3tjg](https://twitter.com/level3tjg) | 0.0.3 | [✔︎](https://github.com/level3tjg/YTNoHoverCards) |
-| **YTMiniplayerEnabler** | [level3tjg](https://twitter.com/level3tjg) | 0.0.2 | [✔︎](https://github.com/level3tjg/YTMiniplayerEnabler) |
-| **DontEatMyContent** | [therealFoxster](https://github.com/therealFoxster) | 1.1.6 | [✔︎](https://github.com/therealFoxster/DontEatMyContent) |
-| **YTSpeed** | [Lyvendia](https://github.com/Lyvendia) | 1.0.1 | [✔︎](https://github.com/Lyvendia/YTSpeed) |
-| **Alderis Color Picker** | [HASHBANG Productions](https://github.com/hbang) | 1.2 | [✔︎](https://github.com/hbang/Alderis) |
-| **YTUHD** | [PoomSmart](https://twitter.com/poomsmart) | 1.5.1 | [✔︎](https://github.com/PoomSmart/YTUHD) |
+| **YouTube Premium** | thaibm92 | 1.6.6 | [✔︎](https://github.com/thaibm92/youtubepremium) |
+| **Open in YouTube** | [CokePokes](https://github.com/CokePokes/) | 1.2 | |
 | **YouPiP** | [PoomSmart](https://twitter.com/poomsmart) | 1.8.9 | [✔︎](https://github.com/PoomSmart/YouPiP) |
-| **IAmYouTube** | [PoomSmart](https://twitter.com/poomsmart) | 1.3.0 | [✔︎](https://github.com/PoomSmart/IAmYouTube) |
-| **YTABConfig** | [PoomSmart](https://twitter.com/poomsmart) | 1.7.2 | [✔︎](https://github.com/PoomSmart/YTABConfig) |
-| **YTReExplore** | [PoomSmart](https://twitter.com/poomsmart) | 1.0.2 | [✔︎](https://github.com/PoomSmart/YTReExplore) |
-| **NoYTPremium** | [PoomSmart](https://twitter.com/poomsmart) | 1.0.4 | [✔︎](https://github.com/PoomSmart/NoYTPremium) |
-| **YTNoPaidPromo** | [PoomSmart](https://twitter.com/poomsmart) | 1.0.0 | [✔︎](https://github.com/PoomSmart/YTNoPaidPromo) |
-| **YouRememberCaption** | [PoomSmart](https://twitter.com/poomsmart) | 1.0.0 | [✔︎](https://poomsmart.github.io/repo/depictions/youremembercaption.html) |
-| **Return YouTube Dislike** | [PoomSmart](https://twitter.com/poomsmart) | 1.11.11 | [✔︎](https://github.com/PoomSmart/Return-YouTube-Dislikes) |
-| **YouMute** | [PoomSmart](https://twitter.com/poomsmart) | 1.2.1-3 | [✔︎](https://github.com/PoomSmart/YouMute) |
-| **YouQuality** | [PoomSmart](https://twitter.com/poomsmart) | 1.2.1 | [✔︎](https://github.com/PoomSmart/YouQuality) |
-| **YTVideoOverlay** | [PoomSmart](https://twitter.com/poomsmart) | 1.1.6 | [✔︎](https://github.com/PoomSmart/YTVideoOverlay) |
-| **YTHoldForSpeed** | [joshuaseltzer](https://github.com/joshuaseltzer) | 1.2.0 | [✔︎](https://github.com/joshuaseltzer/YTHoldForSpeed) |
-| **LowContrastMode** | [arichorn](https://github.com/arichorn) | 1.4.2 | [✔︎](https://github.com/arichorn/YTLowContrastMode) |
+
 
 </details>
 
