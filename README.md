@@ -83,7 +83,6 @@ Special thanks to these developer(s) for maintaining and improving YouTubePremiu
 # Features
 
 1. **YouTube Premium:**
-   
 - Block all advertisements.
 - Enable background playback.
 - Enable Logo Premium.
