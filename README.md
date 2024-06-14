@@ -4,20 +4,6 @@
   </a>
 </p>
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Platform-iOS%20%7C%20iPadOS%2014.0%2B-yellow?logo=apple&logoColor=darkgray" alt="Platform Badge">
-</p>
-
-<p align="center">
-    <a href="https://github.com/arichornlover/YouTubeRebornPlus/release/latest"><img src="https://custom-icon-badges.demolab.com/github/v/release/arichornlover/YouTubeRebornPlus?logo=youtube&color=%23ff0000&label=Latest%20Release" alt="Badge"></img></a>
-    <a href="https://github.com/arichornlover/YouTubeRebornPlus/commit"><img src="https://custom-icon-badges.demolab.com/github/last-commit/arichornlover/YouTubeRebornPlus?logo=history&logoColor=white&color=%23ff0000&label=Last%20Commit" alt="Last Commit Badge"></a>
-    <a href="https://github.com/arichornlover/YouTubeRebornPlus/issues"><img src="https://custom-icon-badges.demolab.com/github/issues-raw/arichornlover/YouTubeRebornPlus?logo=issue-opened&logoColor=white&color=%23ff0000&label=Issues" alt="Issues Badge"></a>
-</p>
-
-<p align="center">
-    <a href="https://github.com/arichornlover/YouTubeRebornPlus/stargazers"><img src="https://custom-icon-badges.demolab.com/github/stars/arichornlover/YouTubeRebornPlus?style=flat&logo=star&logoColor=white&color=%23ff0000&label=Stars" alt="Stars Badge"></img></a>
-<a href="https://github.com/arichornlover/YouTubeRebornPlus/network/members"><img src="https://custom-icon-badges.demolab.com/github/forks/arichornlover/YouTubeRebornPlus?style=flat&logo=github&logoColor=white&color=%23ff0000&label=Forks"></a>
-</p>
 
 # Table of Contents
 
