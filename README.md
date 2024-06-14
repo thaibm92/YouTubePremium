@@ -88,37 +88,12 @@ Special thanks to these developer(s) for maintaining and improving YouTubePremiu
 | **Tweaks/App** | **Developer** | **Version** | **Open source** |
 | - | - | :-: | :-:  |
 | **YouTube** | Google Inc | 19.23.3 | ✖︎ |
-| **YouTube Premium** | thaibm92 | 1.6.6 | [✔︎](https://github.com/thaibm92/youtubepremium) |
-| **Open in YouTube** | [CokePokes](https://github.com/CokePokes/) | 1.2 | |
+| **YouTube Premium** | [Thaibm92]([https://github.com/thaibm92/youtubepremium) | 1.6.6 | [✔︎](https://github.com/thaibm92/youtubepremium) |
+| **Open in YouTube** | [CokePokes](https://github.com/CokePokes/) | 1.2 |[✔︎](https://github.com/CokePokes/)|
 | **YouPiP** | [PoomSmart](https://twitter.com/poomsmart) | 1.8.9 | [✔︎](https://github.com/PoomSmart/YouPiP) |
 
 
 </details>
-
-# Support the developers
-<a href="https://buymeacoffee.com/dayanch96"><img src="https://github.com/YTLitePlus/Assets/blob/main/Github/Buttons/Donations/Dayanch96(buymeacoffee).png" width="200"></a>
-&nbsp;
-<a href="https://github.com/sponsors/dayanch96"><img src="https://github.com/YTLitePlus/Assets/blob/main/Github/Buttons/Donations/Dayanch96(Github).png" width="200"></a>
-
-<a href="https://ko-fi.com/dayanch966"><img src="https://github.com/YTLitePlus/Assets/blob/main/Github/Buttons/Donations/Dayanch96(ko-fi).png" width="200"></a>
-&nbsp;
-<a href="https://www.paypal.com/paypalme/poomsmart"><img src="https://github.com/YTLitePlus/Assets/blob/main/Github/Buttons/Donations/Poomsmart.png" width="200"></a>
-
-<a href="https://www.paypal.com/paypalme/DBrett684"><img src="https://github.com/YTLitePlus/Assets/blob/main/Github/Buttons/Donations/Galactic-dev(Paypal).png" width="200"></a>
-&nbsp;
-<a href="https://venmo.com/u/DavidBrett"><img src="https://github.com/YTLitePlus/Assets/blob/main/Github/Buttons/Donations/Galactic-dev(Venmo).png?raw=true" width="200"></a>
-
-
-<a href="https://github.com/MiRO92/uYou-for-YouTube#support"><img src="https://raw.githubusercontent.com/YTLitePlus/Assets/main/Github/Buttons/Donations/MIRO92.png" width="200"></a>
-&nbsp;
-
-<a href="https://www.paypal.com/paypalme/BandarHL"><img src="https://github.com/YTLitePlus/Assets/blob/main/Github/Buttons/Donations/BandarHL.png" width="200"></a>
-&nbsp;
-
-<a href="https://ko-fi.com/level3tjg"><img src="https://github.com/YTLitePlus/Assets/blob/main/Github/Buttons/Donations/level3tjg.png?raw=true" width="200"></a>
-&nbsp;
-
-<a href="https://www.patreon.com/julioverne"><img src="https://github.com/YTLitePlus/Assets/blob/main/Github/Buttons/Donations/julioverne.png?raw=true" width="200"></a>
 
 # Building
 See [YouTubeRebornPlus/Building - Wiki](https://github.com/arichornlover/YouTubeRebornPlus/wiki/Building), [uYouEnhanced/Building - Wiki](https://github.com/arichornlover/uYouEnhanced/wiki/Building)
