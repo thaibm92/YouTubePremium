@@ -151,7 +151,7 @@ jobs:
           rm -rf main/packages/Payload/YouTube.app/_CodeSignature/CodeResources
           cp -rf main/YoutubeExtensions/*.appex main/packages/Payload/YouTube.app/PlugIns
           cd ${{ github.workspace }}/main/packages
-          zip -r YouTubePremium.ipa Payload
+          zip -r YouTubePremium.ipa Payload > /dev/null
           rm -rf Payload
           rm -rf YouTubePremium.zip
           rm -rf YouPIP.deb
