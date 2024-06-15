@@ -20,6 +20,7 @@ jobs:
         run: |
           if [ ! -d Tweaks/YouPiP ]; then  # Kiểm tra xem thư mục đã tồn tại
             git submodule add https://github.com/thaibm92/YouPiP.git Tweaks/YouPiP
+            git submodule add https://github.com/PoomSmart/YouTubeHeader.git Tweaks/YouTubeHeader
           fi
           
       - name: Update submodules
@@ -27,6 +28,9 @@ jobs:
          
           git submodule update --init --recursive --remote Tweaks/YouPiP
           git add Tweaks/YouPiP
+
+          git submodule update --init --recursive --remote Tweaks/YouTubeHeader
+          git add Tweaks/YouTubeHeader
           
           git submodule update --init --recursive
           git commit -m "updated submodules"
