@@ -20,7 +20,7 @@ jobs:
         run: |
          
           git submodule update --init --recursive --remote Tweaks/YouPiP
-          git add .
+          git add Tweaks/YouPiP
           
           git submodule update --init --recursive
           git commit -m "updated submodules"
