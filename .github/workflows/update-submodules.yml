@@ -19,7 +19,7 @@ jobs:
       - name: Thêm Tweaks/YouPiP (nếu cần)
         run: |
           if [ ! -d Tweaks/YouPiP ]; then  # Kiểm tra xem thư mục đã tồn tại
-            git submodule add ./Tweaks/YouPiP https://github.com/thaibm92/YouPiP.git
+            git submodule add https://github.com/thaibm92/YouPiP.git
           fi
           
       - name: Update submodules
