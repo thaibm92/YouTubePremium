@@ -21,4 +21,3 @@ include $(THEOS_MAKE_PATH)/aggregate.mk
 
 before-package::
       	@echo -e "==> \033[1mMoving tweak's bundle to Resources/...\033[0m"
-      	@cp -R Tweaks/YouPiP/layout/Library/Application\ Support/YouPiP.bundle Resources/
