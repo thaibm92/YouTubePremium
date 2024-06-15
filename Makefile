@@ -11,7 +11,6 @@ BUNDLE_ID = com.google.ios.youtube
 DISPLAY_NAME = YouTube
 
 $(TWEAK_NAME)_INJECT_DYLIBS = .theos/obj/YouPiP.dylib
-$(TWEAK_NAME)_IPA = ./pacge/Payload/YouTube.app
 $(TWEAK_NAME)_FILES = Tweak.x
 $(TWEAK_NAME)_CFLAGS = -fobjc-arc
 
