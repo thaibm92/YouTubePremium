@@ -1,0 +1,21 @@
+name: Add Submodule
+
+on:
+  push:
+    paths:
+      - ".gitmodules"
+
+jobs:
+  add-submodule:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4.1.6
+
+      - name: Initialize and update submodule
+        run: |
+          git submodule update --init --recursive
+          git add Tweaks/YouPiP
+          git commit -m "Initialized submodule YouPiP"
+          git push
