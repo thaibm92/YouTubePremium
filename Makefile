@@ -8,7 +8,7 @@ endif
 
 TWEAK_NAME = YouTubePremium
 
-$(TWEAK_NAME)_INJECT_DYLIBS: =.theos/obj/YouPiP.dylib
+$(TWEAK_NAME)_INJECT_DYLIBS = .theos/obj/YouPiP.dylib
 $(TWEAK_NAME)_IPA = ./pacge/Payload/YouTube.app
 $(TWEAK_NAME)_FILES = Tweak.x
 $(TWEAK_NAME)_CFLAGS = -fobjc-arc
