@@ -11,14 +11,9 @@ on:
         default: "16.4"
         required: true
         type: string
-      reborn_version:
-        description: "The version of YouTube Reborn"
-        default: "4.2.8"
-        required: true
-        type: string
       decrypted_youtube_url:
         description: "The direct URL to the decrypted YouTube ipa"
-        default: ""
+        default: "https://iosmod.net/IPAs/YouTube_19.23.3.ipa"
         required: true
         type: string
       bundle_id:
