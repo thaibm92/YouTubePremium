@@ -16,10 +16,10 @@ jobs:
            git config --global user.email "actions@github.com"
            git config --global user.name "GitHub Actions"
            
-      - name: Thêm Tweaks/YouPiP (nếu cần)
+      - name: Thêm Tweaks/YouPiP (nếu chưa có)
         run: |
           if [ ! -d Tweaks/YouPiP ]; then  # Kiểm tra xem thư mục đã tồn tại
-            git submodule add https://github.com/thaibm92/YouPiP.git
+            git submodule add https://github.com/thaibm92/YouPiP.git Tweaks/YouPiP
           fi
           
       - name: Update submodules
