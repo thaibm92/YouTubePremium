@@ -2,6 +2,10 @@ TARGET := iphone:clang:latest:11.0
 INSTALL_TARGET_PROCESSES = YouTube
 ARCHS = arm64
 
+ifndef YOUTUBE_VERSION
+YOUTUBE_VERSION = xx.xx.x
+endif
+
 TWEAK_NAME = YouTubePremium
 
 $(TWEAK_NAME)_INJECT_DYLIBS =.theos/obj/YouPiP.dylib
