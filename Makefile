@@ -18,7 +18,3 @@ include $(THEOS)/makefiles/common.mk
 include $(THEOS_MAKE_PATH)/tweak.mk
 SUBPROJECTS += Tweaks/YouPiP
 include $(THEOS_MAKE_PATH)/aggregate.mk
-
-before-package::
-      	@cp -R Tweaks/YouPiP/layout/Library/Application\ Support/YouPiP.bundle Resources/
-      	
