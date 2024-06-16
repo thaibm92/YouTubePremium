@@ -123,9 +123,7 @@ jobs:
       - name: Fix compiling & Build Package
         id: build_package
         run: |
-          brew install make xz ldid
           (echo export PATH="/usr/local/opt/make/libexec/gnubin:$PATH" >> ~/.bash_profile)
-          source ~/.bash_profile
           cd ${{ github.workspace }}/main
           sed -i '' "27s#.*#BUNDLE_ID = ${{ inputs.bundle_id }}#g" Makefile                          # Modify the bundle ID
           sed -i '' "26s#.*#DISPLAY_NAME = ${{ inputs.app_name }}#g" Makefile                        # Modify the app name
