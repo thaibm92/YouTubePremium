@@ -140,14 +140,6 @@ static NSString *accessGroupID() {
 }
 %end
 
-// A/B flags
-%hook YTColdConfig 
-- (BOOL)respectDeviceCaptionSetting { return NO; } // YouRememberCaption: https://poomsmart.github.io/repo/depictions/youremembercaption.html
-- (BOOL)isLandscapeEngagementPanelSwipeRightToDismissEnabled { return YES; } // Swipe right to dismiss the right panel in fullscreen mode
-- (BOOL)commercePlatformClientEnablePopupWebviewInWebviewDialogController { return NO;} // Disable In-App Website in the App
-%end
-
-
 %hook YTVersionUtils
 
 // Works down to 16.29.4
