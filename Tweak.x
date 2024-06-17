@@ -38,8 +38,47 @@
 #import "YouTubeHeader/YTHUDMessage.h"
 #import "YouTubeHeader/GOOHUDManagerInternal.h"
 
+// Enable Premium logo
 @interface YTITopbarLogoRenderer : NSObject // Enable Premium logo - @bhackel
 @property(readonly, nonatomic) YTIIcon *iconImage;
+@end
+
+// Hide Premium Promo in You tab
+@interface YTIIconThumbnailRenderer : GPBMessage
+@property (nonatomic, strong) YTIIcon *icon;
+- (BOOL)hasIcon;
+@end
+@interface YTICompactListItemThumbnailSupportedRenderers : GPBMessage
+@property (nonatomic, strong) YTIIconThumbnailRenderer *iconThumbnailRenderer;
+- (BOOL)hasIconThumbnailRenderer;
+@end
+@interface YTICompactListItemRenderer : GPBMessage
+@property (nonatomic, strong) YTICompactListItemThumbnailSupportedRenderers *thumbnail;
+@property (nonatomic, strong) YTIFormattedString *title;
+- (BOOL)hasThumbnail;
+- (BOOL)hasTitle;
+@end
+@interface YTIIcon (uYouEnhanced)
+- (BOOL)hasIconType;
+@end
+@interface YTICompactLinkRenderer : GPBMessage
+@property (nonatomic, strong) YTIIcon *icon;
+@property (nonatomic, strong) YTIFormattedString *title;
+@property (nonatomic, strong) YTICompactListItemThumbnailSupportedRenderers *thumbnail;
+- (BOOL)hasIcon;
+- (BOOL)hasThumbnail;
+@end
+@interface YTIItemSectionSupportedRenderers (uYouEnhanced)
+@property(readonly, nonatomic) YTICompactLinkRenderer *compactLinkRenderer;
+@property(readonly, nonatomic) YTICompactListItemRenderer *compactListItemRenderer;
+- (BOOL)hasCompactLinkRenderer;
+- (BOOL)hasCompactListItemRenderer;
+@end
+@interface YTAppCollectionViewController : YTInnerTubeCollectionViewController
+- (void)uYouEnhancedFakePremiumModel:(YTISectionListRenderer *)model;
+@end
+@interface YTInnerTubeCollectionViewController (uYouEnhanced)
+@property(readonly, nonatomic) YTISectionListRenderer *model;
 @end
 
 // Keychain patching
@@ -124,7 +163,6 @@ static NSString *accessGroupID() {
 %end
 
 // YouTube Premium Logo - @arichornlover & @bhackel
-
 %hook YTHeaderLogoController
 - (void)setTopbarLogoRenderer:(YTITopbarLogoRenderer *)renderer {
     YTIIcon *iconImage = renderer.iconImage;
