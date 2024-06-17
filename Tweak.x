@@ -145,6 +145,12 @@ static NSString *accessGroupID() {
 }
 %end
 
+// A/B flags
+%hook YTColdConfig 
+- (BOOL)respectDeviceCaptionSetting { return NO; } // YouRememberCaption: https://poomsmart.github.io/repo/depictions/youremembercaption.html
+- (BOOL)isLandscapeEngagementPanelSwipeRightToDismissEnabled { return YES; } // Swipe right to dismiss the right panel in fullscreen mode
+- (BOOL)commercePlatformClientEnablePopupWebviewInWebviewDialogController { return NO;} // Disable In-App Website in the App
+%end
 
 
 %hook YTVersionUtils
@@ -219,11 +225,11 @@ BOOL isAdString(NSString *description) {
         || [description containsString:@"full_width_square_image_layout"]
         || [description containsString:@"home_video_with_context"]
         || [description containsString:@"landscape_image_wide_button_layout"]
-        // || [description containsString:@"product_carousel"]
+        || [description containsString:@"product_carousel"]
         || [description containsString:@"product_engagement_panel"]
         || [description containsString:@"product_item"]
         || [description containsString:@"shelf_header"]
-        // || [description containsString:@"statement_banner"]
+        || [description containsString:@"statement_banner"]
         || [description containsString:@"square_image_layout"] // install app ad
         || [description containsString:@"text_image_button_layout"]
         || [description containsString:@"text_search_ad"]
