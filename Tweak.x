@@ -205,17 +205,16 @@ BOOL isAdString(NSString *description) {
         || [description containsString:@"full_width_square_image_layout"]
         || [description containsString:@"home_video_with_context"]
         || [description containsString:@"landscape_image_wide_button_layout"]
-        || [description containsString:@"product_carousel"] //
+        //|| [description containsString:@"product_carousel"] //
         || [description containsString:@"product_engagement_panel"]
         || [description containsString:@"product_item"]
         || [description containsString:@"shelf_header"]
-        || [description containsString:@"statement_banner"] //
+        //|| [description containsString:@"statement_banner"] //
         || [description containsString:@"square_image_layout"] // install app ad
         || [description containsString:@"text_image_button_layout"]
         || [description containsString:@"text_search_ad"]
         || [description containsString:@"video_display_full_layout"]
-        || [description containsString:@"video_display_full_buttoned_layout"]
-        || [description containsString:@"post_shelf"])
+        || [description containsString:@"video_display_full_buttoned_layout"])
         return YES;
     return NO;
 }
