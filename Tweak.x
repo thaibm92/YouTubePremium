@@ -89,11 +89,6 @@ static NSString *accessGroupID() {
 - (BOOL)shouldShowUpgradeDialog { return NO;}
 %end
 
-// No YouTube Ads
-%hook YTHotConfig
-- (BOOL)disableAfmaIdfaCollection { return NO; }
-%end
-
 // NOYTPremium
 %hook YTCommerceEventGroupHandler
 - (void)addEventHandlers {}
@@ -145,6 +140,92 @@ static NSString *accessGroupID() {
 }
 %end
 
+%hook YTAppCollectionViewController
+/**
+  * Modify a given renderer data model to fake premium in the You tab
+  * Replaces the "Get YouTube Premium" cell with a "Your Premium benefits" cell
+  * and adds a "Downloads" cell below the "Your videos" cell
+  * @param model The model for the You tab
+  */
+%new
+- (void)uYouEnhancedFakePremiumModel:(YTISectionListRenderer *)model {
+    // Don't do anything if the version is too low
+    Class YTVersionUtilsClass = %c(YTVersionUtils);
+    NSString *appVersion = [YTVersionUtilsClass performSelector:@selector(appVersion)];
+    NSComparisonResult result = [appVersion compare:@"18.35.4" options:NSNumericSearch];
+    if (result == NSOrderedAscending) {
+        return;
+    }
+    NSUInteger yourVideosCellIndex = -1;
+    NSMutableArray <YTISectionListSupportedRenderers *> *overallContentsArray = model.contentsArray;
+    // Check each item in the overall array - this represents the whole You page
+    YTISectionListSupportedRenderers *supportedRenderers;
+    for (supportedRenderers in overallContentsArray) {
+        YTIItemSectionRenderer *itemSectionRenderer = supportedRenderers.itemSectionRenderer;
+        // Check each subobject - this would be visible as a cell in the You page
+        NSMutableArray <YTIItemSectionSupportedRenderers *> *subContentsArray = itemSectionRenderer.contentsArray;
+        YTIItemSectionSupportedRenderers *itemSectionSupportedRenderers;
+        for (itemSectionSupportedRenderers in subContentsArray) {
+            // Check for Get Youtube Premium cell, which is of type CompactLinkRenderer
+            if ([itemSectionSupportedRenderers hasCompactLinkRenderer]) {
+                YTICompactLinkRenderer *compactLinkRenderer = [itemSectionSupportedRenderers compactLinkRenderer];
+                // Check for an icon in this cell
+                if ([compactLinkRenderer hasIcon]) {
+                    YTIIcon *icon = [compactLinkRenderer icon];
+                    // Check if the icon is for the premium advertisement - 117 is magic number for the icon
+                    if ([icon hasIconType] && icon.iconType == 117) {
+                        // Modify the icon type to be Premium
+                        icon.iconType = 741; // Magic number for premium icon
+                        // Modify the text
+                        ((YTIStringRun *)(compactLinkRenderer.title.runsArray.firstObject)).text = LOC(@"FAKE_YOUR_PREMIUM_BENEFITS");
+                    }
+                }
+            }
+            // Check for Your Videos cell using similar logic explained above
+            if ([itemSectionSupportedRenderers hasCompactListItemRenderer]) {
+                YTICompactListItemRenderer *compactListItemRenderer = itemSectionSupportedRenderers.compactListItemRenderer;
+                if ([compactListItemRenderer hasThumbnail]) {
+                    YTICompactListItemThumbnailSupportedRenderers *thumbnail = compactListItemRenderer.thumbnail;
+                    if ([thumbnail hasIconThumbnailRenderer]) {
+                        YTIIconThumbnailRenderer *iconThumbnailRenderer = thumbnail.iconThumbnailRenderer;
+                        if ([iconThumbnailRenderer hasIcon]) {
+                            YTIIcon *icon = iconThumbnailRenderer.icon;
+                            if ([icon hasIconType] && icon.iconType == 658) {
+                                // Store the index of this cell
+                                yourVideosCellIndex = [subContentsArray indexOfObject:itemSectionSupportedRenderers];
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        if (yourVideosCellIndex != -1 && subContentsArray[yourVideosCellIndex].accessibilityLabel == nil) {
+            // Create the fake Downloads page by copying the Your Videos page and modifying it
+            // Note that this must be done outside the loop to avoid a runtime exception
+            // TODO Link this to the uYou downloads page
+            YTIItemSectionSupportedRenderers *newItemSectionSupportedRenderers = [subContentsArray[yourVideosCellIndex] copy];
+            ((YTIStringRun *)(newItemSectionSupportedRenderers.compactListItemRenderer.title.runsArray.firstObject)).text = LOC(@"FAKE_DOWNLOADS");
+            newItemSectionSupportedRenderers.compactListItemRenderer.thumbnail.iconThumbnailRenderer.icon.iconType = 147;
+            // Insert this cell after the Your Videos cell
+            [subContentsArray insertObject:newItemSectionSupportedRenderers atIndex:yourVideosCellIndex + 1];
+            // Inject a note to not modify this again
+            subContentsArray[yourVideosCellIndex].accessibilityLabel = @"uYouEnhanced Modified";
+            yourVideosCellIndex = -1;
+        }
+    }
+}
+- (void)loadWithModel:(YTISectionListRenderer *)model {
+    // This method is called on first load of the You page
+    [self uYouEnhancedFakePremiumModel:model];
+    %orig;
+}
+- (void)setupSectionListWithModel:(YTISectionListRenderer *)model isLoadingMore:(BOOL)isLoadingMore isRefreshingFromContinuation:(BOOL)isRefreshingFromContinuation {
+    // This method is called on refresh of the You page
+    [self uYouEnhancedFakePremiumModel:model];
+    %orig;
+}
+%end
+
 // A/B flags
 %hook YTColdConfig 
 - (BOOL)respectDeviceCaptionSetting { return NO; } // YouRememberCaption: https://poomsmart.github.io/repo/depictions/youremembercaption.html
@@ -169,51 +250,44 @@ static NSString *accessGroupID() {
 - (BOOL)shouldBlockUpgradeDialog { return YES; }
 %end
 
+// No YouTube Ads
+%hook YTHotConfig
+- (BOOL)disableAfmaIdfaCollection { return NO; }
+%end
+
 %hook YTIPlayerResponse
 - (BOOL)isPlayableInBackground {return YES;}
 - (BOOL)isMonetized { return NO; }
 %end
 
 %hook YTIPlayabilityStatus
-
 - (BOOL)isPlayableInBackground { return YES; }
-
 %end
 
 %hook MLVideo
-
 - (BOOL)playableInBackground { return YES; }
-
 %end
 
 %hook YTDataUtils
-
 + (id)spamSignalsDictionary { return @{}; }
 + (id)spamSignalsDictionaryWithoutIDFA { return @{}; }
-
 %end
 
 %hook YTAdsInnerTubeContextDecorator
-
 - (void)decorateContext:(id)context { %orig(nil); }
-
 %end
 
 %hook YTAccountScopedAdsInnerTubeContextDecorator
-
 - (void)decorateContext:(id)context { %orig(nil); }
-
 %end
 
 %hook YTReelInfinitePlaybackDataSource
-
 - (void)setReels:(NSMutableOrderedSet <YTReelModel *> *)reels {
     [reels removeObjectsAtIndexes:[reels indexesOfObjectsPassingTest:^BOOL(YTReelModel *obj, NSUInteger idx, BOOL *stop) {
         return [obj respondsToSelector:@selector(videoType)] ? obj.videoType == 3 : NO;
     }]];
     %orig;
 }
-
 %end
 
 BOOL isAdString(NSString *description) {
@@ -225,11 +299,11 @@ BOOL isAdString(NSString *description) {
         || [description containsString:@"full_width_square_image_layout"]
         || [description containsString:@"home_video_with_context"]
         || [description containsString:@"landscape_image_wide_button_layout"]
-        || [description containsString:@"product_carousel"]
+        || [description containsString:@"product_carousel"] //
         || [description containsString:@"product_engagement_panel"]
         || [description containsString:@"product_item"]
         || [description containsString:@"shelf_header"]
-        || [description containsString:@"statement_banner"]
+        || [description containsString:@"statement_banner"] //
         || [description containsString:@"square_image_layout"] // install app ad
         || [description containsString:@"text_image_button_layout"]
         || [description containsString:@"text_search_ad"]
@@ -240,9 +314,7 @@ BOOL isAdString(NSString *description) {
 }
 
 NSData *cellDividerData;
-
 %hook YTIElementRenderer
-
 - (NSData *)elementData {
     NSString *description = [self description];
     if ([description containsString:@"cell_divider"]) {
@@ -253,11 +325,9 @@ NSData *cellDividerData;
     // if (isAdString(description)) return cellDividerData;
     return %orig;
 }
-
 %end
 
 %hook YTInnerTubeCollectionViewController
-
 - (void)loadWithModel:(YTISectionListRenderer *)model {
     if ([model isKindOfClass:%c(YTISectionListRenderer)]) {
         NSMutableArray <YTISectionListSupportedRenderers *> *contentsArray = model.contentsArray;
@@ -277,5 +347,4 @@ NSData *cellDividerData;
     }
     %orig;
 }
-
 %end
