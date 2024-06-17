@@ -85,6 +85,7 @@ static NSString *accessGroupID() {
 
 // Hide Upgrade Dialog
 %hook YTGlobalConfig
+- (BOOL)shouldBlockUpgradeDialog { return YES; }
 - (BOOL)shouldForceUpgrade { return NO;}
 - (BOOL)shouldShowUpgrade { return NO;}
 - (BOOL)shouldShowUpgradeDialog { return NO;}
@@ -150,10 +151,6 @@ static NSString *accessGroupID() {
     return appVersion;
 }
 
-%end
-
-%hook YTGlobalConfig
-- (BOOL)shouldBlockUpgradeDialog { return YES; }
 %end
 
 // No YouTube Ads
