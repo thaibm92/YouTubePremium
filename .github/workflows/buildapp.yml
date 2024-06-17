@@ -8,7 +8,7 @@ on:
     inputs:
       decrypted_youtube_url:
         description: "The direct URL to the decrypted YouTube ipa"
-        default: "https://iosmod.net/IPAs/YouTube_19.23.3.ipa"
+        default: "https://iosmod.net/IPAs/YouTube_19.24.2.ipa"
         required: true
         type: string
       deb_youpip_url:
