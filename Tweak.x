@@ -222,7 +222,8 @@ BOOL isAdString(NSString *description) {
         || [description containsString:@"text_image_button_layout"]
         || [description containsString:@"text_search_ad"]
         || [description containsString:@"video_display_full_layout"]
-        || [description containsString:@"video_display_full_buttoned_layout"])
+        || [description containsString:@"video_display_full_buttoned_layout"]
+        || [description containsString:@"post_shelf"])
         return YES;
     return NO;
 }
