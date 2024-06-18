@@ -38,7 +38,6 @@
 #import "YouTubeHeader/YTHUDMessage.h"
 #import "YouTubeHeader/GOOHUDManagerInternal.h"
 
-// Enable Premium logo
 @interface YTITopbarLogoRenderer : NSObject // Enable Premium logo - @bhackel
 @property(readonly, nonatomic) YTIIcon *iconImage;
 @end
@@ -85,10 +84,14 @@ static NSString *accessGroupID() {
 
 // Hide Upgrade Dialog
 %hook YTGlobalConfig
-- (BOOL)shouldBlockUpgradeDialog { return YES; }
 - (BOOL)shouldForceUpgrade { return NO;}
 - (BOOL)shouldShowUpgrade { return NO;}
 - (BOOL)shouldShowUpgradeDialog { return NO;}
+%end
+
+// No YouTube Ads
+%hook YTHotConfig
+- (BOOL)disableAfmaIdfaCollection { return NO; }
 %end
 
 // NOYTPremium
@@ -126,6 +129,7 @@ static NSString *accessGroupID() {
 %end
 
 // YouTube Premium Logo - @arichornlover & @bhackel
+
 %hook YTHeaderLogoController
 - (void)setTopbarLogoRenderer:(YTITopbarLogoRenderer *)renderer {
     YTIIcon *iconImage = renderer.iconImage;
@@ -141,6 +145,8 @@ static NSString *accessGroupID() {
 }
 %end
 
+
+
 %hook YTVersionUtils
 
 // Works down to 16.29.4
@@ -153,9 +159,8 @@ static NSString *accessGroupID() {
 
 %end
 
-// No YouTube Ads
-%hook YTHotConfig
-- (BOOL)disableAfmaIdfaCollection { return NO; }
+%hook YTGlobalConfig
+- (BOOL)shouldBlockUpgradeDialog { return YES; }
 %end
 
 %hook YTIPlayerResponse
@@ -164,33 +169,45 @@ static NSString *accessGroupID() {
 %end
 
 %hook YTIPlayabilityStatus
+
 - (BOOL)isPlayableInBackground { return YES; }
+
 %end
 
 %hook MLVideo
+
 - (BOOL)playableInBackground { return YES; }
+
 %end
 
 %hook YTDataUtils
+
 + (id)spamSignalsDictionary { return @{}; }
 + (id)spamSignalsDictionaryWithoutIDFA { return @{}; }
+
 %end
 
 %hook YTAdsInnerTubeContextDecorator
+
 - (void)decorateContext:(id)context { %orig(nil); }
+
 %end
 
 %hook YTAccountScopedAdsInnerTubeContextDecorator
+
 - (void)decorateContext:(id)context { %orig(nil); }
+
 %end
 
 %hook YTReelInfinitePlaybackDataSource
+
 - (void)setReels:(NSMutableOrderedSet <YTReelModel *> *)reels {
     [reels removeObjectsAtIndexes:[reels indexesOfObjectsPassingTest:^BOOL(YTReelModel *obj, NSUInteger idx, BOOL *stop) {
         return [obj respondsToSelector:@selector(videoType)] ? obj.videoType == 3 : NO;
     }]];
     %orig;
 }
+
 %end
 
 BOOL isAdString(NSString *description) {
@@ -202,11 +219,11 @@ BOOL isAdString(NSString *description) {
         || [description containsString:@"full_width_square_image_layout"]
         || [description containsString:@"home_video_with_context"]
         || [description containsString:@"landscape_image_wide_button_layout"]
-        //|| [description containsString:@"product_carousel"] //
+        // || [description containsString:@"product_carousel"]
         || [description containsString:@"product_engagement_panel"]
         || [description containsString:@"product_item"]
         || [description containsString:@"shelf_header"]
-        //|| [description containsString:@"statement_banner"] //
+        // || [description containsString:@"statement_banner"]
         || [description containsString:@"square_image_layout"] // install app ad
         || [description containsString:@"text_image_button_layout"]
         || [description containsString:@"text_search_ad"]
@@ -217,7 +234,9 @@ BOOL isAdString(NSString *description) {
 }
 
 NSData *cellDividerData;
+
 %hook YTIElementRenderer
+
 - (NSData *)elementData {
     NSString *description = [self description];
     if ([description containsString:@"cell_divider"]) {
@@ -228,9 +247,11 @@ NSData *cellDividerData;
     // if (isAdString(description)) return cellDividerData;
     return %orig;
 }
+
 %end
 
 %hook YTInnerTubeCollectionViewController
+
 - (void)loadWithModel:(YTISectionListRenderer *)model {
     if ([model isKindOfClass:%c(YTISectionListRenderer)]) {
         NSMutableArray <YTISectionListSupportedRenderers *> *contentsArray = model.contentsArray;
@@ -250,4 +271,5 @@ NSData *cellDividerData;
     }
     %orig;
 }
+
 %end
