@@ -127,9 +127,8 @@ static NSString *accessGroupID() {
 %new
 - (BOOL)savedSettingShouldExpire { return NO; }
 %end
-
+/*
 // YouTube Premium Logo - @arichornlover & @bhackel
-
 %hook YTHeaderLogoController
 - (void)setTopbarLogoRenderer:(YTITopbarLogoRenderer *)renderer {
     YTIIcon *iconImage = renderer.iconImage;
@@ -144,9 +143,7 @@ static NSString *accessGroupID() {
     return YES;
 }
 %end
-
-
-
+*/
 %hook YTVersionUtils
 
 // Works down to 16.29.4
