@@ -84,6 +84,7 @@ static NSString *accessGroupID() {
 
 // Hide Upgrade Dialog
 %hook YTGlobalConfig
+- (BOOL)shouldBlockUpgradeDialog { return YES; }
 - (BOOL)shouldForceUpgrade { return NO;}
 - (BOOL)shouldShowUpgrade { return NO;}
 - (BOOL)shouldShowUpgradeDialog { return NO;}
@@ -132,7 +133,7 @@ static NSString *accessGroupID() {
 %new
 - (BOOL)savedSettingShouldExpire { return NO; }
 %end
-/*
+
 // YouTube Premium Logo - @arichornlover & @bhackel
 %hook YTHeaderLogoController
 - (void)setTopbarLogoRenderer:(YTITopbarLogoRenderer *)renderer {
@@ -148,9 +149,8 @@ static NSString *accessGroupID() {
     return YES;
 }
 %end
-*/
-%hook YTVersionUtils
 
+%hook YTVersionUtils
 // Works down to 16.29.4
 + (NSString *)appVersion {
     NSString *appVersion = %orig;
@@ -158,11 +158,6 @@ static NSString *accessGroupID() {
         return @"17.33.2";
     return appVersion;
 }
-
-%end
-
-%hook YTGlobalConfig
-- (BOOL)shouldBlockUpgradeDialog { return YES; }
 %end
 
 %hook YTIPlayerResponse
@@ -171,45 +166,33 @@ static NSString *accessGroupID() {
 %end
 
 %hook YTIPlayabilityStatus
-
 - (BOOL)isPlayableInBackground { return YES; }
-
 %end
 
 %hook MLVideo
-
 - (BOOL)playableInBackground { return YES; }
-
 %end
 
 %hook YTDataUtils
-
 + (id)spamSignalsDictionary { return @{}; }
 + (id)spamSignalsDictionaryWithoutIDFA { return @{}; }
-
 %end
 
 %hook YTAdsInnerTubeContextDecorator
-
 - (void)decorateContext:(id)context { %orig(nil); }
-
 %end
 
 %hook YTAccountScopedAdsInnerTubeContextDecorator
-
 - (void)decorateContext:(id)context { %orig(nil); }
-
 %end
 
 %hook YTReelInfinitePlaybackDataSource
-
 - (void)setReels:(NSMutableOrderedSet <YTReelModel *> *)reels {
     [reels removeObjectsAtIndexes:[reels indexesOfObjectsPassingTest:^BOOL(YTReelModel *obj, NSUInteger idx, BOOL *stop) {
         return [obj respondsToSelector:@selector(videoType)] ? obj.videoType == 3 : NO;
     }]];
     %orig;
 }
-
 %end
 
 BOOL isAdString(NSString *description) {
@@ -236,9 +219,7 @@ BOOL isAdString(NSString *description) {
 }
 
 NSData *cellDividerData;
-
 %hook YTIElementRenderer
-
 - (NSData *)elementData {
     NSString *description = [self description];
     if ([description containsString:@"cell_divider"]) {
@@ -249,11 +230,9 @@ NSData *cellDividerData;
     // if (isAdString(description)) return cellDividerData;
     return %orig;
 }
-
 %end
 
 %hook YTInnerTubeCollectionViewController
-
 - (void)loadWithModel:(YTISectionListRenderer *)model {
     if ([model isKindOfClass:%c(YTISectionListRenderer)]) {
         NSMutableArray <YTISectionListSupportedRenderers *> *contentsArray = model.contentsArray;
@@ -273,5 +252,4 @@ NSData *cellDividerData;
     }
     %orig;
 }
-
 %end
