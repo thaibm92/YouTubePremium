@@ -118,11 +118,6 @@ static NSString *accessGroupID() {
 - (BOOL)shouldThrottleInterstitial { return YES; }
 %end
 
-// "Try new features" in settings
-%hook YTSettingsSectionItemManager
-- (void)updatePremiumEarlyAccessSectionWithEntry:(id)arg1 {}
-%end
-
 %hook YTSurveyController
 - (void)showSurveyWithRenderer:(id)arg1 surveyParentResponder:(id)arg2 {}
 %end
@@ -132,6 +127,19 @@ static NSString *accessGroupID() {
 - (int)availabilityType { return 1; }
 %new
 - (BOOL)savedSettingShouldExpire { return NO; }
+%end
+
+// YTNoPaidPromo https://github.com/PoomSmart/YTNoPaidPromo
+%hook YTMainAppVideoPlayerOverlayViewController
+- (void)setPaidContentWithPlayerData:(id)data {}
+- (void)playerOverlayProvider:(YTPlayerOverlayProvider *)provider didInsertPlayerOverlay:(YTPlayerOverlay *)overlay {
+    if ([[overlay overlayIdentifier] isEqualToString:@"player_overlay_paid_content"]) return;
+    %orig;
+}
+%end
+
+%hook YTInlineMutedPlaybackPlayerOverlayViewController
+- (void)setPaidContentWithPlayerData:(id)data {}
 %end
 
 // YouTube Premium Logo - @arichornlover & @bhackel
