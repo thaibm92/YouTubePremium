@@ -37,6 +37,9 @@
 // YT Headers - snackbar
 #import "YouTubeHeader/YTHUDMessage.h"
 #import "YouTubeHeader/GOOHUDManagerInternal.h"
+// YTNoPaidPromo
+#import "YouTubeHeader/YTPlayerOverlay.h"
+#import "YouTubeHeader/YTPlayerOverlayProvider.h"
 
 @interface YTITopbarLogoRenderer : NSObject // Enable Premium logo - @bhackel
 @property(readonly, nonatomic) YTIIcon *iconImage;
