@@ -117,6 +117,11 @@ static NSString *accessGroupID() {
 - (BOOL)shouldThrottleInterstitial { return YES; }
 %end
 
+// "Try new features" in settings
+%hook YTSettingsSectionItemManager
+- (void)updatePremiumEarlyAccessSectionWithEntry:(id)arg1 {}
+%end
+
 %hook YTSurveyController
 - (void)showSurveyWithRenderer:(id)arg1 surveyParentResponder:(id)arg2 {}
 %end
