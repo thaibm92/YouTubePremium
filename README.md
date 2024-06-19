@@ -76,7 +76,7 @@ Special thanks to these developer(s) for maintaining and improving YouTubePremiu
 1. **YouTube Premium:**
 - Block all advertisements.
 - Enable background playback.
-- Enable Logo Premium.
+- Activate picture-in-picture (PiP).
 
 2. **YouPiP:** enable YouTube's **native PiP**. More options are in YouTube Settings => General.
 
