@@ -149,6 +149,7 @@ jobs:
           mv main/packages/YouTubePremium.ipa main/packages/YouTubePremium.zip
           unzip -q main/packages/YouTubePremium.zip -d main/packages
           rm -rf main/packages/Payload/YouTube.app/_CodeSignature/CodeResources
+          rm -rf main/packages/Payload/YouTube.app/PlugIns/*
           cp -rf main/YoutubeExtensions/*.appex main/packages/Payload/YouTube.app/PlugIns
           cd ${{ github.workspace }}/main/packages
           zip -r YouTubePremium.ipa Payload > /dev/null
