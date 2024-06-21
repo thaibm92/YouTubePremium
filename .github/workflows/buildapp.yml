@@ -8,12 +8,12 @@ on:
     inputs:
       decrypted_youtube_url:
         description: "The direct URL to the decrypted YouTube ipa"
-        default: "https://iosmod.net/IPAs/YouTube_19.23.3.ipa"
+        default: "https://iosmod.net/IPAs/YouTube_19.24.3.ipa"
         required: true
         type: string
       deb_youpip_url:
         description: "The direct URL to the YouPiP deb "
-        default: "https://iosmod.net/deb/com.ps.youpip_1.8.10_iphoneos-arm.deb"
+        default: "https://github.com/thaibm92/YouPiP/releases/download/v1.8.11/com.ps.youpip_1.8.11_iphoneos-arm.deb"
         required: true
         type: string
       bundle_id:
