@@ -131,7 +131,7 @@ static NSString *accessGroupID() {
 %new
 - (BOOL)savedSettingShouldExpire { return NO; }
 %end
-
+/*
 // YTNoPaidPromo https://github.com/PoomSmart/YTNoPaidPromo
 %hook YTMainAppVideoPlayerOverlayViewController
 - (void)setPaidContentWithPlayerData:(id)data {}
@@ -144,7 +144,7 @@ static NSString *accessGroupID() {
 %hook YTInlineMutedPlaybackPlayerOverlayViewController
 - (void)setPaidContentWithPlayerData:(id)data {}
 %end
-
+*/
 // YouTube Premium Logo - @arichornlover & @bhackel
 %hook YTHeaderLogoController
 - (void)setTopbarLogoRenderer:(YTITopbarLogoRenderer *)renderer {
