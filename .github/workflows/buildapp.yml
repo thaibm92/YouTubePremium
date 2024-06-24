@@ -160,7 +160,7 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@v4.3.3
         with:
-          name: YouTubePremium_${{ env.YT_VERSION }}
+          name: YouTubePremium${{ env.YT_VERSION }}
           path: ${{ github.workspace }}/main/packages/${{ steps.build_package.outputs.package }}
           if-no-files-found: error
           
