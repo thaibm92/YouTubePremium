@@ -184,6 +184,11 @@ static NSString *accessGroupID() {
 - (BOOL)playableInBackground { return YES; }
 %end
 
+%hook YTAdShieldUtils
++ (id)spamSignalsDictionary { return @{}; }
++ (id)spamSignalsDictionaryWithoutIDFA { return @{}; }
+%end
+
 %hook YTDataUtils
 + (id)spamSignalsDictionary { return @{}; }
 + (id)spamSignalsDictionaryWithoutIDFA { return @{}; }
@@ -307,14 +312,9 @@ static uint8_t cellDividerDataBytes[] = {
     0x39, 0x39, 0x36, 0x30, 0x31, 0x37, 0x31, 0x33, 0x38,
 };
 
-NSData *cellDividerData;
 %hook YTIElementRenderer
 - (NSData *)elementData {
-    NSString *description = [self description];
-    if ([description containsString:@"cell_divider"]) {
-        if (!cellDividerData) cellDividerData = %orig;
-        return cellDividerData;
-    }
+    // NSString *description = [self description];
     if ([self respondsToSelector:@selector(hasCompatibilityOptions)] && self.hasCompatibilityOptions && self.compatibilityOptions.hasAdLoggingData && cellDividerData) return cellDividerData;
     // if (isAdString(description)) return cellDividerData;
     return %orig;
@@ -339,3 +339,8 @@ NSData *cellDividerData;
     %orig;
 }
 %end
+
+%ctor {
+    cellDividerData = [NSData dataWithBytes:cellDividerDataBytes length:cellDividerDataBytesLength];
+    %init;
+}
