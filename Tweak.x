@@ -183,12 +183,12 @@ static NSString *accessGroupID() {
 %hook MLVideo
 - (BOOL)playableInBackground { return YES; }
 %end
-
+/*
 %hook YTAdShieldUtils
 + (id)spamSignalsDictionary { return @{}; }
 + (id)spamSignalsDictionaryWithoutIDFA { return @{}; }
 %end
-
+*/
 %hook YTDataUtils
 + (id)spamSignalsDictionary { return @{}; }
 + (id)spamSignalsDictionaryWithoutIDFA { return @{}; }
@@ -234,7 +234,7 @@ BOOL isAdString(NSString *description) {
         return YES;
     return NO;
 }
-
+/*
 #define cellDividerDataBytesLength 719
 static __strong NSData *cellDividerData;
 static uint8_t cellDividerDataBytes[] = {
@@ -320,6 +320,21 @@ static uint8_t cellDividerDataBytes[] = {
     return %orig;
 }
 %end
+*/
+
+NSData *cellDividerData;
+%hook YTIElementRenderer
+- (NSData *)elementData {
+    NSString *description = [self description];
+    if ([description containsString:@"cell_divider"]) {
+        if (!cellDividerData) cellDividerData = %orig;
+        return cellDividerData;
+    }
+    if ([self respondsToSelector:@selector(hasCompatibilityOptions)] && self.hasCompatibilityOptions && self.compatibilityOptions.hasAdLoggingData && cellDividerData) return cellDividerData;
+    // if (isAdString(description)) return cellDividerData;
+    return %orig;
+}
+%end
 
 %hook YTInnerTubeCollectionViewController
 - (void)loadWithModel:(YTISectionListRenderer *)model {
@@ -339,8 +354,9 @@ static uint8_t cellDividerDataBytes[] = {
     %orig;
 }
 %end
-
+/*
 %ctor {
     cellDividerData = [NSData dataWithBytes:cellDividerDataBytes length:cellDividerDataBytesLength];
     %init;
 }
+*/
