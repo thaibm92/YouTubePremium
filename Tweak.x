@@ -353,9 +353,16 @@ static uint8_t cellDividerDataBytes[] = {
 
 %hook YTIElementRenderer
 - (NSData *)elementData {
-    // NSString *description = [self description];
-    if ([self respondsToSelector:@selector(hasCompatibilityOptions)] && self.hasCompatibilityOptions && self.compatibilityOptions.hasAdLoggingData && cellDividerData) return cellDividerData;
-    // if (isAdString(description)) return cellDividerData;
+    if ([self respondsToSelector:@selector(hasCompatibilityOptions)] && self.hasCompatibilityOptions && self.compatibilityOptions.hasAdLoggingData) {
+        // HBLogInfo(@"YTX adLogging %@", cellDividerData);
+        return cellDividerData;
+    }
+    NSString *description = [self description];
+    NSString *adString = getAdString(description);
+    if (adString) {
+        // HBLogInfo(@"YTX getAdString %@ %@", str, cellDividerData);
+        return cellDividerData;
+    }
     return %orig;
 }
 %end
