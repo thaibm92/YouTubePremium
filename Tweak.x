@@ -211,6 +211,45 @@ static NSString *accessGroupID() {
 }
 %end
 
+NSString *getAdString(NSString *description) {
+    if ([description containsString:@"brand_promo"])
+        return @"brand_promo";
+    if ([description containsString:@"carousel_footered_layout"])
+        return @"carousel_footered_layout";
+    if ([description containsString:@"carousel_headered_layout"])
+        return @"carousel_headered_layout";
+    if ([description containsString:@"feed_ad_metadata"])
+        return @"feed_ad_metadata";
+    if ([description containsString:@"full_width_portrait_image_layout"])
+        return @"full_width_portrait_image_layout";
+    if ([description containsString:@"full_width_square_image_layout"])
+        return @"full_width_square_image_layout";
+    if ([description containsString:@"landscape_image_wide_button_layout"])
+        return @"landscape_image_wide_button_layout";
+    if ([description containsString:@"post_shelf"])
+        return @"post_shelf";
+    if ([description containsString:@"product_carousel"])
+        return @"product_carousel";
+    if ([description containsString:@"product_engagement_panel"])
+        return @"product_engagement_panel";
+    if ([description containsString:@"product_item"])
+        return @"product_item";
+    if ([description containsString:@"statement_banner"])
+        return @"statement_banner";
+    if ([description containsString:@"square_image_layout"])
+        return @"square_image_layout";
+    if ([description containsString:@"text_image_button_layout"])
+        return @"text_image_button_layout";
+    if ([description containsString:@"text_search_ad"])
+        return @"text_search_ad";
+    if ([description containsString:@"video_display_full_layout"])
+        return @"video_display_full_layout";
+    if ([description containsString:@"video_display_full_buttoned_layout"])
+        return @"video_display_full_buttoned_layout";
+    return nil;
+}
+
+/*
 BOOL isAdString(NSString *description) {
     if ([description containsString:@"brand_promo"]
         || [description containsString:@"carousel_footered_layout"]
@@ -234,7 +273,7 @@ BOOL isAdString(NSString *description) {
         return YES;
     return NO;
 }
-/*
+
 #define cellDividerDataBytesLength 719
 static __strong NSData *cellDividerData;
 static uint8_t cellDividerDataBytes[] = {
@@ -320,7 +359,7 @@ static uint8_t cellDividerDataBytes[] = {
     return %orig;
 }
 %end
-*/
+
 
 NSData *cellDividerData;
 %hook YTIElementRenderer
@@ -354,7 +393,7 @@ NSData *cellDividerData;
     %orig;
 }
 %end
-/*
+
 %ctor {
     cellDividerData = [NSData dataWithBytes:cellDividerDataBytes length:cellDividerDataBytesLength];
     %init;
