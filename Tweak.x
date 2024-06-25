@@ -79,14 +79,14 @@ NSString *getAdString(NSString *description) {
         return @"landscape_image_wide_button_layout";
     if ([description containsString:@"post_shelf"])
         return @"post_shelf";
-   // if ([description containsString:@"product_carousel"])
-   //    return @"product_carousel";
+    if ([description containsString:@"product_carousel"])
+       return @"product_carousel";
     if ([description containsString:@"product_engagement_panel"])
         return @"product_engagement_panel";
     if ([description containsString:@"product_item"])
         return @"product_item";
-  //  if ([description containsString:@"statement_banner"])
-  //     return @"statement_banner";
+    if ([description containsString:@"statement_banner"])
+       return @"statement_banner";
     if ([description containsString:@"square_image_layout"])
         return @"square_image_layout";
     if ([description containsString:@"text_image_button_layout"])
@@ -99,3 +99,17 @@ NSString *getAdString(NSString *description) {
         return @"video_display_full_buttoned_layout";
     return nil;
 }
+
+NSData *cellDividerData;
+%hook YTIElementRenderer
+- (NSData *)elementData {
+    NSString *description = [self description];
+    if ([description containsString:@"cell_divider"]) {
+        if (!cellDividerData) cellDividerData = %orig;
+        return cellDividerData;
+    }
+    if ([self respondsToSelector:@selector(hasCompatibilityOptions)] && self.hasCompatibilityOptions && self.compatibilityOptions.hasAdLoggingData && cellDividerData) return cellDividerData;
+    // if (isAdString(description)) return cellDividerData;
+    return %orig;
+}
+%end
