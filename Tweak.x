@@ -326,6 +326,7 @@ static uint8_t cellDividerDataBytes[] = {
     0x39, 0x39, 0x36, 0x30, 0x31, 0x37, 0x31, 0x33, 0x38,
 };
 */
+NSData *cellDividerData;
 %hook YTIElementRenderer
 - (NSData *)elementData {
     if ([self respondsToSelector:@selector(hasCompatibilityOptions)] && self.hasCompatibilityOptions && self.compatibilityOptions.hasAdLoggingData) {
@@ -341,8 +342,9 @@ static uint8_t cellDividerDataBytes[] = {
     return %orig;
 }
 %end
-
+/*
 %ctor {
     cellDividerData = [NSData dataWithBytes:cellDividerDataBytes length:cellDividerDataBytesLength];
     %init;
 }
+*/
