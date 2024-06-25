@@ -144,6 +144,7 @@ jobs:
           ./Azule/azule -i $PWD/YouTube.ipa -o $PWD/packages/YouTubePremium.ipa -f $PWD/packages/YouTubePremium.deb $PWD/packages/YouPIP.deb
 
       - name: Prepare YouTube iPA
+        id: prepare_youtube
         run: |
           mv main/packages/YouTubePremium.ipa main/packages/YouTubePremium.zip
           unzip -q main/packages/YouTubePremium.zip -d main/packages
@@ -155,6 +156,7 @@ jobs:
           cp -rf main/YoutubeExtensions/*.appex main/packages/Payload/YouTube.app/PlugIns
           cd ${{ github.workspace }}/main/packages
           zip -r YouTubePremium.ipa Payload > /dev/null
+          echo "==> YouTubePremium.ipa Ziped!"
           rm -rf Payload
           rm -rf YouTubePremium.zip
           rm -rf YouPIP.deb
