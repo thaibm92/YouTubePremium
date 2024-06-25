@@ -147,6 +147,8 @@ jobs:
         run: |
           mv main/packages/YouTubePremium.ipa main/packages/YouTubePremium.zip
           unzip -q main/packages/YouTubePremium.zip -d main/packages
+          youtube_version=$(defaults read "$(pwd)/Payload/YouTube.app/Info" CFBundleVersion)
+          echo "youtube_version=${youtube_version}" >> $GITHUB_OUTPUT
           rm -rf main/packages/Payload/YouTube.app/_CodeSignature/CodeResources
           rm -rf main/packages/Payload/YouTube.app/PlugIns/*
           cp -rf main/YoutubeExtensions/*.appex main/packages/Payload/YouTube.app/PlugIns
@@ -158,8 +160,10 @@ jobs:
           
       - name: Upload Artifact
         uses: actions/upload-artifact@v4.3.3
+        env:
+          YOUTUBE_VERSION: ${{ steps.prepare_youtube.outputs.youtube_version }}
         with:
-          name: YouTubePremium${{ env.YT_VERSION }}
+          name: YouTubePremium_${{ env.YOUTUBE_VERSION }}
           path: ${{ github.workspace }}/main/packages/${{ steps.build_package.outputs.package }}
           if-no-files-found: error
           
@@ -171,8 +175,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DRAFT: ${{ inputs.create_release }}
         with:
-          tag_name: v${{ env.YT_VERSION }}
-          name: v${{ env.YT_VERSION }} - YouTube Premium
+          tag_name: v${{ env.YOUTUBE_VERSION }}
+          name: v${{ env.YOUTUBE_VERSION }}
           files: |
             main/packages/YouTubePremium.deb
             main/packages/YouTubePremium.ipa
