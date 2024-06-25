@@ -183,7 +183,7 @@ static NSString *accessGroupID() {
 %hook MLVideo
 - (BOOL)playableInBackground { return YES; }
 %end
-
+/*
 %hook YTAdShieldUtils
 + (id)spamSignalsDictionary { return @{}; }
 + (id)spamSignalsDictionaryWithoutIDFA { return @{}; }
@@ -193,7 +193,7 @@ static NSString *accessGroupID() {
 + (id)spamSignalsDictionary { return @{}; }
 + (id)spamSignalsDictionaryWithoutIDFA { return @{}; }
 %end
-
+*/
 %hook YTAdsInnerTubeContextDecorator
 - (void)decorateContext:(id)context { %orig(nil); }
 %end
