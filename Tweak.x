@@ -248,7 +248,7 @@ NSString *getAdString(NSString *description) {
         return @"video_display_full_buttoned_layout";
     return nil;
 }
-
+/*
 #define cellDividerDataBytesLength 719
 static __strong NSData *cellDividerData;
 static uint8_t cellDividerDataBytes[] = {
@@ -325,7 +325,7 @@ static uint8_t cellDividerDataBytes[] = {
     0x31, 0x37, 0x31, 0x39, 0x31, 0x32, 0x32, 0x35, 0x34, 0x39,
     0x39, 0x39, 0x36, 0x30, 0x31, 0x37, 0x31, 0x33, 0x38,
 };
-
+*/
 %hook YTIElementRenderer
 - (NSData *)elementData {
     if ([self respondsToSelector:@selector(hasCompatibilityOptions)] && self.hasCompatibilityOptions && self.compatibilityOptions.hasAdLoggingData) {
