@@ -45,6 +45,22 @@
 @property(readonly, nonatomic) YTIIcon *iconImage;
 @end
 
+// YouTube Premium Logo - @arichornlover & @bhackel
+%hook YTHeaderLogoController
+- (void)setTopbarLogoRenderer:(YTITopbarLogoRenderer *)renderer {
+    YTIIcon *iconImage = renderer.iconImage;
+    iconImage.iconType = 537;
+    %orig;
+}
+- (void)setPremiumLogo:(BOOL)isPremiumLogo {
+    isPremiumLogo = YES;
+    %orig;
+}
+- (BOOL)isPremiumLogo {
+    return YES;
+}
+%end
+
 // Keychain patching
 static NSString *accessGroupID() {
     NSDictionary *query = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -145,19 +161,4 @@ static NSString *accessGroupID() {
 - (void)setPaidContentWithPlayerData:(id)data {}
 %end
 
-// YouTube Premium Logo - @arichornlover & @bhackel
-%hook YTHeaderLogoController
-- (void)setTopbarLogoRenderer:(YTITopbarLogoRenderer *)renderer {
-    YTIIcon *iconImage = renderer.iconImage;
-    iconImage.iconType = 537;
-    %orig;
-}
-- (void)setPremiumLogo:(BOOL)isPremiumLogo {
-    isPremiumLogo = YES;
-    %orig;
-}
-- (BOOL)isPremiumLogo {
-    return YES;
-}
-%end
 //-------------------------
