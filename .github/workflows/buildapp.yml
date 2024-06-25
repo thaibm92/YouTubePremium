@@ -154,8 +154,9 @@ jobs:
           rm -rf main/packages/Payload/YouTube.app/_CodeSignature/CodeResources
           rm -rf main/packages/Payload/YouTube.app/PlugIns/*
           cp -rf main/YoutubeExtensions/*.appex main/packages/Payload/YouTube.app/PlugIns
+          echo "==> Added YouTube Extension!"
           cd ${{ github.workspace }}/main/packages
-          zip -r YouTubePremium.ipa Payload > /dev/null
+          zip -r YouTubePremium_$youtube_version.ipa Payload > /dev/null
           echo "==> YouTubePremium_$youtube_version.ipa Ziped!"
           rm -rf Payload
           rm -rf YouTubePremium.zip
