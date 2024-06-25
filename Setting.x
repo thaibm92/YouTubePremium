@@ -87,7 +87,7 @@ static NSString *accessGroupID() {
 
 // Hide Upgrade Dialog
 %hook YTGlobalConfig
-- (BOOL)shouldBlockUpgradeDialog { return YES; }
+//- (BOOL)shouldBlockUpgradeDialog { return YES; }
 - (BOOL)shouldForceUpgrade { return NO;}
 - (BOOL)shouldShowUpgrade { return NO;}
 - (BOOL)shouldShowUpgradeDialog { return NO;}
