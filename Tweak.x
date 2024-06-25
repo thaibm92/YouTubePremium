@@ -350,7 +350,7 @@ static uint8_t cellDividerDataBytes[] = {
     0x31, 0x37, 0x31, 0x39, 0x31, 0x32, 0x32, 0x35, 0x34, 0x39,
     0x39, 0x39, 0x36, 0x30, 0x31, 0x37, 0x31, 0x33, 0x38,
 };
-
+*/
 %hook YTIElementRenderer
 - (NSData *)elementData {
     if ([self respondsToSelector:@selector(hasCompatibilityOptions)] && self.hasCompatibilityOptions && self.compatibilityOptions.hasAdLoggingData) {
@@ -366,41 +366,7 @@ static uint8_t cellDividerDataBytes[] = {
     return %orig;
 }
 %end
-
-
-NSData *cellDividerData;
-%hook YTIElementRenderer
-- (NSData *)elementData {
-    NSString *description = [self description];
-    if ([description containsString:@"cell_divider"]) {
-        if (!cellDividerData) cellDividerData = %orig;
-        return cellDividerData;
-    }
-    if ([self respondsToSelector:@selector(hasCompatibilityOptions)] && self.hasCompatibilityOptions && self.compatibilityOptions.hasAdLoggingData && cellDividerData) return cellDividerData;
-    // if (isAdString(description)) return cellDividerData;
-    return %orig;
-}
-%end
-
-%hook YTInnerTubeCollectionViewController
-- (void)loadWithModel:(YTISectionListRenderer *)model {
-    if ([model isKindOfClass:%c(YTISectionListRenderer)]) {
-        NSMutableArray <YTISectionListSupportedRenderers *> *contentsArray = model.contentsArray;
-        NSIndexSet *removeIndexes = [contentsArray indexesOfObjectsPassingTest:^BOOL(YTISectionListSupportedRenderers *renderers, NSUInteger idx, BOOL *stop) {
-            if (![renderers isKindOfClass:%c(YTISectionListSupportedRenderers)])
-                return NO;
-            YTIItemSectionRenderer *sectionRenderer = renderers.itemSectionRenderer;
-            YTIItemSectionSupportedRenderers *firstObject = [sectionRenderer.contentsArray firstObject];
-            YTIElementRenderer *elementRenderer = firstObject.elementRenderer;
-            NSString *description = [elementRenderer description];
-            return isAdString(description);
-        }];
-        [contentsArray removeObjectsAtIndexes:removeIndexes];
-    }
-    %orig;
-}
-%end
-
+/*
 %ctor {
     cellDividerData = [NSData dataWithBytes:cellDividerDataBytes length:cellDividerDataBytesLength];
     %init;
