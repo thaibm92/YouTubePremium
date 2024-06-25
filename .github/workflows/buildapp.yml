@@ -113,7 +113,7 @@ jobs:
       - name: Build Tweak YouTubePremium
         id: build_package
         run: |
-          brew install make xz ldid
+          //brew install make xz ldid
           (echo export PATH="/usr/local/opt/make/libexec/gnubin:$PATH" >> ~/.bash_profile)
           source ~/.bash_profile
           cd ${{ github.workspace }}/main
