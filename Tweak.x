@@ -183,12 +183,12 @@ static NSString *accessGroupID() {
 %hook MLVideo
 - (BOOL)playableInBackground { return YES; }
 %end
-/*
+
 %hook YTAdShieldUtils
 + (id)spamSignalsDictionary { return @{}; }
 + (id)spamSignalsDictionaryWithoutIDFA { return @{}; }
 %end
-*/
+
 %hook YTDataUtils
 + (id)spamSignalsDictionary { return @{}; }
 + (id)spamSignalsDictionaryWithoutIDFA { return @{}; }
@@ -247,31 +247,6 @@ NSString *getAdString(NSString *description) {
     if ([description containsString:@"video_display_full_buttoned_layout"])
         return @"video_display_full_buttoned_layout";
     return nil;
-}
-
-/*
-BOOL isAdString(NSString *description) {
-    if ([description containsString:@"brand_promo"]
-        || [description containsString:@"carousel_footered_layout"]
-        || [description containsString:@"carousel_headered_layout"]
-        || [description containsString:@"feed_ad_metadata"]
-        || [description containsString:@"full_width_portrait_image_layout"]
-        || [description containsString:@"full_width_square_image_layout"]
-        || [description containsString:@"home_video_with_context"]
-        || [description containsString:@"landscape_image_wide_button_layout"]
-        || [description containsString:@"post_shelf"]
-        || [description containsString:@"product_carousel"]
-        || [description containsString:@"product_engagement_panel"]
-        || [description containsString:@"product_item"]
-        || [description containsString:@"shelf_header"]
-        || [description containsString:@"statement_banner"]
-        || [description containsString:@"square_image_layout"] // install app ad
-        || [description containsString:@"text_image_button_layout"]
-        || [description containsString:@"text_search_ad"]
-        || [description containsString:@"video_display_full_layout"]
-        || [description containsString:@"video_display_full_buttoned_layout"])
-        return YES;
-    return NO;
 }
 
 #define cellDividerDataBytesLength 719
@@ -350,7 +325,7 @@ static uint8_t cellDividerDataBytes[] = {
     0x31, 0x37, 0x31, 0x39, 0x31, 0x32, 0x32, 0x35, 0x34, 0x39,
     0x39, 0x39, 0x36, 0x30, 0x31, 0x37, 0x31, 0x33, 0x38,
 };
-*/
+
 %hook YTIElementRenderer
 - (NSData *)elementData {
     if ([self respondsToSelector:@selector(hasCompatibilityOptions)] && self.hasCompatibilityOptions && self.compatibilityOptions.hasAdLoggingData) {
@@ -366,9 +341,8 @@ static uint8_t cellDividerDataBytes[] = {
     return %orig;
 }
 %end
-/*
+
 %ctor {
     cellDividerData = [NSData dataWithBytes:cellDividerDataBytes length:cellDividerDataBytesLength];
     %init;
 }
-*/
