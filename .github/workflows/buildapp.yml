@@ -160,10 +160,8 @@ jobs:
           
       - name: Upload Artifact
         uses: actions/upload-artifact@v4.3.3
-        env:
-          YOUTUBE_VERSION: ${{ steps.prepare_youtube.outputs.youtube_version }}
         with:
-          name: YouTubePremium_${{ env.YOUTUBE_VERSION }}
+          name: YouTubePremium_${{ steps.prepare_youtube.outputs.youtube_version }}
           path: ${{ github.workspace }}/main/packages/${{ steps.build_package.outputs.package }}
           if-no-files-found: error
           
@@ -175,8 +173,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DRAFT: ${{ inputs.create_release }}
         with:
-          tag_name: v${{ env.YOUTUBE_VERSION }}
-          name: v${{ env.YOUTUBE_VERSION }}
+          tag_name: v${{ steps.prepare_youtube.outputs.youtube_version }}
+          name: v${{ steps.prepare_youtube.outputs.youtube_version }}
           files: |
             main/packages/YouTubePremium.deb
             main/packages/YouTubePremium.ipa
