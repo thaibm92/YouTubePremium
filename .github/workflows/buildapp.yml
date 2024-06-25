@@ -156,7 +156,7 @@ jobs:
           cp -rf main/YoutubeExtensions/*.appex main/packages/Payload/YouTube.app/PlugIns
           cd ${{ github.workspace }}/main/packages
           zip -r YouTubePremium.ipa Payload > /dev/null
-          echo "==> YouTubePremium.ipa Ziped!"
+          echo "==> YouTubePremium_$youtube_version.ipa Ziped!"
           rm -rf Payload
           rm -rf YouTubePremium.zip
           rm -rf YouPIP.deb
@@ -180,6 +180,6 @@ jobs:
           name: v${{ steps.prepare_youtube.outputs.youtube_version }}
           files: |
             main/packages/YouTubePremium.deb
-            main/packages/YouTubePremium.ipa
+            main/packages/YouTubePremium_${{ steps.prepare_youtube.outputs.youtube_version }}.ipa
           draft: ${{ env.DRAFT }}
     
