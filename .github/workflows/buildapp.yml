@@ -141,7 +141,7 @@ jobs:
         run: |
           brew install coreutils
           cd ${{ github.workspace }}/main
-          ./Azule/azule -i $PWD/YouTube.ipa -o $PWD/packages/YouTubePremium.ipa -f $PWD/packages/${{ steps.build_package.outputs.tweakName }} $PWD/packages/YouPiP.deb
+          ./Azule/azule -i $PWD/YouTube.ipa -o $PWD/packages/YouTubePremium.ipa -f $PWD/packages/${{steps.build_package.outputs.tweakName}} $PWD/packages/YouPiP.deb
 
       - name: Prepare YouTube iPA
         id: prepare_youtube
@@ -180,7 +180,7 @@ jobs:
           tag_name: v${{ steps.prepare_youtube.outputs.youtube_version }}
           name: v${{ steps.prepare_youtube.outputs.youtube_version }}
           files: |
-            main/packages/YouTubePremium.deb
+            main/packages/${{steps.build_package.outputs.tweakName}}.deb
             main/packages/YouTubePremium_${{ steps.prepare_youtube.outputs.youtube_version }}.ipa
           draft: ${{ env.DRAFT }}
     
