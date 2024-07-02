@@ -126,7 +126,7 @@ jobs:
       - name: Downloading YouTube IPA & DEBs
         run: |
           wget "$YOUTUBE_URL" --no-verbose -O main/YouTube.ipa
-          wget "$YOUPIP_DEB_URL" --no-verbose -O main/packages/YouPIP.deb
+          wget "$YOUPIP_DEB_URL" --no-verbose -O main/packages/YouPiP.deb
         env:
           YOUTUBE_URL: ${{ inputs.decrypted_youtube_url }}
           YOUPIP_DEB_URL: ${{ inputs.deb_youpip_url }}
@@ -141,7 +141,7 @@ jobs:
         run: |
           brew install coreutils
           cd ${{ github.workspace }}/main
-          ./Azule/azule -i $PWD/YouTube.ipa -o $PWD/packages/YouTubePremium.ipa -f $PWD/packages/YouTubePremium.deb $PWD/packages/YouPIP.deb
+          ./Azule/azule -i $PWD/YouTube.ipa -o $PWD/packages/YouTubePremium.ipa -f $PWD/packages/YouTubePremium.deb $PWD/packages/YouPiP.deb
 
       - name: Prepare YouTube iPA
         id: prepare_youtube
