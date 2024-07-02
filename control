@@ -3,9 +3,9 @@ Name: YouTube Premium
 Version: 1.6.10
 Architecture: iphoneos-arm
 Description: A lightweight YouTube improvement tweak.
-Maintainer: IOSMOD.NET
-Author: IOSMOD.NET
-Section: IOSMOD.NET
+Maintainer: Minh Thái
+Author: Minh Thái
+Section: Minh Thái
 Depends: mobilesubstrate (>= 0.9.5000), firmware (>= 11.0), com.iosmod.youtubepremium
-Depiction: https://iosmod.net
-SileoDepiction: https://iosmod.net
+Depiction: https://github.com/thaibm92/YouTubePremium
+SileoDepiction: https://github.com/thaibm92/YouTubePremium
