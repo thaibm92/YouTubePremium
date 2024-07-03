@@ -1,0 +1,186 @@
+# Original idea by @ISnackable. Many thanks to him for handling the most hardest parts!
+# https://github.com/ISnackable/CercubePlus/blob/main/.github/workflows/Build.yml
+
+name: Build and Release YouTube Premium
+
+on:
+  workflow_dispatch:
+    inputs:
+      decrypted_youtube_url:
+        description: "The direct URL to the decrypted YouTube ipa"
+        default: "https://iosmod.net/IPAs/YouTube_19.26.5.ipa"
+        required: true
+        type: string
+      deb_youpip_url:
+        description: "The direct URL to the YouPiP deb "
+        default: "https://github.com/thaibm92/YouPiP/releases/download/v1.8.13/com.ps.youpip_1.8.13_iphoneos-arm.deb"
+        required: true
+        type: string
+      bundle_id:
+        description: "Modify the bundle ID. Not recommended"
+        default: "com.google.ios.youtube"
+        required: true
+        type: string
+      app_name:
+        description: "Modify the name of the app on the Home Screen. Not recommended"
+        default: "YouTube"
+        required: true
+        type: string
+      commit_id:
+        description: "(Optional) Commit ID to build at"
+        default: ""
+        required: false
+        type: string
+      create_release:
+        description: "Create a draft release"
+        default: true
+        required: false
+        type: boolean
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build YouTube Premium
+    runs-on: macos-12
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout Main
+        uses: actions/checkout@v4.1.6
+        with:
+          path: main
+          ref: ${{ github.event.inputs.commit_id || github.ref }}
+          submodules: recursive
+
+      - name: Install Dependencies
+        run: brew install ldid dpkg make
+
+      - name: Setup Theos
+        uses: actions/checkout@v4.1.6
+        with:
+          repository: theos/theos
+          ref: 3da31488281ecf4394d10302d2629607f4a1aa07
+          path: theos
+          submodules: recursive
+
+      - name: Caching
+        id: SDK
+        uses: actions/cache@v4.0.2
+        env:
+          cache-name: iOS-16.4-SDK
+        with:
+          path: theos/sdks/
+          key: ${{ env.cache-name }}
+
+      - name: Download iOS 16.4 SDK
+        if: steps.SDK.outputs.cache-hit != 'true'
+        run: |
+          git clone -n --depth=1 --filter=tree:0 https://github.com/thaibm92/sdks/
+          cd sdks
+          git sparse-checkout set --no-cone iPhoneOS16.4.sdk
+          git checkout
+          mv *.sdk $THEOS/sdks
+        env:
+          THEOS: ${{ github.workspace }}/theos
+
+      - name: Setup Theos Jailed
+        uses: actions/checkout@v4.1.6
+        with:
+          repository: qnblackcat/theos-jailed
+          ref: master
+          path: theos-jailed
+          submodules: recursive
+        
+      - name: Set PATH environment variable
+        run: echo "$(brew --prefix make)/libexec/gnubin" >> $GITHUB_PATH 
+
+      - name: Install Theos Jailed
+        run: |
+          ./theos-jailed/install
+        env:
+          THEOS: ${{ github.workspace }}/theos
+
+      - name: Clone Extensions & Submodules
+        run: |
+          cd ${{ github.workspace }}/main
+          git clone https://github.com/CokePokes/YoutubeExtensions.git YoutubeExtensions
+          git clone https://github.com/PoomSmart/YouTubeHeader.git YouTubeHeader
+          
+      - name: Build Tweak YouTubePremium
+        id: build_package
+        run: |
+          (echo export PATH="/usr/local/opt/make/libexec/gnubin:$PATH" >> ~/.bash_profile)
+          source ~/.bash_profile
+          cd ${{ github.workspace }}/main
+          make package FINALPACKAGE=1
+          cd ${{ github.workspace }}/main/packages
+          tweakName=$(ls *.deb)
+          echo "tweakName=${tweakName}" >> $GITHUB_OUTPUT
+        env:
+          THEOS: ${{ github.workspace }}/theos
+
+      - name: Downloading YouTube IPA & DEBs
+        run: |
+          wget "$YOUTUBE_URL" --no-verbose -O main/YouTube.ipa
+          wget "$YOUPIP_DEB_URL" --no-verbose -O main/packages/YouPiP.deb
+        env:
+          YOUTUBE_URL: ${{ inputs.decrypted_youtube_url }}
+          YOUPIP_DEB_URL: ${{ inputs.deb_youpip_url }}
+
+      - name: Install Azule
+        run: |
+          cd ${{ github.workspace }}/main
+          git clone https://github.com/Al4ise/Azule 
+          sudo ln -sf ~/Azule/azule /usr/local/bin/azule
+          
+      - name: Inject Tweak into IPA
+        run: |
+          brew install coreutils
+          cd ${{ github.workspace }}/main
+          ./Azule/azule -i $PWD/YouTube.ipa -o $PWD/packages/YouTubePremium.ipa -f $PWD/packages/${{steps.build_package.outputs.tweakName}} $PWD/packages/YouPiP.deb
+
+      - name: Prepare YouTube iPA
+        id: prepare_youtube
+        run: |
+          mv main/packages/YouTubePremium.ipa main/packages/YouTubePremium.zip
+          unzip -q main/packages/YouTubePremium.zip -d main/packages
+          youtube_version=$(/usr/libexec/PlistBuddy -c "Print CFBundleVersion" "main/packages/Payload/YouTube.app/Info.plist")
+          echo "==> YouTube v$youtube_version Unziped!"
+          echo "youtube_version=${youtube_version}" >> $GITHUB_OUTPUT
+          rm -rf main/packages/Payload/YouTube.app/_CodeSignature/CodeResources
+          rm -rf main/packages/Payload/YouTube.app/PlugIns/*
+          cp -rf main/YoutubeExtensions/*.appex main/packages/Payload/YouTube.app/PlugIns
+          echo "==> Added YouTube Extension!"
+          cd ${{ github.workspace }}/main/packages
+          zip -r YouTubePremium_$youtube_version.ipa Payload > /dev/null
+          echo "==> YouTubePremium_$youtube_version.ipa Ziped!"
+          rm -rf Payload
+          rm -rf YouTubePremium.zip
+          rm -rf YouPIP.deb
+          
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4.3.3
+        with:
+          name: YouTubePremium_${{ steps.prepare_youtube.outputs.youtube_version }}
+          path: ${{ github.workspace }}/main/packages/${{ steps.build_package.outputs.package }}
+          if-no-files-found: error
+          
+      
+      - name: Create Release
+        id: create_release
+        uses: softprops/action-gh-release@v2.0.5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DRAFT: ${{ inputs.create_release }}
+        with:
+          tag_name: v${{ steps.prepare_youtube.outputs.youtube_version }}
+          name: v${{ steps.prepare_youtube.outputs.youtube_version }}
+          files: |
+            main/packages/${{steps.build_package.outputs.tweakName}}.deb
+            main/packages/YouTubePremium_${{ steps.prepare_youtube.outputs.youtube_version }}.ipa
+          draft: ${{ env.DRAFT }}
+    
