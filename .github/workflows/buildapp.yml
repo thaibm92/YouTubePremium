@@ -122,9 +122,11 @@ jobs:
         run: |
           wget "$YOUTUBE_URL" --no-verbose -O main/YouTube.ipa
           wget "$YOUPIP_DEB_URL" --no-verbose -O main/packages/YouPiP.deb
+          wget "$YOUMUTE_DEB_URL" --no-verbose -O main/packages/YouMute.deb
         env:
           YOUTUBE_URL: ${{ inputs.decrypted_youtube_url }}
           YOUPIP_DEB_URL: "https://github.com/thaibm92/YouPiP/releases/download/v1.8.13/com.ps.youpip_1.8.13_iphoneos-arm.deb"
+          YOUMUTE_DEB_URL: "https://github.com/thaibm92/YouMute/releases/download/v1.2.2/com.ps.youmute_1.2.2_iphoneos-arm.deb"
 
       - name: Install Azule
         run: |
@@ -136,7 +138,7 @@ jobs:
         run: |
           brew install coreutils
           cd ${{ github.workspace }}/main
-          ./Azule/azule -i $PWD/YouTube.ipa -o $PWD/packages/YouTubePremium.ipa -f $PWD/packages/${{steps.build_package.outputs.tweakName}} $PWD/packages/YouPiP.deb
+          ./Azule/azule -i $PWD/YouTube.ipa -o $PWD/packages/YouTubePremium.ipa -f $PWD/packages/${{steps.build_package.outputs.tweakName}} $PWD/packages/YouPiP.deb $PWD/packages/YouMute.deb
 
       - name: Prepare YouTube iPA
         id: prepare_youtube
