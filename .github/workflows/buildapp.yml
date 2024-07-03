@@ -13,7 +13,7 @@ on:
         type: string
       deb_youpip_url:
         description: "The direct URL to the YouPiP deb "
-        default: "https://github.com/thaibm92/YouPiP/releases/download/v1.8.11/com.ps.youpip_1.8.11_iphoneos-arm.deb"
+        default: "https://github.com/thaibm92/YouPiP/releases/download/v1.8.13/com.ps.youpip_1.8.13_iphoneos-arm.deb"
         required: true
         type: string
       bundle_id:
