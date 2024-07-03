@@ -149,7 +149,7 @@ jobs:
           brew install coreutils
           cd ${{ github.workspace }}/main
           ./Azule/azule -i $PWD/YouTube.ipa -o $PWD/packages/YouTubePremium.ipa -f $PWD/packages/${{steps.build_package.outputs.tweakName}} $PWD/packages/YouPiP.deb $PWD/packages/YouMute.deb
-
+          
       - name: Prepare YouTube iPA
         id: prepare_youtube
         run: |
@@ -167,7 +167,7 @@ jobs:
           echo "==> YouTubePremium_$youtube_version.ipa Ziped!"
           rm -rf Payload
           rm -rf YouTubePremium.zip
-          rm -rf YouPIP.deb
+          rm -rf YouPiP.deb
           rm -rf YouMute.deb
           
       - name: Upload Artifact
