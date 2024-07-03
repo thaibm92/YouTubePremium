@@ -16,11 +16,6 @@ on:
         default: "https://github.com/thaibm92/YouPiP/releases/download/v1.8.13/com.ps.youpip_1.8.13_iphoneos-arm.deb"
         required: true
         type: string
-      deb_youmute_url:
-        description: "The direct URL to the YouMute deb "
-        default: "https://github.com/thaibm92/YouMute/releases/download/v1.2.2/com.ps.youmute_1.2.2_iphoneos-arm.deb"
-        required: true
-        type: string
       bundle_id:
         description: "Modify the bundle ID. Not recommended"
         default: "com.google.ios.youtube"
@@ -132,11 +127,9 @@ jobs:
         run: |
           wget "$YOUTUBE_URL" --no-verbose -O main/YouTube.ipa
           wget "$YOUPIP_DEB_URL" --no-verbose -O main/packages/YouPiP.deb
-          wget "$YOUMUTE_DEB_URL" --no-verbose -O main/packages/YouMute.deb
         env:
           YOUTUBE_URL: ${{ inputs.decrypted_youtube_url }}
           YOUPIP_DEB_URL: ${{ inputs.deb_youpip_url }}
-          YOUMUTE_DEB_URL: ${{ inputs.deb_youmute_url }}
 
       - name: Install Azule
         run: |
@@ -148,8 +141,8 @@ jobs:
         run: |
           brew install coreutils
           cd ${{ github.workspace }}/main
-          ./Azule/azule -i $PWD/YouTube.ipa -o $PWD/packages/YouTubePremium.ipa -f $PWD/packages/${{steps.build_package.outputs.tweakName}} $PWD/packages/YouPiP.deb $PWD/packages/YouMute.deb
-          
+          ./Azule/azule -i $PWD/YouTube.ipa -o $PWD/packages/YouTubePremium.ipa -f $PWD/packages/${{steps.build_package.outputs.tweakName}} $PWD/packages/YouPiP.deb
+
       - name: Prepare YouTube iPA
         id: prepare_youtube
         run: |
@@ -167,8 +160,7 @@ jobs:
           echo "==> YouTubePremium_$youtube_version.ipa Ziped!"
           rm -rf Payload
           rm -rf YouTubePremium.zip
-          rm -rf YouPiP.deb
-          rm -rf YouMute.deb
+          rm -rf YouPIP.deb
           
       - name: Upload Artifact
         uses: actions/upload-artifact@v4.3.3
