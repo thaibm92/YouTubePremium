@@ -11,8 +11,12 @@ on:
         default: "https://iosmod.net/IPAs/YouTube_19.26.5.ipa"
         required: true
         type: string
-      deb_youpip_url: "https://github.com/thaibm92/YouPiP/releases/download/v1.8.13/com.ps.youpip_1.8.13_iphoneos-arm.deb"
-        
+      deb_youpip_url:
+        description: "The direct URL to the YouPiP deb "
+        default: "https://github.com/thaibm92/YouPiP/releases/download/v1.8.13/com.ps.youpip_1.8.13_iphoneos-arm.deb"
+        required: true
+        type: string
+        readonly: true
       bundle_id:
         description: "Modify the bundle ID. Not recommended"
         default: "com.google.ios.youtube"
