@@ -160,7 +160,7 @@ jobs:
           echo "==> YouTubePremium_$youtube_version.ipa Ziped!"
           rm -rf Payload
           rm -rf YouTubePremium.zip
-          rm -rf YouPIP.deb
+          rm -rf YouPiP.deb
           
       - name: Upload Artifact
         uses: actions/upload-artifact@v4.3.3
