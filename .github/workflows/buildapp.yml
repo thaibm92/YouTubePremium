@@ -123,10 +123,12 @@ jobs:
           wget "$YOUTUBE_URL" --no-verbose -O main/YouTube.ipa
           wget "$YOUPIP_DEB_URL" --no-verbose -O main/packages/YouPiP.deb
           wget "$YOUTUBEDISLIKES_DEB_URL" --no-verbose -O main/packages/YouTubeDislikesReturn.deb
+          wget "$YTUHD_DEB_URL" --no-verbose -O main/packages/YTUHD.deb
         env:
           YOUTUBE_URL: ${{ inputs.decrypted_youtube_url }}
           YOUPIP_DEB_URL: "https://github.com/thaibm92/YouPiP/releases/download/v1.8.13/com.ps.youpip_1.8.13_iphoneos-arm.deb"
           YOUTUBEDISLIKES_DEB_URL: "https://github.com/thaibm92/Return-YouTube-Dislikes/releases/download/v1.11.16/weeb.lillie.youtubedislikesreturn_1.11.16_iphoneos-arm.deb"
+          YTUHD_DEB_URL: "https://github.com/thaibm92/YTUHD/releases/download/v1.11.16/com.ps.ytuhd_1.5.3_iphoneos-arm.deb"
 
       - name: Install Azule
         run: |
@@ -138,7 +140,7 @@ jobs:
         run: |
           brew install coreutils
           cd ${{ github.workspace }}/main
-          ./Azule/azule -i $PWD/YouTube.ipa -o $PWD/packages/YouTubePremium.ipa -f $PWD/packages/${{steps.build_package.outputs.tweakName}} $PWD/packages/YouPiP.deb $PWD/packages/YouTubeDislikesReturn.deb
+          ./Azule/azule -i $PWD/YouTube.ipa -o $PWD/packages/YouTubePremium.ipa -f $PWD/packages/${{steps.build_package.outputs.tweakName}} $PWD/packages/YouPiP.deb $PWD/packages/YouTubeDislikesReturn.deb $PWD/packages/YTUHD.deb
 
       - name: Prepare YouTube iPA
         id: prepare_youtube
