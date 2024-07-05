@@ -185,12 +185,12 @@ jobs:
       - name: Upload Artifact to Catbox
         if: ${{ inputs.upload_artifact_catbox }}
         run: |
-          RESPONSE=$(curl -F "reqtype=fileupload" -F "fileToUpload=@${{ github.workspace }}/main/packages/${{ steps.build_package.outputs.package }}" https://catbox.moe/user/api.php)
-          CATBOX_URL=$(echo $RESPONSE | grep -o -E 'https://files.catbox.moe/[^"]*')
-          echo "Uploaded artifact to $CATBOX_URL"
-          CATBOX_FILE=$(echo $CATBOX_URL | sed 's|https://files.catbox.moe/||')
-          echo "$CATBOX_FILE"
-          echo "CATBOX_FILE=$CATBOX_FILE" >> $GITHUB_ENV
+          RESPONSE_IPA=$(curl -F "reqtype=fileupload" -F "fileToUpload=@${{ github.workspace }}main/packages/YouTubePremium_${{steps.prepare_youtube.outputs.youtube_version}}.ipa" https://catbox.moe/user/api.php)
+          CATBOX_URL_IPA=$(echo $RESPONSE_IPA | grep -o -E 'https://files.catbox.moe/[^"]*')
+          RESPONSE_DEB=$(curl -F "reqtype=fileupload" -F "fileToUpload=@${{ github.workspace }}main/packages/${{steps.build_package.outputs.tweakName}}" https://catbox.moe/user/api.php)
+          CATBOX_URL_DEB=$(echo $RESPONSE_DEB | grep -o -E 'https://files.catbox.moe/[^"]*')
+          echo "Uploaded .ipa artifact to $CATBOX_URL_IPA"
+          echo "Uploaded .deb artifact to $CATBOX_URL_DEB"
       
       - name: Create Release
         if: ${{ inputs.create_release }}
