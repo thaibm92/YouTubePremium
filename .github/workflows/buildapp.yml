@@ -184,6 +184,6 @@ jobs:
           name: v${{ steps.prepare_youtube.outputs.youtube_version }}-${{ steps.build_package.outputs.Version }}
           files: |
             main/packages/${{steps.build_package.outputs.tweakName}}.deb
-            main/packages/YouTubePremium_${{ steps.prepare_youtube.outputs.youtube_version }}-${{ steps.build_package.outputs.$Version }}.ipa
+            main/packages/YouTubePremium_${{ steps.prepare_youtube.outputs.youtube_version }}-${{ steps.build_package.outputs.Version }}.ipa
           draft: ${{ env.DRAFT }}
     
