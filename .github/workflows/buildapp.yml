@@ -115,7 +115,7 @@ jobs:
           cd ${{ github.workspace }}/main/packages
           tweakName=$(ls *.deb)
           echo "tweakName=${tweakName}" >> $GITHUB_OUTPUT
-          Version=$(grep '^Version' control | cut -d' ' -f3)
+          Version=$(grep '^Version' control | cut -d' ' -f2)
           echo "Version=$Version" >> $GITHUB_OUTPUT
           echo "==> Built v$Version Successfully."
         env:
@@ -180,8 +180,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DRAFT: ${{ inputs.create_release }}
         with:
-          tag_name: v${{ steps.prepare_youtube.outputs.youtube_version }}-${{ steps.build_package.outputs.$Version }}
-          name: v${{ steps.prepare_youtube.outputs.youtube_version }}-${{ steps.build_package.outputs.$Version }}
+          tag_name: v${{ steps.prepare_youtube.outputs.youtube_version }}-${{ steps.build_package.outputs.Version }}
+          name: v${{ steps.prepare_youtube.outputs.youtube_version }}-${{ steps.build_package.outputs.Version }}
           files: |
             main/packages/${{steps.build_package.outputs.tweakName}}.deb
             main/packages/YouTubePremium_${{ steps.prepare_youtube.outputs.youtube_version }}-${{ steps.build_package.outputs.$Version }}.ipa
