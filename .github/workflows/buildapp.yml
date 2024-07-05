@@ -161,10 +161,7 @@ jobs:
           cd ${{ github.workspace }}/main/packages
           zip -r YouTubePremium_$youtube_version.ipa Payload > /dev/null
           echo "==> YouTubePremium_$youtube_version.ipa Ziped!"
-          rm -rf Payload
-          rm -rf YouTubePremium.zip
-          rm -rf YouPiP.deb
-          rm -rf YouTubeDislikesReturn.deb
+          find . -type f ! -name '${{steps.build_package.outputs.tweakName}}' ! -name 'YouTubePremium_${{steps.prepare_youtube.outputs.youtube_version}}.ipa' -exec rm -f {} +
           
       - name: Upload Artifact
         uses: actions/upload-artifact@v4.3.3
@@ -185,6 +182,6 @@ jobs:
           name: v${{ steps.prepare_youtube.outputs.youtube_version }}-${{ steps.build_package.outputs.Version }}
           files: |
             main/packages/${{steps.build_package.outputs.tweakName}}
-            main/packages/YouTubePremium_${{ steps.prepare_youtube.outputs.youtube_version }}.ipa
+            main/packages/YouTubePremium_${{steps.prepare_youtube.outputs.youtube_version}}.ipa
           draft: ${{ env.DRAFT }}
     
