@@ -166,7 +166,9 @@ jobs:
         uses: actions/upload-artifact@v4.3.3
         with:
           name: YouTubePremium_${{ steps.prepare_youtube.outputs.youtube_version }}
-          path: ${{ github.workspace }}/main/packages/${{ steps.build_package.outputs.package }}
+          path: |
+            main/packages/${{steps.build_package.outputs.tweakName}}
+            main/packages/YouTubePremium_${{steps.prepare_youtube.outputs.youtube_version}}.ipa
           if-no-files-found: error
           
       
