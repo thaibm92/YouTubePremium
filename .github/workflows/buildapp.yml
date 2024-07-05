@@ -112,12 +112,13 @@ jobs:
           source ~/.bash_profile
           cd ${{ github.workspace }}/main
           make package FINALPACKAGE=1
-          cd ${{ github.workspace }}/main/packages
-          tweakName=$(ls *.deb)
-          echo "tweakName=${tweakName}" >> $GITHUB_OUTPUT
           Version=$(grep '^Version' control | cut -d' ' -f2)
           echo "Version=$Version" >> $GITHUB_OUTPUT
           echo "==> Built v$Version Successfully."
+          cd ${{ github.workspace }}/main/packages
+          tweakName=$(ls *.deb)
+          echo "tweakName=${tweakName}" >> $GITHUB_OUTPUT
+          
         env:
           THEOS: ${{ github.workspace }}/theos
 
