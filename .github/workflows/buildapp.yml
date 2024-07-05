@@ -161,11 +161,10 @@ jobs:
           cd ${{ github.workspace }}/main/packages
           zip -r YouTubePremium_$youtube_version.ipa Payload > /dev/null
           echo "==> YouTubePremium_$youtube_version.ipa Ziped!"
-
       - name: Cleanup Temp
         run: |
         find . -type f ! -name "${{ steps.build_package.outputs.tweakName }}" ! -name "YouTubePremium_${{ steps.prepare_youtube.outputs.youtube_version }}.ipa" -exec rm -f {} +
-          
+        
       - name: Upload Artifact
         uses: actions/upload-artifact@v4.3.3
         with:
