@@ -115,7 +115,7 @@ jobs:
           cd ${{ github.workspace }}/main/packages
           tweakName=$(ls *.deb)
           echo "tweakName=${tweakName}" >> $GITHUB_OUTPUT
-          Version=$(grep '^Version' Makefile | cut -d' ' -f3)
+          Version=$(grep '^Version' control | cut -d' ' -f3)
           echo "Version=$Version" >> $GITHUB_OUTPUT
           echo "==> Built v$Version Successfully."
         env:
