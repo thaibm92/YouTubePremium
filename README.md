@@ -73,12 +73,13 @@ Special thanks to these developer(s) for maintaining and improving YouTubePremiu
 
 # Features
 
-1. **YouTube Premium:**
+1. **YouTube Premium**
 - Block all advertisements.
 - Enable background playback.
-- Activate picture-in-picture (PiP).
-
-2. **YouPiP:** enable YouTube's **native PiP**. More options are in YouTube Settings => General.
+  
+2. **YouPiP** enable YouTube's **native PiP**. More options are in YouTube Settings => General => YouPiP
+3. **Return YouTube Dislikes** Brings back Dislike counts under YouTube videos using ReturnYoutubeDislike's API.
+4. **YTUHD** This tweak unlocks 1440p (2K) and 2160p (4K) resolutions in the iOS YouTube app.
 
 # Download
 
