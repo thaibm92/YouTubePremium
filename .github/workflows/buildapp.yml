@@ -26,6 +26,11 @@ on:
         default: ""
         required: false
         type: string
+      upload_artifact:
+        description: "Upload Artifact"
+        default: true
+        required: false
+        type: boolean
       create_release:
         description: "Create a draft release"
         default: true
@@ -163,6 +168,7 @@ jobs:
           echo "==> YouTubePremium_$youtube_version.ipa Ziped!"
 
       - name: Upload Artifact
+        if: ${{ inputs.upload_artifact }}
         uses: actions/upload-artifact@v4.3.3
         with:
           name: YouTubePremium_${{ steps.prepare_youtube.outputs.youtube_version }}
@@ -173,6 +179,7 @@ jobs:
           
       
       - name: Create Release
+        if: ${{ inputs.create_release }}
         id: create_release
         uses: softprops/action-gh-release@v2.0.5
         env:
