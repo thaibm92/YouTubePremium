@@ -115,6 +115,9 @@ jobs:
           cd ${{ github.workspace }}/main/packages
           tweakName=$(ls *.deb)
           echo "tweakName=${tweakName}" >> $GITHUB_OUTPUT
+          Version=$(grep '^Version' Makefile | cut -d' ' -f3)
+          echo "Version=$Version" >> $GITHUB_OUTPUT
+          echo "==> Built v$Version Successfully."
         env:
           THEOS: ${{ github.workspace }}/theos
 
@@ -127,7 +130,7 @@ jobs:
         env:
           YOUTUBE_URL: ${{ inputs.decrypted_youtube_url }}
           YOUPIP_DEB_URL: "https://github.com/thaibm92/YouPiP/releases/download/v1.8.13/com.ps.youpip_1.8.13_iphoneos-arm.deb"
-          YOUTUBEDISLIKES_DEB_URL: "https://github.com/thaibm92/Return-YouTube-Dislikes/releases/download/v1.11.16/weeb.lillie.youtubedislikesreturn_1.11.16_iphoneos-arm.deb"
+          YOUTUBEDISLIKES_DEB_URL: "https://github.com/thaibm92/Return-YouTube-Dislikes/releases/download/v1.11.17/weeb.lillie.youtubedislikesreturn_1.11.17_iphoneos-arm.deb"
           YTUHD_DEB_URL: "https://github.com/thaibm92/YTUHD/releases/download/v1.11.16/com.ps.ytuhd_1.5.3_iphoneos-arm.deb"
 
       - name: Install Azule
@@ -177,10 +180,10 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DRAFT: ${{ inputs.create_release }}
         with:
-          tag_name: v${{ steps.prepare_youtube.outputs.youtube_version }}
-          name: v${{ steps.prepare_youtube.outputs.youtube_version }}
+          tag_name: v${{ steps.prepare_youtube.outputs.youtube_version }}-${{ steps.build_package.outputs.$Version }}
+          name: v${{ steps.prepare_youtube.outputs.youtube_version }}-${{ steps.build_package.outputs.$Version }}
           files: |
             main/packages/${{steps.build_package.outputs.tweakName}}.deb
-            main/packages/YouTubePremium_${{ steps.prepare_youtube.outputs.youtube_version }}.ipa
+            main/packages/YouTubePremium_${{ steps.prepare_youtube.outputs.youtube_version }}-${{ steps.build_package.outputs.$Version }}.ipa
           draft: ${{ env.DRAFT }}
     
