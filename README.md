@@ -78,7 +78,7 @@ Special thanks to these developer(s) for maintaining and improving YouTubePremiu
 - Enable background playback.
   
 2. **YouPiP:** enable YouTube's **native PiP**. More options are in YouTube Settings => General => YouPiP
-3. **Return YouTube Dislikes:** Brings back Dislike counts under YouTube videos using ReturnYoutubeDislike's API.
+3. **Return YouTube Dislikes:** Brings back Dislike counts under YouTube videos using ReturnYoutubeDislike's API. More options are in YouTube Settings => General => Return YouTube Dislikes
 4. **YTUHD:** This tweak unlocks 1440p (2K) and 2160p (4K) resolutions in the iOS YouTube app.
 
 # Download
