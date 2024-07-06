@@ -144,7 +144,7 @@ jobs:
         env:
           YOUTUBE_URL: ${{ inputs.decrypted_youtube_url }}
           YOUPIP_DEB_URL: "https://github.com/thaibm92/YouPiP/releases/download/v1.8.13/com.ps.youpip_1.8.13_iphoneos-arm.deb"
-          YOUTUBEDISLIKES_DEB_URL: "https://github.com/thaibm92/Return-YouTube-Dislikes/releases/download/v1.11.18/weeb.lillie.youtubedislikesreturn_1.11.17_iphoneos-arm.deb"
+          YOUTUBEDISLIKES_DEB_URL: "https://github.com/thaibm92/Return-YouTube-Dislikes/releases/download/v1.11.18/weeb.lillie.youtubedislikesreturn_1.11.18_iphoneos-arm.deb"
           YTUHD_DEB_URL: "https://github.com/thaibm92/YTUHD/releases/download/v1.11.16/com.ps.ytuhd_1.5.3_iphoneos-arm.deb"
           YTVIDEOOVERLAY_DEB_URL: "https://github.com/thaibm92/YTVideoOverlay/releases/download/v1.2.0/com.ps.ytvideooverlay_1.2.0_iphoneos-arm.deb"
           YOUMUTE_DEB_URL: "https://github.com/thaibm92/YouMute/releases/download/v1.2.2/com.ps.youmute_1.2.2_iphoneos-arm.deb"
