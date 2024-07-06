@@ -137,43 +137,43 @@ jobs:
         run: |
           get_latest_release() {
             repo=$1
-            api_url="https://api.github.com/repos/$repo/releases/latest"
-            response=$(curl -s $api_url)
+            response=$(curl -s "https://api.github.com/repos/$repo/releases/latest")
             latest_release=$(echo $response | jq -r .tag_name)
+            download_url=$(echo $response | jq -r '.assets[0].browser_download_url')
             
             echo "Fetching latest release for repository $repo"
-            echo "API URL: $api_url"
-            echo "Response: $response"
             echo "Latest release: $latest_release"
+            echo "Download URL: $download_url"
             
             if [ "$latest_release" = "null" ]; then
               echo "Error: Unable to fetch latest release for repository $repo" >&2
               exit 1
             fi
-            echo $latest_release
+            echo $download_url
           }
-          YOUPIP_VERSION=$(get_latest_release "thaibm92/YouPiP")
-          YOUTUBEDISLIKES_VERSION=$(get_latest_release "thaibm92/Return-YouTube-Dislikes")
-          YTUHD_VERSION=$(get_latest_release "thaibm92/YTUHD")
-          YTVIDEOOVERLAY_VERSION=$(get_latest_release "thaibm92/YTVideoOverlay")
-          YOUMUTE_VERSION=$(get_latest_release "thaibm92/YouMute")
-          YOUQUALITY_VERSION=$(get_latest_release "thaibm92/YouQuality")
-          echo "YOUPIP_VERSION=$YOUPIP_VERSION" >> $GITHUB_ENV
-          echo "YOUTUBEDISLIKES_VERSION=$YOUTUBEDISLIKES_VERSION" >> $GITHUB_ENV
-          echo "YTUHD_VERSION=$YTUHD_VERSION" >> $GITHUB_ENV
-          echo "YTVIDEOOVERLAY_VERSION=$YTVIDEOOVERLAY_VERSION" >> $GITHUB_ENV
-          echo "YOUMUTE_VERSION=$YOUMUTE_VERSION" >> $GITHUB_ENV
-          echo "YOUQUALITY_VERSION=$YOUQUALITY_VERSION" >> $GITHUB_ENV
+          YOUPIP_URL=$(get_latest_release "thaibm92/YouPiP")
+          YOUTUBEDISLIKES_URL=$(get_latest_release "thaibm92/Return-YouTube-Dislikes")
+          YTUHD_URL=$(get_latest_release "thaibm92/YTUHD")
+          YTVIDEOOVERLAY_URL=$(get_latest_release "thaibm92/YTVideoOverlay")
+          YOUMUTE_URL=$(get_latest_release "thaibm92/YouMute")
+          YOUQUALITY_URL=$(get_latest_release "thaibm92/YouQuality")
+
+          echo "YOUPIP_URL=$YOUPIP_URL" >> $GITHUB_ENV
+          echo "YOUTUBEDISLIKES_URL=$YOUTUBEDISLIKES_URL" >> $GITHUB_ENV
+          echo "YTUHD_URL=$YTUHD_URL" >> $GITHUB_ENV
+          echo "YTVIDEOOVERLAY_URL=$YTVIDEOOVERLAY_URL" >> $GITHUB_ENV
+          echo "YOUMUTE_URL=$YOUMUTE_URL" >> $GITHUB_ENV
+          echo "YOUQUALITY_URL=$YOUQUALITY_URL" >> $GITHUB_ENV
       
       - name: Downloading YouTube IPA & DEBs
         run: |
           wget "$YOUTUBE_URL" --no-verbose -O main/YouTube.ipa
-          wget "https://github.com/thaibm92/YouPiP/releases/download/${{ env.YOUPIP_VERSION }}/com.ps.youpip_${{ env.YOUPIP_VERSION }}_iphoneos-arm.deb" --no-verbose -O main/packages/YouPiP.deb
-          wget "https://github.com/thaibm92/Return-YouTube-Dislikes/releases/download/${{ env.YOUTUBEDISLIKES_VERSION }}/weeb.lillie.youtubedislikesreturn_${{ env.YOUTUBEDISLIKES_VERSION }}_iphoneos-arm.deb" --no-verbose -O main/packages/YouTubeDislikesReturn.deb
-          wget "https://github.com/thaibm92/YTUHD/releases/download/${{ env.YTUHD_VERSION }}/com.ps.ytuhd_${{ env.YTUHD_VERSION }}_iphoneos-arm.deb" --no-verbose -O main/packages/YTUHD.deb
-          wget "https://github.com/thaibm92/YTVideoOverlay/releases/download/${{ env.YTVIDEOOVERLAY_VERSION }}/com.ps.ytvideooverlay_${{ env.YTVIDEOOVERLAY_VERSION }}_iphoneos-arm.deb" --no-verbose -O main/packages/YTVideoOverlay.deb
-          wget "https://github.com/thaibm92/YouMute/releases/download/${{ env.YOUMUTE_VERSION }}/com.ps.youmute_${{ env.YOUMUTE_VERSION }}_iphoneos-arm.deb" --no-verbose -O main/packages/YouMute.deb
-          wget "https://github.com/thaibm92/YouQuality/releases/download/${{ env.YOUQUALITY_VERSION }}/com.ps.youquality_${{ env.YOUQUALITY_VERSION }}_iphoneos-arm.deb" --no-verbose -O main/packages/YouQuality.deb
+          wget "${{ env.YOUPIP_URL }}" --no-verbose -O main/packages/YouPiP.deb
+          wget "${{ env.YOUTUBEDISLIKES_URL }}" --no-verbose -O main/packages/YouTubeDislikesReturn.deb
+          wget "${{ env.YTUHD_URL }}" --no-verbose -O main/packages/YTUHD.deb
+          wget "${{ env.YTVIDEOOVERLAY_URL }}" --no-verbose -O main/packages/YTVideoOverlay.deb
+          wget "${{ env.YOUMUTE_URL }}" --no-verbose -O main/packages/YouMute.deb
+          wget "${{ env.YOUQUALITY_URL }}" --no-verbose -O main/packages/YouQuality.deb
         env:
           YOUTUBE_URL: ${{ inputs.decrypted_youtube_url }}
           
