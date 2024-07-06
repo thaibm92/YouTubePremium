@@ -132,7 +132,7 @@ jobs:
         env:
           THEOS: ${{ github.workspace }}/theos
 
-      - name: Fetch Latest Versions
+      - name: Fetch Deb Latest Versions of Debs
         id: get_latest_versions
         run: |
           get_latest_release() {
@@ -149,19 +149,14 @@ jobs:
           
           YOUPIP_URL=$(get_latest_release "thaibm92/YouPiP")
           echo "YouPiP URL: $YOUPIP_URL"
-          
           YOUTUBEDISLIKES_URL=$(get_latest_release "thaibm92/Return-YouTube-Dislikes")
           echo "Return YouTube Dislikes URL: $YOUTUBEDISLIKES_URL"
-          
           YTUHD_URL=$(get_latest_release "thaibm92/YTUHD")
           echo "YTUHD URL: $YTUHD_URL"
-          
           YTVIDEOOVERLAY_URL=$(get_latest_release "thaibm92/YTVideoOverlay")
           echo "YTVideoOverlay URL: $YTVIDEOOVERLAY_URL"
-          
           YOUMUTE_URL=$(get_latest_release "thaibm92/YouMute")
           echo "YouMute URL: $YOUMUTE_URL"
-          
           YOUQUALITY_URL=$(get_latest_release "thaibm92/YouQuality")
           echo "YouQuality URL: $YOUQUALITY_URL"
           
