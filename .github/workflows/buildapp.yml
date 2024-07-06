@@ -138,11 +138,17 @@ jobs:
           wget "$YOUPIP_DEB_URL" --no-verbose -O main/packages/YouPiP.deb
           wget "$YOUTUBEDISLIKES_DEB_URL" --no-verbose -O main/packages/YouTubeDislikesReturn.deb
           wget "$YTUHD_DEB_URL" --no-verbose -O main/packages/YTUHD.deb
+          wget "$YTVIDEOOVERLAY_DEB_URL" --no-verbose -O main/packages/YTVideoOverlay.deb
+          wget "$YOUMUTE_DEB_URL" --no-verbose -O main/packages/YouMute.deb
+          wget "$YOUQUALITY_DEB_URL" --no-verbose -O main/packages/YouQuality.deb
         env:
           YOUTUBE_URL: ${{ inputs.decrypted_youtube_url }}
           YOUPIP_DEB_URL: "https://github.com/thaibm92/YouPiP/releases/download/v1.8.13/com.ps.youpip_1.8.13_iphoneos-arm.deb"
-          YOUTUBEDISLIKES_DEB_URL: "https://github.com/thaibm92/Return-YouTube-Dislikes/releases/download/v1.11.17/weeb.lillie.youtubedislikesreturn_1.11.17_iphoneos-arm.deb"
+          YOUTUBEDISLIKES_DEB_URL: "https://github.com/thaibm92/Return-YouTube-Dislikes/releases/download/v1.11.18/weeb.lillie.youtubedislikesreturn_1.11.17_iphoneos-arm.deb"
           YTUHD_DEB_URL: "https://github.com/thaibm92/YTUHD/releases/download/v1.11.16/com.ps.ytuhd_1.5.3_iphoneos-arm.deb"
+          YTVIDEOOVERLAY_DEB_URL: "https://github.com/thaibm92/YTVideoOverlay/releases/download/v1.2.0/com.ps.ytvideooverlay_1.2.0_iphoneos-arm.deb"
+          YOUMUTE_DEB_URL: "https://github.com/thaibm92/YouMute/releases/download/v1.2.2/com.ps.youmute_1.2.2_iphoneos-arm.deb"
+          YOUQUALITY_DEB_URL: "https://github.com/thaibm92/YouQuality/releases/download/v1.2.1/com.ps.youquality_1.2.1_iphoneos-arm.deb"
 
       - name: Install Azule
         run: |
@@ -154,7 +160,7 @@ jobs:
         run: |
           brew install coreutils
           cd ${{ github.workspace }}/main
-          ./Azule/azule -i $PWD/YouTube.ipa -o $PWD/packages/YouTubePremium.ipa -f $PWD/packages/${{steps.build_package.outputs.tweakName}} $PWD/packages/YouPiP.deb $PWD/packages/YouTubeDislikesReturn.deb $PWD/packages/YTUHD.deb
+          ./Azule/azule -i $PWD/YouTube.ipa -o $PWD/packages/YouTubePremium.ipa -f $PWD/packages/${{steps.build_package.outputs.tweakName}} $PWD/packages/YouPiP.deb $PWD/packages/YouTubeDislikesReturn.deb $PWD/packages/YTUHD.deb $PWD/packages/YTVideoOverlay.deb $PWD/packages/YouMute.deb $PWD/packages/YouQuality.deb
 
       - name: Prepare YouTube iPA
         id: prepare_youtube
