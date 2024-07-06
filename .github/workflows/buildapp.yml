@@ -136,18 +136,34 @@ jobs:
         id: get_latest_versions
         run: |
           get_latest_release() {
-            repo=$1
-            response=$(curl -s "https://api.github.com/repos/$repo/releases/latest")
-            latest_release=$(echo $response | jq -r .tag_name)
-            download_url=$(echo $response | jq -r '.assets[0].browser_download_url')
-            echo $download_url
+              repo=$1
+              response=$(curl -s "https://api.github.com/repos/$repo/releases/latest")
+              download_url=$(echo $response | jq -r '.assets[0].browser_download_url')
+          
+              if [ "$download_url" = "null" ]; then
+                  echo "No assets found for the latest release of $repo."
+              else
+                  echo $download_url
+              fi
           }
+          
           YOUPIP_URL=$(get_latest_release "thaibm92/YouPiP")
+          echo "YouPiP URL: $YOUPIP_URL"
+          
           YOUTUBEDISLIKES_URL=$(get_latest_release "thaibm92/Return-YouTube-Dislikes")
+          echo "Return YouTube Dislikes URL: $YOUTUBEDISLIKES_URL"
+          
           YTUHD_URL=$(get_latest_release "thaibm92/YTUHD")
+          echo "YTUHD URL: $YTUHD_URL"
+          
           YTVIDEOOVERLAY_URL=$(get_latest_release "thaibm92/YTVideoOverlay")
+          echo "YTVideoOverlay URL: $YTVIDEOOVERLAY_URL"
+          
           YOUMUTE_URL=$(get_latest_release "thaibm92/YouMute")
+          echo "YouMute URL: $YOUMUTE_URL"
+          
           YOUQUALITY_URL=$(get_latest_release "thaibm92/YouQuality")
+          echo "YouQuality URL: $YOUQUALITY_URL"
           
           echo "YOUPIP_URL=$YOUPIP_URL" >> $GITHUB_ENV
           echo "YOUTUBEDISLIKES_URL=$YOUTUBEDISLIKES_URL" >> $GITHUB_ENV
