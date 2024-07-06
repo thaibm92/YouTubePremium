@@ -138,6 +138,10 @@ jobs:
           get_latest_release() {
             repo=$1
             latest_release=$(curl -s https://api.github.com/repos/$repo/releases/latest | jq -r .tag_name)
+            if [ "$latest_release" = "null" ]; then
+              echo "Error: Unable to fetch latest release for repository $repo" >&2
+              exit 1
+            fi
             echo $latest_release
           }
           YOUPIP_VERSION=$(get_latest_release "thaibm92/YouPiP")
