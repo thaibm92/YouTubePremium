@@ -140,10 +140,6 @@ jobs:
             response=$(curl -s "https://api.github.com/repos/$repo/releases/latest")
             latest_release=$(echo $response | jq -r .tag_name)
             download_url=$(echo $response | jq -r '.assets[0].browser_download_url')
-            if [ "$latest_release" = "null" ]; then
-              echo "Error: Unable to fetch latest release for repository $repo" >&2
-              exit 1
-            fi
             echo $download_url
           }
           YOUPIP_URL=$(get_latest_release "thaibm92/YouPiP")
