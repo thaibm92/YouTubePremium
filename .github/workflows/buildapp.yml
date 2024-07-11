@@ -125,9 +125,6 @@ jobs:
           Version=$(grep '^Version' control | cut -d' ' -f2)
           echo "Version=$Version" >> $GITHUB_OUTPUT
           echo "==> Built v$Version Successfully."
-          cd ${{ github.workspace }}/main/packages
-          tweakName=$(ls *.deb)
-          echo "tweakName=${tweakName}" >> $GITHUB_OUTPUT
           
         env:
           THEOS: ${{ github.workspace }}/theos
