@@ -13,4 +13,4 @@ include $(THEOS_MAKE_PATH)/tweak.mk
 
 before-package::
 	@echo -e "==> \033[1mMoving tweak's bundle to Resources/...\033[0m"
-	@cp -R lang/YTLitePlus.bundle Resources/
+	@cp -R lang/YouTubeRebornPlus.bundle Resources/
