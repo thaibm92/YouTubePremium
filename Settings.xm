@@ -63,7 +63,7 @@ extern NSBundle *YouTubeRebornPlusBundle();
 - (void)updateYouTubeRebornPlusSectionWithEntry:(id)entry {
     NSMutableArray *sectionItems = [NSMutableArray array];
     NSBundle *tweakBundle = YouTubeRebornPlusBundle();
-    Class YTSettingsSectionItemClass = %c(YTSettingsSectionItem);
+    //Class YTSettingsSectionItemClass = %c(YTSettingsSectionItem);
     YTSettingsViewController *settingsViewController = [self valueForKey:@"_settingsViewControllerDelegate"];
 
     # pragma mark - About
