@@ -11,9 +11,6 @@
 
 #define SECTION_HEADER(s) [sectionItems addObject:[%c(YTSettingsSectionItem) itemWithTitle:@"\t" titleDescription:[s uppercaseString] accessibilityIdentifier:nil detailTextBlock:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger sectionItemIndex) { return NO; }]]
 
-static int appVersionSpoofer() {
-    return [[NSUserDefaults standardUserDefaults] integerForKey:@"versionSpoofer"];
-}
 static const NSInteger YouTubeRebornPlusSection = 500;
 
 @interface YTSettingsSectionItemManager (YouTubeRebornPlus)
