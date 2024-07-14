@@ -10,3 +10,7 @@ $(TWEAK_NAME)_FILES = Tweak.x Settings.x YouTubeRebornPlus.xm Settings.xm
 $(TWEAK_NAME)_CFLAGS = -fobjc-arc
 
 include $(THEOS_MAKE_PATH)/tweak.mk
+
+before-package::
+	@echo -e "==> \033[1mMoving tweak's bundle to Resources/...\033[0m"
+	@cp -R lang/YTLitePlus.bundle Resources/
