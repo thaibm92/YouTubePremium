@@ -5,7 +5,7 @@
 @interface YTITopbarLogoRenderer : NSObject
 @property(readonly, nonatomic) YTIIcon *iconImage;
 @end
-
+/*
 #define VERSION_STRING [[NSString stringWithFormat:@"%@", @(OS_STRINGIFY(TWEAK_VERSION))] stringByReplacingOccurrencesOfString:@"\"" withString:@""]
 #define SECTION_HEADER(s) [sectionItems addObject:[%c(YTSettingsSectionItem) itemWithTitle:@"\t" titleDescription:[s uppercaseString] accessibilityIdentifier:nil detailTextBlock:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger sectionItemIndex) { return NO; }]]
 
@@ -52,7 +52,7 @@ extern NSBundle *YouTubePremiumBundle();
     if (selectedItem != NSNotFound) %orig;
 }
 %end
-
+*/
 //enable logo premium
 %hook YTHeaderLogoController
 - (void)setTopbarLogoRenderer:(YTITopbarLogoRenderer *)renderer {
@@ -184,7 +184,7 @@ static NSString *accessGroupID() {
 - (void)setPaidContentWithPlayerData:(id)data {}
 %end
 
-//----------------------
+/*//----------------------
 %hook YTSettingsSectionItemManager
 %new(v@:@)
 - (void)updateYouTubePremiumSectionWithEntry:(id)entry {
@@ -222,3 +222,4 @@ static NSString *accessGroupID() {
     %orig;
 }
 %end
+*/
