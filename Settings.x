@@ -70,7 +70,7 @@ extern NSBundle *YouTubePremiumBundle();
 %end
 
 //Load bundle
-NSBundle *YouTubePremiumBundle() {
+NSBundle *YouTubeRebornPlusBundle() {
     static NSBundle *bundle = nil;
     static dispatch_once_t onceToken;
  	dispatch_once(&onceToken, ^{
@@ -82,7 +82,7 @@ NSBundle *YouTubePremiumBundle() {
     });
     return bundle;
 }
-NSBundle *tweakBundle = YouTubePremiumBundle();
+NSBundle *tweakBundle = YouTubeRebornPlusBundle();
 
 // Keychain patching
 static NSString *accessGroupID() {
