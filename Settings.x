@@ -1,5 +1,11 @@
 #import "Header.h"
 
+
+// YouTube Premium Logo - @arichornlover & @bhackel
+@interface YTITopbarLogoRenderer : NSObject
+@property(readonly, nonatomic) YTIIcon *iconImage;
+@end
+
 #define VERSION_STRING [[NSString stringWithFormat:@"%@", @(OS_STRINGIFY(TWEAK_VERSION))] stringByReplacingOccurrencesOfString:@"\"" withString:@""]
 #define SECTION_HEADER(s) [sectionItems addObject:[%c(YTSettingsSectionItem) itemWithTitle:@"\t" titleDescription:[s uppercaseString] accessibilityIdentifier:nil detailTextBlock:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger sectionItemIndex) { return NO; }]]
 
@@ -47,11 +53,7 @@ extern NSBundle *YouTubePremiumBundle();
 }
 %end
 
-// YouTube Premium Logo - @arichornlover & @bhackel
-@interface YTITopbarLogoRenderer : NSObject
-@property(readonly, nonatomic) YTIIcon *iconImage;
-@end
-
+//enable logo premium
 %hook YTHeaderLogoController
 - (void)setTopbarLogoRenderer:(YTITopbarLogoRenderer *)renderer {
     YTIIcon *iconImage = renderer.iconImage;
