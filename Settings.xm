@@ -12,6 +12,20 @@ static const NSInteger YouTubeRebornPlusSection = 500;
 
 extern NSBundle *YouTubeRebornPlusBundle();
 
+NSBundle *YouTubeRebornPlusBundle() {
+    static NSBundle *bundle = nil;
+    static dispatch_once_t onceToken;
+ 	dispatch_once(&onceToken, ^{
+        NSString *tweakBundlePath = [[NSBundle mainBundle] pathForResource:@"YouTubePremium" ofType:@"bundle"];
+        if (tweakBundlePath)
+            bundle = [NSBundle bundleWithPath:tweakBundlePath];
+        else
+            bundle = [NSBundle bundleWithPath:ROOT_PATH_NS(@"/Library/Application Support/YouTubePremium.bundle")];
+    });
+    return bundle;
+}
+NSBundle *tweakBundle = YouTubeRebornPlusBundle();
+
 // Settings Search Bar
 %hook YTSettingsViewController
 - (void)loadWithModel:(id)model fromView:(UIView *)view {
