@@ -1,5 +1,5 @@
-#import "Header.h"
-
+//#import "Header.h"
+#import "YouTubeRebornPlus.h"
 
 // YouTube Premium Logo - @arichornlover & @bhackel
 @interface YTITopbarLogoRenderer : NSObject
