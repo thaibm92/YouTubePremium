@@ -5,7 +5,7 @@
 #import <UIKit/UIKit.h>
 #import <dlfcn.h>
 #import <rootless.h>
-// YT Headers
+
 #import "YouTubeHeader/ASCollectionElement.h"
 #import "YouTubeHeader/ELMCellNode.h"
 #import "YouTubeHeader/ELMNodeController.h"
@@ -34,18 +34,17 @@
 #import "YouTubeHeader/YTSlimVideoScrollableDetailsActionsView.h"
 #import "YouTubeHeader/YTTouchFeedbackController.h"
 #import "YouTubeHeader/YTWatchViewController.h"
-// YT Headers - snackbar
 #import "YouTubeHeader/YTHUDMessage.h"
 #import "YouTubeHeader/GOOHUDManagerInternal.h"
 // YTNoPaidPromo
 #import "YouTubeHeader/YTPlayerOverlay.h"
 #import "YouTubeHeader/YTPlayerOverlayProvider.h"
 
-@interface YTITopbarLogoRenderer : NSObject // Enable Premium logo - @bhackel
+// YouTube Premium Logo - @arichornlover & @bhackel
+@interface YTITopbarLogoRenderer : NSObject
 @property(readonly, nonatomic) YTIIcon *iconImage;
 @end
 
-// YouTube Premium Logo - @arichornlover & @bhackel
 %hook YTHeaderLogoController
 - (void)setTopbarLogoRenderer:(YTITopbarLogoRenderer *)renderer {
     YTIIcon *iconImage = renderer.iconImage;
@@ -60,6 +59,21 @@
     return YES;
 }
 %end
+
+//Load bundle
+NSBundle *YouTubePremiumBundle() {
+    static NSBundle *bundle = nil;
+    static dispatch_once_t onceToken;
+ 	dispatch_once(&onceToken, ^{
+        NSString *tweakBundlePath = [[NSBundle mainBundle] pathForResource:@"YouTubePremium" ofType:@"bundle"];
+        if (tweakBundlePath)
+            bundle = [NSBundle bundleWithPath:tweakBundlePath];
+        else
+            bundle = [NSBundle bundleWithPath:ROOT_PATH_NS(@"/Library/Application Support/YouTubePremium.bundle")];
+    });
+    return bundle;
+}
+NSBundle *tweakBundle = YouTubePremiumBundle();
 
 // Keychain patching
 static NSString *accessGroupID() {
