@@ -39,3 +39,11 @@
 // YTNoPaidPromo
 #import "YouTubeHeader/YTPlayerOverlay.h"
 #import "YouTubeHeader/YTPlayerOverlayProvider.h"
+//IOSMOD
+#import "YouTubeHeader/YTSettingsViewController.h"
+#import "YouTubeHeader/YTSearchableSettingsViewController.h"
+#import "YouTubeHeader/YTSettingsSectionItem.h"
+#import "YouTubeHeader/YTSettingsSectionItemManager.h"
+#import "YouTubeHeader/YTUIUtils.h"
+#import "YouTubeHeader/YTSettingsPickerViewController.h"
+
