@@ -1,5 +1,6 @@
 #import "Header.h"
 
+#define TWEAK_VERSION @"1.1.10"
 #define LOC(x) [tweakBundle localizedStringForKey:x value:nil table:nil]
 #define VERSION_STRING [[NSString stringWithFormat:@"%@", @(OS_STRINGIFY(TWEAK_VERSION))] stringByReplacingOccurrencesOfString:@"\"" withString:@""]
 #define SECTION_HEADER(s) [sectionItems addObject:[%c(YTSettingsSectionItem) itemWithTitle:@"\t" titleDescription:[s uppercaseString] accessibilityIdentifier:nil detailTextBlock:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger sectionItemIndex) { return NO; }]]
@@ -70,7 +71,7 @@ NSBundle *tweakBundle = YouTubePremiumBundle();
     NSBundle *tweakBundle = YouTubePremiumBundle();
     //Class YTSettingsSectionItemClass = %c(YTSettingsSectionItem);
     YTSettingsViewController *settingsViewController = [self valueForKey:@"_settingsViewControllerDelegate"];
-/*
+
     # pragma mark - About
     // SECTION_HEADER(LOC(@"ABOUT"));
 
@@ -84,20 +85,12 @@ NSBundle *tweakBundle = YouTubePremiumBundle();
         }
     ];
     [sectionItems addObject:version];
-*/
-    // Add tap gesture recognizer to the section header view
-    UIView *headerView = [settingsViewController valueForKey:@"_headerView"];
-    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openIOSModNet)];
-    [headerView addGestureRecognizer:tapGesture];
+
 
     if ([settingsViewController respondsToSelector:@selector(setSectionItems:forCategory:title:icon:titleDescription:headerHidden:)])
         [settingsViewController setSectionItems:sectionItems forCategory:YouTubePremiumSection title:@"IOSMOD.NET" icon:nil titleDescription:LOC(@"TITLE DESCRIPTION") headerHidden:YES];
     else
         [settingsViewController setSectionItems:sectionItems forCategory:YouTubePremiumSection title:@"IOSMOD.NET" titleDescription:LOC(@"TITLE DESCRIPTION") headerHidden:YES];
-}
-
-- (void)openIOSModNet {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://iosmod.net"] options:@{} completionHandler:nil];
 }
 
 - (void)updateSectionForCategory:(NSUInteger)category withEntry:(id)entry {
