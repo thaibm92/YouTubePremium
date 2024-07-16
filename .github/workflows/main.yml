@@ -189,9 +189,11 @@ jobs:
           echo "==> YouTube v$youtube_version Unziped!"
           echo "youtube_version=${youtube_version}" >> $GITHUB_OUTPUT
           rm -rf main/packages/Payload/YouTube.app/_CodeSignature/CodeResources
+          echo "==> CodeResources removed."
           rm -rf main/packages/Payload/YouTube.app/PlugIns/*
+          echo "==> Extension removed."
           cp -rf main/YoutubeExtensions/*.appex main/packages/Payload/YouTube.app/PlugIns
-          echo "==> Added YouTube Extension!"
+          echo "==> Added YouTube Extension."
           cd ${{ github.workspace }}/main/packages
           zip -r YouTubePremium_$youtube_version.ipa Payload > /dev/null
           echo "==> YouTubePremium_$youtube_version.ipa Ziped!"
