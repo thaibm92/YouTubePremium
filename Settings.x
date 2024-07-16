@@ -25,7 +25,7 @@ NSBundle *YouTubePremiumBundle() {
     return bundle;
 }
 NSBundle *tweakBundle = YouTubePremiumBundle();
-
+/*
 // Settings Search Bar
 %hook YTSettingsViewController
 - (void)loadWithModel:(id)model fromView:(UIView *)view {
@@ -43,7 +43,7 @@ NSBundle *tweakBundle = YouTubePremiumBundle();
     }
 }
 %end
-
+*/
 // Settings
 %hook YTAppSettingsPresentationData
 + (NSArray *)settingsCategoryOrder {
