@@ -169,13 +169,13 @@ jobs:
           
       - name: Downloading YouTube IPA & DEBs
         run: |
-          wget "${{ env.YOUPIP_URL }}" --no-verbose -O main/packages/YouPiP.deb
-          wget "${{ env.YOUTUBEDISLIKES_URL }}" --no-verbose -O main/packages/YouTubeDislikesReturn.deb
-          wget "${{ env.YTUHD_URL }}" --no-verbose -O main/packages/YTUHD.deb
-          wget "${{ env.YTVIDEOOVERLAY_URL }}" --no-verbose -O main/packages/YTVideoOverlay.deb
-          wget "${{ env.YOUMUTE_URL }}" --no-verbose -O main/packages/YouMute.deb
-          wget "${{ env.YOUQUALITY_URL }}" --no-verbose -O main/packages/YouQuality.deb
-          wget "$YOUTUBE_URL" --no-verbose -O main/YouTube.ipa
+          wget "${{ env.YOUPIP_URL }}" --progress=bar:force -O main/packages/YouPiP.deb
+          wget "${{ env.YOUTUBEDISLIKES_URL }}" --progress=bar:force -O main/packages/YouTubeDislikesReturn.deb
+          wget "${{ env.YTUHD_URL }}" --progress=bar:force -O main/packages/YTUHD.deb
+          wget "${{ env.YTVIDEOOVERLAY_URL }}" --progress=bar:force -O main/packages/YTVideoOverlay.deb
+          wget "${{ env.YOUMUTE_URL }}" --progress=bar:force -O main/packages/YouMute.deb
+          wget "${{ env.YOUQUALITY_URL }}" --progress=bar:force -O main/packages/YouQuality.deb
+          wget "$YOUTUBE_URL" --progress=bar:force -O main/YouTube.ipa
         env:
           YOUTUBE_URL: ${{ inputs.decrypted_youtube_url }}
           
