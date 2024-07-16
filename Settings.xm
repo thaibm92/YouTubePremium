@@ -4,15 +4,15 @@
 #define VERSION_STRING [[NSString stringWithFormat:@"%@", @(OS_STRINGIFY(TWEAK_VERSION))] stringByReplacingOccurrencesOfString:@"\"" withString:@""]
 #define SECTION_HEADER(s) [sectionItems addObject:[%c(YTSettingsSectionItem) itemWithTitle:@"\t" titleDescription:[s uppercaseString] accessibilityIdentifier:nil detailTextBlock:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger sectionItemIndex) { return NO; }]]
 
-static const NSInteger YouTubeRebornPlusSection = 500;
+static const NSInteger YouTubePremiumSection = 500;
 
-@interface YTSettingsSectionItemManager (YouTubeRebornPlus)
-- (void)updateYouTubeRebornPlusSectionWithEntry:(id)entry;
+@interface YTSettingsSectionItemManager (YouTubePremium)
+- (void)updateYouTubePremiumSectionWithEntry:(id)entry;
 @end
 
-extern NSBundle *YouTubeRebornPlusBundle();
+extern NSBundle *YouTubePremiumBundle();
 
-NSBundle *YouTubeRebornPlusBundle() {
+NSBundle *YouTubePremiumBundle() {
     static NSBundle *bundle = nil;
     static dispatch_once_t onceToken;
  	dispatch_once(&onceToken, ^{
@@ -24,13 +24,13 @@ NSBundle *YouTubeRebornPlusBundle() {
     });
     return bundle;
 }
-NSBundle *tweakBundle = YouTubeRebornPlusBundle();
+NSBundle *tweakBundle = YouTubePremiumBundle();
 
 // Settings Search Bar
 %hook YTSettingsViewController
 - (void)loadWithModel:(id)model fromView:(UIView *)view {
     %orig;
-    if ([[self valueForKey:@"_detailsCategoryID"] integerValue] == YouTubeRebornPlusSection)
+    if ([[self valueForKey:@"_detailsCategoryID"] integerValue] == YouTubePremiumSection)
         MSHookIvar<BOOL>(self, "_shouldShowSearchBar") = YES;
 }
 - (void)setSectionControllers {
@@ -51,7 +51,7 @@ NSBundle *tweakBundle = YouTubeRebornPlusBundle();
     NSMutableArray *mutableOrder = [order mutableCopy];
     NSUInteger insertIndex = [order indexOfObject:@(1)];
     if (insertIndex != NSNotFound)
-        [mutableOrder insertObject:@(YouTubeRebornPlusSection) atIndex:insertIndex + 1];
+        [mutableOrder insertObject:@(YouTubePremiumSection) atIndex:insertIndex + 1];
     return mutableOrder;
 }
 %end
@@ -64,9 +64,9 @@ NSBundle *tweakBundle = YouTubeRebornPlusBundle();
 
 %hook YTSettingsSectionItemManager
 %new(v@:@)
-- (void)updateYouTubeRebornPlusSectionWithEntry:(id)entry {
+- (void)updateYouTubePremiumSectionWithEntry:(id)entry {
     NSMutableArray *sectionItems = [NSMutableArray array];
-    NSBundle *tweakBundle = YouTubeRebornPlusBundle();
+    NSBundle *tweakBundle = YouTubePremiumBundle();
     //Class YTSettingsSectionItemClass = %c(YTSettingsSectionItem);
     YTSettingsViewController *settingsViewController = [self valueForKey:@"_settingsViewControllerDelegate"];
 
@@ -86,14 +86,14 @@ NSBundle *tweakBundle = YouTubeRebornPlusBundle();
 
 
     if ([settingsViewController respondsToSelector:@selector(setSectionItems:forCategory:title:icon:titleDescription:headerHidden:)])
-        [settingsViewController setSectionItems:sectionItems forCategory:YouTubeRebornPlusSection title:@"IOSMOD.NET" icon:nil titleDescription:LOC(@"TITLE DESCRIPTION") headerHidden:YES];
+        [settingsViewController setSectionItems:sectionItems forCategory:YouTubePremiumSection title:@"IOSMOD.NET" icon:nil titleDescription:LOC(@"TITLE DESCRIPTION") headerHidden:YES];
     else
-        [settingsViewController setSectionItems:sectionItems forCategory:YouTubeRebornPlusSection title:@"IOSMOD.NET" titleDescription:LOC(@"TITLE DESCRIPTION") headerHidden:YES];
+        [settingsViewController setSectionItems:sectionItems forCategory:YouTubePremiumSection title:@"IOSMOD.NET" titleDescription:LOC(@"TITLE DESCRIPTION") headerHidden:YES];
 }
 
 - (void)updateSectionForCategory:(NSUInteger)category withEntry:(id)entry {
-    if (category == YouTubeRebornPlusSection) {
-        [self updateYouTubeRebornPlusSectionWithEntry:entry];
+    if (category == YouTubePremiumSection) {
+        [self updateYouTubePremiumSectionWithEntry:entry];
         return;
     }
     %orig;
