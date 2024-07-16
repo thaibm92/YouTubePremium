@@ -132,18 +132,23 @@ jobs:
         env:
           THEOS: ${{ github.workspace }}/theos
 
+      - name: Install GitHub CLI
+        run: |
+          sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key C99B11DEB97541F0
+          sudo apt-add-repository https://cli.github.com/packages
+          sudo apt update
+          sudo apt install gh
+      
       - name: Fetch Deb Latest Versions of Debs
         id: get_latest_versions
         run: |
           get_latest_release() {
               repo=$1
-              response=$(curl -s "https://api.github.com/repos/$repo/releases/latest")
-              download_url=$(echo $response | jq -r '.assets[0].browser_download_url')
-          
-              if [ "$download_url" = "null" ]; then
+              response=$(gh api "repos/$repo/releases/latest" --jq '.assets[0].browser_download_url')
+              if [ -z "$response" ]; then
                   echo "No assets found for the latest release of $repo."
               else
-                  echo $download_url
+                  echo $response
               fi
           }
           
@@ -166,6 +171,7 @@ jobs:
           echo "YTVIDEOOVERLAY_URL=$YTVIDEOOVERLAY_URL" >> $GITHUB_ENV
           echo "YOUMUTE_URL=$YOUMUTE_URL" >> $GITHUB_ENV
           echo "YOUQUALITY_URL=$YOUQUALITY_URL" >> $GITHUB_ENV
+
           
       - name: Downloading YouTube IPA & DEBs
         run: |
