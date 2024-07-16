@@ -132,37 +132,20 @@ jobs:
         env:
           THEOS: ${{ github.workspace }}/theos
 
-      - name: Install GitHub CLI
-        run: |
-          curl -fsSL https://github.com/cli/cli/releases/download/v2.52.0/gh_2.52.0_macOS_amd64.zip -o gh.zip
-          unzip gh.zip
-          sudo mv gh_2.52.0_macOS_amd64/bin/gh /usr/local/bin/gh
-          gh --version
-      
       - name: Fetch Deb Latest Versions of Debs
         id: get_latest_versions
         run: |
-          get_latest_release() {
-              repo=$1
-              response=$(gh api "repos/$repo/releases/latest" --jq '.assets[0].browser_download_url')
-              if [ -z "$response" ]; then
-                  echo "No assets found for the latest release of $repo."
-              else
-                  echo $response
-              fi
-          }
-          
-          YOUPIP_URL=$(get_latest_release "thaibm92/YouPiP")
+          YOUPIP_URL="https://github.com/thaibm92/YouPiP/releases/download/v1.8.13/com.ps.youpip_1.8.13_iphoneos-arm.deb"
           echo "YouPiP URL: $YOUPIP_URL"
-          YOUTUBEDISLIKES_URL=$(get_latest_release "thaibm92/Return-YouTube-Dislikes")
+          YOUTUBEDISLIKES_URL="https://github.com/thaibm92/Return-YouTube-Dislikes/releases/download/v1.11.18/weeb.lillie.youtubedislikesreturn_1.11.18_iphoneos-arm.deb"
           echo "Return YouTube Dislikes URL: $YOUTUBEDISLIKES_URL"
-          YTUHD_URL=$(get_latest_release "thaibm92/YTUHD")
+          YTUHD_URL="https://github.com/thaibm92/YTUHD/releases/download/v1.11.16/com.ps.ytuhd_1.5.3_iphoneos-arm.deb"
           echo "YTUHD URL: $YTUHD_URL"
-          YTVIDEOOVERLAY_URL=$(get_latest_release "thaibm92/YTVideoOverlay")
+          YTVIDEOOVERLAY_URL="https://github.com/thaibm92/YTVideoOverlay/releases/download/v1.2.1/com.ps.ytvideooverlay_1.2.1_iphoneos-arm.deb"
           echo "YTVideoOverlay URL: $YTVIDEOOVERLAY_URL"
-          YOUMUTE_URL=$(get_latest_release "thaibm92/YouMute")
+          YOUMUTE_URL="https://github.com/thaibm92/YouMute/releases/download/v1.2.2/com.ps.youmute_1.2.2_iphoneos-arm.deb"
           echo "YouMute URL: $YOUMUTE_URL"
-          YOUQUALITY_URL=$(get_latest_release "thaibm92/YouQuality")
+          YOUQUALITY_URL="https://github.com/thaibm92/YouQuality/releases/download/v1.2.1/com.ps.youquality_1.2.1_iphoneos-arm.deb"
           echo "YouQuality URL: $YOUQUALITY_URL"
           
           echo "YOUPIP_URL=$YOUPIP_URL" >> $GITHUB_ENV
