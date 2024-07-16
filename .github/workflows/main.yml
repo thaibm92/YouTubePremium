@@ -134,9 +134,9 @@ jobs:
 
       - name: Install GitHub CLI
         run: |
-          curl -fsSL https://github.com/cli/cli/archive/refs/tags/v2.52.0.tar.gz -o gh.tar.gz
-          tar xzf gh.tar.gz
-          sudo mv gh_2.22.1_macOS_amd64/bin/gh /usr/local/bin/gh
+          curl -fsSL https://github.com/cli/cli/releases/download/v2.52.0/gh_2.52.0_macOS_amd64.zip -o gh.zip
+          unzip gh.zip
+          sudo mv gh_2.52.0_macOS_amd64/bin/gh /usr/local/bin/gh
           gh --version
       
       - name: Fetch Deb Latest Versions of Debs
