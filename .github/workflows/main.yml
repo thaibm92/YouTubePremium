@@ -164,7 +164,7 @@ jobs:
           wget "${{ env.YTVIDEOOVERLAY_URL }}" --no-verbose -O main/packages/YTVideoOverlay.deb
           wget "${{ env.YOUMUTE_URL }}" --no-verbose -O main/packages/YouMute.deb
           wget "${{ env.YOUQUALITY_URL }}" --no-verbose -O main/packages/YouQuality.deb
-          wget "$YOUTUBE_URL" --progress=bar -O main/YouTube.ipa
+          wget "$YOUTUBE_URL" -O main/YouTube.ipa
         env:
           YOUTUBE_URL: ${{ inputs.decrypted_youtube_url }}
           
