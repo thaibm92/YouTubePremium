@@ -136,13 +136,13 @@ NSString *getAdString(NSString *description) {
         YTIItemSectionSupportedRenderers *firstObject = [sectionRenderer.contentsArray firstObject];
         YTIElementRenderer *elementRenderer = firstObject.elementRenderer;
         if ([elementRenderer respondsToSelector:@selector(hasCompatibilityOptions)] && elementRenderer.hasCompatibilityOptions && elementRenderer.compatibilityOptions.hasAdLoggingData) {
-            HBLogDebug(@"YTX adLogging 2 %@", elementRenderer);
+            HBLogDebug(@"YTP adLogging 2 %@", elementRenderer);
             return YES;
         }
         NSString *description = [elementRenderer description];
         NSString *adString = getAdString(description);
         if (adString) {
-            HBLogDebug(@"YTX getAdString 2 %@ %@", adString, elementRenderer);
+            HBLogDebug(@"YTP getAdString 2 %@ %@", adString, elementRenderer);
             return YES;
         }
         return NO;
