@@ -21,11 +21,6 @@ on:
         default: "YouTube"
         required: true
         type: string
-      commit_id:
-        description: "(Optional) Commit ID to build at"
-        default: ""
-        required: false
-        type: string
       upload_artifact:
         description: "Upload Artifact"
         default: true
@@ -58,7 +53,7 @@ jobs:
         uses: actions/checkout@v4.1.6
         with:
           path: main
-          ref: ${{ github.event.inputs.commit_id || github.ref }}
+          ref: ${{ github.ref }}
           submodules: recursive
 
       - name: Install Dependencies
