@@ -65,17 +65,6 @@
 
 %end
 
-%hook YTLocalPlaybackController
-
-- (id)createAdsPlaybackCoordinator { return nil; }
-
-%end
-
-%hook MDXSession
-
-- (void)adPlaying:(id)ad {}
-
-%end
 
 %hook YTReelInfinitePlaybackDataSource
 
