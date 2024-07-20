@@ -2,7 +2,6 @@
 
 #define TWEAK_VERSION 19.28.1-1.7.1
 #define LOC(x) [tweakBundle localizedStringForKey:x value:nil table:nil]
-#define VERSION_STRING [[NSString stringWithFormat:@"%@", @(OS_STRINGIFY(TWEAK_VERSION))] stringByReplacingOccurrencesOfString:@"\"" withString:@""]
 #define SECTION_HEADER(s) [sectionItems addObject:[%c(YTSettingsSectionItem) itemWithTitle:@"" titleDescription:[s uppercaseString] accessibilityIdentifier:nil detailTextBlock:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger sectionItemIndex) { return NO; }]]
 
 static const NSInteger YouTubePremiumSection = 500;
