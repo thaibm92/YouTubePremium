@@ -1,7 +1,7 @@
 #import <YouTubeHeader/YTIElementRenderer.h>
 #import <YouTubeHeader/YTISectionListRenderer.h>
 #import <YouTubeHeader/YTReelModel.h>
-// #import <HBLog.h>
+#import <HBLog.h>
 
 %hook YTVersionUtils
 
@@ -65,6 +65,17 @@
 
 %end
 
+%hook YTLocalPlaybackController
+
+- (id)createAdsPlaybackCoordinator { return nil; }
+
+%end
+
+%hook MDXSession
+
+- (void)adPlaying:(id)ad {}
+
+%end
 
 %hook YTReelInfinitePlaybackDataSource
 
@@ -115,57 +126,29 @@ NSString *getAdString(NSString *description) {
     return nil;
 }
 
-static __strong NSData *cellDividerData;
-
-%hook YTIElementRenderer
-
-- (NSData *)elementData {
-    NSString *description = [self description];
-    if ([description containsString:@"cell_divider"]) {
-        if (!cellDividerData) cellDividerData = %orig;
-        return cellDividerData;
-    }
-    if (!cellDividerData) return %orig;
-    if ([self respondsToSelector:@selector(hasCompatibilityOptions)] && self.hasCompatibilityOptions && self.compatibilityOptions.hasAdLoggingData) {
-        // HBLogInfo(@"YTX adLogging 1 %@", cellDividerData);
-        return cellDividerData;
-    }
-    NSString *adString = getAdString(description);
-    if (adString) {
-        // HBLogInfo(@"YTX getAdString 1 %@ %@", adString, cellDividerData);
-        return cellDividerData;
-    }
-    return %orig;
-}
-
-%end
-
 %hook YTInnerTubeCollectionViewController
 
-- (void)loadWithModel:(YTISectionListRenderer *)model {
-    if ([model isKindOfClass:%c(YTISectionListRenderer)]) {
-        NSMutableArray <YTISectionListSupportedRenderers *> *contentsArray = model.contentsArray;
-        NSIndexSet *removeIndexes = [contentsArray indexesOfObjectsPassingTest:^BOOL(YTISectionListSupportedRenderers *renderers, NSUInteger idx, BOOL *stop) {
-            if (![renderers isKindOfClass:%c(YTISectionListSupportedRenderers)])
-                return NO;
-            YTIItemSectionRenderer *sectionRenderer = renderers.itemSectionRenderer;
-            YTIItemSectionSupportedRenderers *firstObject = [sectionRenderer.contentsArray firstObject];
-            YTIElementRenderer *elementRenderer = firstObject.elementRenderer;
-            if ([elementRenderer respondsToSelector:@selector(hasCompatibilityOptions)] && elementRenderer.hasCompatibilityOptions && elementRenderer.compatibilityOptions.hasAdLoggingData) {
-                // HBLogInfo(@"YTX adLogging 2 %@", elementRenderer);
-                return YES;
-            }
-            NSString *description = [elementRenderer description];
-            NSString *adString = getAdString(description);
-            if (adString) {
-                // HBLogInfo(@"YTX getAdString 2 %@ %@", adString, elementRenderer);
-                return YES;
-            }
+- (void)addSectionsFromArray:(NSArray <YTIItemSectionRenderer *> *)array {
+    NSMutableArray <YTIItemSectionRenderer *> *newArray = [array mutableCopy];
+    NSIndexSet *removeIndexes = [newArray indexesOfObjectsPassingTest:^BOOL(YTIItemSectionRenderer *sectionRenderer, NSUInteger idx, BOOL *stop) {
+        if (![sectionRenderer isKindOfClass:%c(YTIItemSectionRenderer)])
             return NO;
-        }];
-        [contentsArray removeObjectsAtIndexes:removeIndexes];
-    }
-    %orig;
+        YTIItemSectionSupportedRenderers *firstObject = [sectionRenderer.contentsArray firstObject];
+        YTIElementRenderer *elementRenderer = firstObject.elementRenderer;
+        if ([elementRenderer respondsToSelector:@selector(hasCompatibilityOptions)] && elementRenderer.hasCompatibilityOptions && elementRenderer.compatibilityOptions.hasAdLoggingData) {
+            HBLogDebug(@"YTX adLogging 2 %@", elementRenderer);
+            return YES;
+        }
+        NSString *description = [elementRenderer description];
+        NSString *adString = getAdString(description);
+        if (adString) {
+            HBLogDebug(@"YTX getAdString 2 %@ %@", adString, elementRenderer);
+            return YES;
+        }
+        return NO;
+    }];
+    [newArray removeObjectsAtIndexes:removeIndexes];
+    %orig(newArray.copy);
 }
 
 %end
