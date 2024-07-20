@@ -88,6 +88,28 @@ NSBundle *tweakBundle = YouTubePremiumBundle();
     # pragma mark - functions
     SECTION_HEADER(LOC(@"FUNCTIONS"));
 
+    YTSettingsSectionItem *noads = [%c(YTSettingsSectionItem)
+    itemWithTitle:[NSString stringWithFormat:LOC(@"NOADS")]
+    titleDescription:LOC(@"NOADS_DESC")
+    accessibilityIdentifier:nil
+    detailTextBlock:nil
+    selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
+        // Không thực hiện hành động nào khi nhấp vào
+        return NO;
+    }];
+    [sectionItems addObject:noads];
+
+    YTSettingsSectionItem *playbackgroud = [%c(YTSettingsSectionItem)
+    itemWithTitle:[NSString stringWithFormat:LOC(@"PLAYBACKGROUD")]
+    titleDescription:LOC(@"PLAYBACKGROUD_DESC")
+    accessibilityIdentifier:nil
+    detailTextBlock:nil
+    selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
+        // Không thực hiện hành động nào khi nhấp vào
+        return NO;
+    }];
+    [sectionItems addObject:playbackgroud];
+
     YTSettingsSectionItem *youpip = [%c(YTSettingsSectionItem)
     itemWithTitle:[NSString stringWithFormat:LOC(@"YOUPIP")]
     titleDescription:LOC(@"YOUPIP_DESC")
