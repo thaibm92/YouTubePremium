@@ -135,7 +135,7 @@ jobs:
       - name: Fetch Deb Latest Versions of Debs
         id: get_latest_versions
         run: |
-          YOUPIP_URL="https://github.com/thaibm92/YouPiP/releases/download/v1.8.13/com.ps.youpip_1.8.13_iphoneos-arm.deb"
+          YOUPIP_URL="https://github.com/thaibm92/YouPiP/releases/download/v1.8.14/com.ps.youpip_1.8.14_iphoneos-arm.deb"
           echo "YouPiP URL: $YOUPIP_URL"
           YOUTUBEDISLIKES_URL="https://github.com/thaibm92/Return-YouTube-Dislikes/releases/download/v1.11.18/weeb.lillie.youtubedislikesreturn_1.11.18_iphoneos-arm.deb"
           echo "Return YouTube Dislikes URL: $YOUTUBEDISLIKES_URL"
