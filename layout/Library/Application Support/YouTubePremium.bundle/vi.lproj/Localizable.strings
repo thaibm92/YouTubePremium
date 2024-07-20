@@ -5,11 +5,11 @@
 
 "FUNCTIONS" = "CÁC CHỨC NĂNG";
 
-"YOUPIP" = "KHÔNG QUẢNG CÁO";
-"YOUPIP_DESC" = "Loại bỏ tất cả quảng cáo trong video";
+"NOADS" = "KHÔNG QUẢNG CÁO";
+"NOADS_DESC" = "Loại bỏ tất cả quảng cáo trong video";
 
-"YOUPIP" = "PHÁT TRONG NỀN";
-"YOUPIP_DESC" = "Kích hoạt phát video trong nền khi khoá màn hình";
+"PLAYBACKGROUD" = "PHÁT TRONG NỀN";
+"PLAYBACKGROUD_DESC" = "Kích hoạt phát video trong nền khi khoá màn hình";
 
 "YOUPIP" = "HÌNH TRONG HÌNH (PIP)";
 "YOUPIP_DESC" = "Kích hoạt chức năng hình trong hình (PiP)";
