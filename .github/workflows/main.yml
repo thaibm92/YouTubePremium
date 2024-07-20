@@ -1,7 +1,7 @@
 # Original idea by @ISnackable. Many thanks to him for handling the most hardest parts!
 # https://github.com/ISnackable/CercubePlus/blob/main/.github/workflows/Build.yml
 
-name: Build and Release YouTube Premium
+name: Build and Release YouTube Premium Direct Link To Deb
 
 on:
   workflow_dispatch:
