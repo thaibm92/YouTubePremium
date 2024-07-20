@@ -122,6 +122,40 @@ NSBundle *tweakBundle = YouTubePremiumBundle();
     [sectionItems addObject:youpip];
 
 
+    // Hàm tạo chuỗi canh giữa
+    - (NSAttributedString *)centeredString:(NSString *)string {
+        NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+        paragraphStyle.alignment = NSTextAlignmentCenter;
+        
+        NSAttributedString *centeredString = [[NSAttributedString alloc] initWithString:string attributes:@{NSParagraphStyleAttributeName: paragraphStyle}];
+        
+        return centeredString;
+    }
+    
+    YTSettingsSectionItem *copyright = [%c(YTSettingsSectionItem)
+        itemWithTitle:[self centeredString:LOC(@"COPYRIGHT")]
+        titleDescription:LOC(@"COPYRIGHT_DESC")]
+        accessibilityIdentifier:nil
+        detailTextBlock:nil
+        selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
+            // Không thực hiện hành động nào khi nhấp vào
+            return NO;
+        }];
+    [sectionItems addObject:copyright];
+    
+    @implementation YTSettingsCell
+    
+    - (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
+        // Không thay đổi giao diện khi được làm nổi bật
+    }
+    
+    - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
+        // Không thay đổi giao diện khi được chọn
+    }
+    
+    @end
+
+
     if ([settingsViewController respondsToSelector:@selector(setSectionItems:forCategory:title:icon:titleDescription:headerHidden:)])
         [settingsViewController setSectionItems:sectionItems forCategory:YouTubePremiumSection title:@"IOSMOD.NET" icon:nil titleDescription:LOC(@"TITLE DESCRIPTION") headerHidden:YES];
     else
