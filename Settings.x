@@ -93,7 +93,10 @@ NSBundle *tweakBundle = YouTubePremiumBundle();
     titleDescription:LOC(@"YOUPIP_DESC")
     accessibilityIdentifier:nil
     detailTextBlock:nil
-    ];
+    selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
+        // Không thực hiện hành động nào khi nhấp vào
+        return NO;
+    }];
     [sectionItems addObject:youpip];
 
 
