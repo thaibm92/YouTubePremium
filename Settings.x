@@ -109,7 +109,7 @@ NSBundle *tweakBundle = YouTubePremiumBundle();
         return NO;
     }];
     [sectionItems addObject:playbackgroud];
-/*
+
     YTSettingsSectionItem *youpip = [%c(YTSettingsSectionItem)
     itemWithTitle:[NSString stringWithFormat:LOC(@"YOUPIP")]
     titleDescription:LOC(@"YOUPIP_DESC")
@@ -120,29 +120,7 @@ NSBundle *tweakBundle = YouTubePremiumBundle();
         return NO;
     }];
     [sectionItems addObject:youpip];
-*/
-    YTSettingsSectionItem *youpip = [%c(YTSettingsSectionItem)
-    itemWithTitle:nil
-    titleDescription:nil
-    accessibilityIdentifier:nil
-    detailTextBlock:nil
-    selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-        // Không thực hiện hành động nào khi nhấp vào
-        return NO;
-    }];
-    // Tạo thuộc tính văn bản với kích thước chữ mong muốn
-    NSDictionary *titleAttributes = @{
-        NSFontAttributeName: [UIFont systemFontOfSize:18] // Thay đổi kích thước chữ theo mong muốn của bạn
-    };
-    NSAttributedString *attributedTitle = [[NSAttributedString alloc] initWithString:LOC(@"YOUPIP") attributes:titleAttributes];
-    NSDictionary *descriptionAttributes = @{
-        NSFontAttributeName: [UIFont systemFontOfSize:14] // Thay đổi kích thước chữ theo mong muốn của bạn
-    };
-    NSAttributedString *attributedDescription = [[NSAttributedString alloc] initWithString:LOC(@"YOUPIP_DESC") attributes:descriptionAttributes];
-    // Gán thuộc tính văn bản cho title và titleDescription
-    [youpip setTitle:attributedTitle];
-    [youpip setTitleDescription:attributedDescription];
-    [sectionItems addObject:youpip];
+
 
     if ([settingsViewController respondsToSelector:@selector(setSectionItems:forCategory:title:icon:titleDescription:headerHidden:)])
         [settingsViewController setSectionItems:sectionItems forCategory:YouTubePremiumSection title:@"IOSMOD.NET" icon:nil titleDescription:LOC(@"TITLE DESCRIPTION") headerHidden:YES];
