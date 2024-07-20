@@ -5,11 +5,11 @@
 
 "FUNCTIONS" = "MAIN FUNCTIONS";
 
-"NOADS" = "NO ADS";
+"NOADS" = "No Ads";
 "NOADS_DESC" = "Remove all ads in video";
 
-"PLAYBACKGROUD" = "PLAYING IN THE BACKGROUND";
+"PLAYBACKGROUD" = "Playing in the backgroud";
 "PLAYBACKGROUD_DESC" = "Enable background video play when screen is locked";
 
-"YOUPIP" = "PIC IN PIP (PIP)";
+"YOUPIP" = "PiP in PiP";
 "YOUPIP_DESC" = "Enable picture-in-picture (PiP)";
