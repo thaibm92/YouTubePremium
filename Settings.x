@@ -89,13 +89,13 @@ NSBundle *tweakBundle = YouTubePremiumBundle();
     SECTION_HEADER(LOC(@"FUNCTIONS"));
 
     YTSettingsSectionItem *youpip = [%c(YTSettingsSectionItem)
-    itemWithTitle:[NSString stringWithFormat:LOC(@"YOUPIP")
+    itemWithTitle:[NSString stringWithFormat:LOC(@"YOUPIP")]
     titleDescription:LOC(@"YOUPIP_DESC")
     accessibilityIdentifier:nil
     detailTextBlock:nil
     ];
     [sectionItems addObject:youpip];
-    
+
 
     if ([settingsViewController respondsToSelector:@selector(setSectionItems:forCategory:title:icon:titleDescription:headerHidden:)])
         [settingsViewController setSectionItems:sectionItems forCategory:YouTubePremiumSection title:@"IOSMOD.NET" icon:nil titleDescription:LOC(@"TITLE DESCRIPTION") headerHidden:YES];
