@@ -5,5 +5,11 @@
 
 "FUNCTIONS" = "MAIN FUNCTIONS";
 
-"YOUPIP" = "YouPiP";
-"YOUPIP_DESC" = "Enable picture-in-picture (PIP) function";
+"YOUPIP" = "NO ADS";
+"YOUPIP_DESC" = "Remove all ads in video";
+
+"YOUPIP" = "PLAYING IN THE BACKGROUND";
+"YOUPIP_DESC" = "Enable background video play when screen is locked";
+
+"YOUPIP" = "PIC IN PIP (PIP)";
+"YOUPIP_DESC" = "Enable picture-in-picture (PiP)";
