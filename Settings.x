@@ -92,7 +92,8 @@ NSBundle *tweakBundle = YouTubePremiumBundle();
     itemWithTitle:[NSString stringWithFormat:LOC(@"YOUPIP")
     titleDescription:LOC(@"YOUPIP_DESC")
     accessibilityIdentifier:nil
-    detailTextBlock:nil];
+    detailTextBlock:nil
+    ];
     [sectionItems addObject:youpip];
     
 
