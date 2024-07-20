@@ -1,4 +1,4 @@
-"ABOUT" = "About";
+"ABOUT" = "ABOUT";
 
-"VERSION" = "YouTube Premium by IOSMOD.NET: v%@";
+"VERSION" = "YouTube Premium version: %@";
 "VERSION_CHECK" = "Tap to check for updates!";
