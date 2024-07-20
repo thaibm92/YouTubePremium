@@ -3,5 +3,7 @@
 "VERSION" = "YouTube Premium version: %@";
 "VERSION_CHECK" = "Tap to check for updates!";
 
+"FUNCTIONS" = "MAIN FUNCTIONS";
+
 "YOUPIP" = "YouPiP";
 "YOUPIP_DESC" = "Enable picture-in-picture (PIP) function";
