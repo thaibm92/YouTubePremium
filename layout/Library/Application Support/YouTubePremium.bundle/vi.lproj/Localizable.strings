@@ -5,6 +5,14 @@
 
 "FUNCTIONS" = "CÁC CHỨC NĂNG";
 
-"YOUPIP" = "YouPiP";
-"YOUPIP_DESC" = "Kích hoạt chức năng hình trong hình (PIP)";
+"YOUPIP" = "KHÔNG QUẢNG CÁO";
+"YOUPIP_DESC" = "Loại bỏ tất cả quảng cáo trong video";
+
+"YOUPIP" = "PHÁT NHẠC TRONG NỀN";
+"YOUPIP_DESC" = "Kích hoạt phát video trong nền khi khoá màn hình";
+
+"YOUPIP" = "HÌNH TRONG HÌNH (PIP)";
+"YOUPIP_DESC" = "Kích hoạt chức năng hình trong hình (PiP)";
+
+
 
