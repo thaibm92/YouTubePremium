@@ -3,6 +3,8 @@
 "VERSION" = "YouTube Premium phiên bản: %@";
 "VERSION_CHECK" = "Nhấp vào để kiểm tra bản cập nhật!";
 
+"FUNCTIONS" = "CHỨC NĂNG CHÍNH";
+
 "YOUPIP" = "YouPiP";
 "YOUPIP_DESC" = "Kích hoạt chức năng hình trong hình (PIP)";
 
