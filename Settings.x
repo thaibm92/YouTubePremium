@@ -73,7 +73,7 @@ NSBundle *tweakBundle = YouTubePremiumBundle();
     YTSettingsViewController *settingsViewController = [self valueForKey:@"_settingsViewControllerDelegate"];
 
     # pragma mark - About
-    // SECTION_HEADER(LOC(@"ABOUT"));
+    SECTION_HEADER(LOC(@"ABOUT"));
 
     YTSettingsSectionItem *version = [%c(YTSettingsSectionItem)
     itemWithTitle:[NSString stringWithFormat:LOC(@"VERSION"), @(OS_STRINGIFY(TWEAK_VERSION))]
