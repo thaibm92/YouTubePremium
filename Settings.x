@@ -94,7 +94,6 @@ NSBundle *tweakBundle = YouTubePremiumBundle();
     accessibilityIdentifier:nil
     detailTextBlock:nil
     selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-        // Không thực hiện hành động nào khi nhấp vào
         return NO;
     }];
     [sectionItems addObject:noads];
@@ -105,7 +104,6 @@ NSBundle *tweakBundle = YouTubePremiumBundle();
     accessibilityIdentifier:nil
     detailTextBlock:nil
     selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-        // Không thực hiện hành động nào khi nhấp vào
         return NO;
     }];
     [sectionItems addObject:playbackgroud];
@@ -116,10 +114,49 @@ NSBundle *tweakBundle = YouTubePremiumBundle();
     accessibilityIdentifier:nil
     detailTextBlock:nil
     selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-        // Không thực hiện hành động nào khi nhấp vào
         return NO;
     }];
     [sectionItems addObject:youpip];
+
+    YTSettingsSectionItem *ryd = [%c(YTSettingsSectionItem)
+    itemWithTitle:[NSString stringWithFormat:LOC(@"RYD")]
+    titleDescription:LOC(@"RYD_DESC")
+    accessibilityIdentifier:nil
+    detailTextBlock:nil
+    selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
+        return NO;
+    }];
+    [sectionItems addObject:ryd];
+
+    YTSettingsSectionItem *ytuhd = [%c(YTSettingsSectionItem)
+    itemWithTitle:[NSString stringWithFormat:LOC(@"YTUHD")]
+    titleDescription:LOC(@"YTUHD_DESC")
+    accessibilityIdentifier:nil
+    detailTextBlock:nil
+    selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
+        return NO;
+    }];
+    [sectionItems addObject:ytuhd];
+
+    YTSettingsSectionItem *youquality = [%c(YTSettingsSectionItem)
+    itemWithTitle:[NSString stringWithFormat:LOC(@"YOUQUALITY")]
+    titleDescription:LOC(@"YOUQUALITY_DESC")
+    accessibilityIdentifier:nil
+    detailTextBlock:nil
+    selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
+        return NO;
+    }];
+    [sectionItems addObject:youquality];
+
+    YTSettingsSectionItem *youmute = [%c(YTSettingsSectionItem)
+    itemWithTitle:[NSString stringWithFormat:LOC(@"YOUMUTE")]
+    titleDescription:LOC(@"YOUMUTE_DESC")
+    accessibilityIdentifier:nil
+    detailTextBlock:nil
+    selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
+        return NO;
+    }];
+    [sectionItems addObject:youmute];
 
 
     if ([settingsViewController respondsToSelector:@selector(setSectionItems:forCategory:title:icon:titleDescription:headerHidden:)])
