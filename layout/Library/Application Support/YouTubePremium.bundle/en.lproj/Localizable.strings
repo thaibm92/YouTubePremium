@@ -6,10 +6,22 @@
 "FUNCTIONS" = "MAIN FUNCTIONS";
 
 "NOADS" = "No Ads";
-"NOADS_DESC" = "Remove all ads in video";
+"NOADS_DESC" = "Remove all ads in video.";
 
 "PLAYBACKGROUD" = "Playing in the backgroud";
-"PLAYBACKGROUD_DESC" = "Enable background video play when screen is locked";
+"PLAYBACKGROUD_DESC" = "Enable background video play when screen is locked.";
 
 "YOUPIP" = "PiP in PiP";
-"YOUPIP_DESC" = "Enable picture-in-picture (PiP)";
+"YOUPIP_DESC" = "Enable picture-in-picture (PiP).";
+
+"RYD" = "Return dislike button";
+"RYD_DESC" = "Returns the Dislike button, displaying details of the number of likes/dislikes.";
+
+"YTUHD" = "Enable UHD video";
+"YTUHD_DESC" = "Unlock 1440p (2K) and 2160p (4K) resolution for video.";
+
+"YOUQUALITY" = "YouQuality";
+"YOUQUALITY_DESC" = "Allows viewing and changing video quality on videos faster.";
+
+"YOUMUTE" = "YouMute";
+"YOUMUTE_DESC" = "Allow users to mute/unmute videos directly in the Video Player.";
