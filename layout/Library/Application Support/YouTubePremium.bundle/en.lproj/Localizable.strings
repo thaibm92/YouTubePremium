@@ -8,13 +8,13 @@
 "NOADS" = "No Ads";
 "NOADS_DESC" = "Remove all ads in video.";
 
-"PLAYBACKGROUD" = "Playing in the backgroud";
+"PLAYBACKGROUD" = "Play backgroud";
 "PLAYBACKGROUD_DESC" = "Enable background video play when screen is locked.";
 
-"YOUPIP" = "PiP in PiP";
+"YOUPIP" = "YouPiP";
 "YOUPIP_DESC" = "Enable picture-in-picture (PiP).";
 
-"RYD" = "Return dislike button";
+"RYD" = "Return Dislike";
 "RYD_DESC" = "Returns the Dislike button, displaying details of the number of likes/dislikes.";
 
 "YTUHD" = "YTUHD";
