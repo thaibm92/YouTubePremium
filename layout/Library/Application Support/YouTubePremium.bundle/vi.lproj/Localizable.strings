@@ -15,9 +15,9 @@
 "YOUPIP_DESC" = "Kích hoạt chức năng hình trong hình (PiP).";
 
 "RYD" = "Trả về nút dislike";
-"RYD_DESC" = "Trả về nút Dislike, hiển thị chi tiết số lượng like/dislike.";
+"RYD_DESC" = "Trả về nút Dislike, hiển thị chi tiết số lượng Like/Dislike.";
 
-"YTUHD" = "Kích hoạt video UHD";
+"YTUHD" = "YUHD";
 "YTUHD_DESC" = "Mở khóa độ phân giải 1440p (2K) và 2160p (4K) cho video.";
 
 "YOUQUALITY" = "YouQuality";
@@ -25,4 +25,7 @@
 
 "YOUMUTE" = "YouMute";
 "YOUMUTE_DESC" = "Cho phép người dùng tắt tiếng/bật tiếng video trực tiếp trong Trình phát video.";
+
+"YOUCHOOSEQUALITY" = "YouChooseQuality";
+"YOUCHOOSEQUALITY_DESC" = "Tự động chọn chất lượng video theo ý muốn.";
 
