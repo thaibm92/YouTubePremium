@@ -86,6 +86,7 @@ Special thanks to these developer(s) for maintaining and improving YouTubePremiu
 5. **YTVideoOverlay:** A helper tweak that adds buttons on the YouTube video overlay.
 - **YouQuality:** Enables you to view and change video quality in YouTube faster.
 - **YouMute:** Allows users to mute/unmute videos directly in the YouTube Video Player.
+6. **YouChooseQuality:** Auto-select the video quality of choice.
 
 # Download
 
@@ -93,16 +94,6 @@ Special thanks to these developer(s) for maintaining and improving YouTubePremiu
 
 - The latest version of **YouTube Premium** can be found under [Releases](https://github.com/thaibm92/YouTubePremium/releases).
 - **Compatibility:** Requires iOS/iPadOS 15.0 or later.
-
-<details>
-  <summary>Version information (last updated: June 11, 2024)</summary>
-
-| **Tweaks/App** | **Developer** | **Version** | **Open source** |
-| - | - | :-: | :-:  |
-| **YouTube** | Google Inc | 19.23.3 | ✖︎ |
-| **YouTube Premium** | [Thaibm92](https://github.com/thaibm92/youtubepremium) | 1.6.6 | [✔︎](https://github.com/thaibm92/youtubepremium) |
-| **Open in YouTube** | [CokePokes](https://github.com/CokePokes/) | 1.2 |[✔︎](https://github.com/CokePokes/)|
-| **YouPiP** | [PoomSmart](https://twitter.com/poomsmart) | 1.8.9 | [✔︎](https://github.com/PoomSmart/YouPiP) |
 
 
 </details>
