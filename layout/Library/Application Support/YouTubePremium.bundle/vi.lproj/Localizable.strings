@@ -5,16 +5,16 @@
 
 "FUNCTIONS" = "CÁC CHỨC NĂNG";
 
-"NOADS" = "Không quảng cáo";
+"NOADS" = "Không Quảng Cáo";
 "NOADS_DESC" = "Loại bỏ tất cả quảng cáo trong video.";
 
-"PLAYBACKGROUD" = "Phát trong nền";
+"PLAYBACKGROUD" = "Phát Trong Nền";
 "PLAYBACKGROUD_DESC" = "Kích hoạt phát video trong nền khi khoá màn hình.";
 
 "YOUPIP" = "YouPiP";
 "YOUPIP_DESC" = "Kích hoạt chức năng hình trong hình (PiP).";
 
-"RYD" = "Trả về nút Dislike";
+"RYD" = "Return YouTube Dislike";
 "RYD_DESC" = "Trả về nút Dislike, hiển thị chi tiết số lượng Like/Dislike.";
 
 "YTUHD" = "YTUHD";
