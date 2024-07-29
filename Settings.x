@@ -158,6 +158,16 @@ NSBundle *tweakBundle = YouTubePremiumBundle();
     }];
     [sectionItems addObject:youmute];
 
+    YTSettingsSectionItem *youchoosequlity = [%c(YTSettingsSectionItem)
+    itemWithTitle:[NSString stringWithFormat:LOC(@"YOUCHOOSEQUALITY")]
+    titleDescription:LOC(@"YOUCHOOSEQUALITY_DESC")
+    accessibilityIdentifier:nil
+    detailTextBlock:nil
+    selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
+        return NO;
+    }];
+    [sectionItems addObject:youchoosequlity];
+
 
     if ([settingsViewController respondsToSelector:@selector(setSectionItems:forCategory:title:icon:titleDescription:headerHidden:)])
         [settingsViewController setSectionItems:sectionItems forCategory:YouTubePremiumSection title:@"IOSMOD.NET" icon:nil titleDescription:LOC(@"TITLE DESCRIPTION") headerHidden:YES];
