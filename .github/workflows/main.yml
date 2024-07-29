@@ -134,7 +134,7 @@ jobs:
           echo "YouPiP URL: $YOUPIP_URL"
           YOUTUBEDISLIKES_URL="https://github.com/thaibm92/Return-YouTube-Dislikes/releases/download/v1.11.18/weeb.lillie.youtubedislikesreturn_1.11.18_iphoneos-arm.deb"
           echo "Return YouTube Dislikes URL: $YOUTUBEDISLIKES_URL"
-          YTUHD_URL="https://github.com/thaibm92/YTUHD/releases/download/v1.11.16/com.ps.ytuhd_1.5.3_iphoneos-arm.deb"
+          YTUHD_URL="https://github.com/thaibm92/YTUHD/releases/download/v1.5.4/com.ps.ytuhd_1.5.4_iphoneos-arm.deb"
           echo "YTUHD URL: $YTUHD_URL"
           YTVIDEOOVERLAY_URL="https://github.com/thaibm92/YTVideoOverlay/releases/download/v1.2.1/com.ps.ytvideooverlay_1.2.1_iphoneos-arm.deb"
           echo "YTVideoOverlay URL: $YTVIDEOOVERLAY_URL"
