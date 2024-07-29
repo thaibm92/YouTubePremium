@@ -11,10 +11,10 @@
 "PLAYBACKGROUD" = "Phát trong nền";
 "PLAYBACKGROUD_DESC" = "Kích hoạt phát video trong nền khi khoá màn hình.";
 
-"YOUPIP" = "Hình trong hình";
+"YOUPIP" = "YouPiP";
 "YOUPIP_DESC" = "Kích hoạt chức năng hình trong hình (PiP).";
 
-"RYD" = "Trả về nút dislike";
+"RYD" = "Trả về nút Dislike";
 "RYD_DESC" = "Trả về nút Dislike, hiển thị chi tiết số lượng Like/Dislike.";
 
 "YTUHD" = "YUHD";
