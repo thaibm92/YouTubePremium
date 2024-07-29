@@ -17,7 +17,7 @@
 "RYD" = "Return dislike button";
 "RYD_DESC" = "Returns the Dislike button, displaying details of the number of likes/dislikes.";
 
-"YTUHD" = "Enable UHD video";
+"YTUHD" = "YTUHD";
 "YTUHD_DESC" = "Unlock 1440p (2K) and 2160p (4K) resolution for video.";
 
 "YOUQUALITY" = "YouQuality";
@@ -25,3 +25,8 @@
 
 "YOUMUTE" = "YouMute";
 "YOUMUTE_DESC" = "Allow users to mute/unmute videos directly in the Video Player.";
+
+"YOUCHOOSEQUALITY" = "YouChooseQuality";
+"YOUCHOOSEQUALITY_DESC" = "Auto-select the video quality of choice";
+
+
