@@ -71,6 +71,14 @@ Special thanks to these developer(s) for maintaining and improving YouTubePremiu
 <br>
 <a href='https://theos.dev'>theos</a>
 </td>
+
+<td align="center">
+<a href='https://github.com/Al4ise/'>
+<img src='https://avatars.githubusercontent.com/u/39273158?v=4' width='110px'>
+</a>
+<br>
+<a href='https://github.com/Al4ise/Azule'>Azule</a>
+</td>
 </tr>
 </table>
 
