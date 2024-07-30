@@ -43,7 +43,7 @@ Special thanks to these developer(s) for maintaining and improving YouTubePremiu
 </td>
 <td align="center">
 <a href='https://github.com/bhackel'>
-<img src='https://github.com/arichornlover/uYouEnhanced/assets/78001398/d1d46f69-d7b9-4e6a-82b6-e5629d26667b' width='110px;'>
+<img src='https://avatars.githubusercontent.com/u/34104885?v=4' width='110px;'>
 </a>
 <br>
 <a href='https://github.com/bhackel'>bhackel</a>
