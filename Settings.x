@@ -1,6 +1,6 @@
 #import "Header.h"
 
-#define TWEAK_VERSION 19.29.1-1.7.2
+#define TWEAK_VERSION 19.30.2-1.7.2
 #define LOC(x) [tweakBundle localizedStringForKey:x value:nil table:nil]
 #define SECTION_HEADER(s) [sectionItems addObject:[%c(YTSettingsSectionItem) itemWithTitle:@"" titleDescription:[s uppercaseString] accessibilityIdentifier:nil detailTextBlock:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger sectionItemIndex) { return NO; }]]
 
