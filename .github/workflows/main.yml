@@ -138,7 +138,7 @@ jobs:
           echo "YTUHD URL: $YTUHD_URL"
           YTVIDEOOVERLAY_URL="https://github.com/thaibm92/YTVideoOverlay/releases/download/v1.2.1/com.ps.ytvideooverlay_1.2.1_iphoneos-arm.deb"
           echo "YTVideoOverlay URL: $YTVIDEOOVERLAY_URL"
-          YOUMUTE_URL="https://github.com/thaibm92/YouMute/releases/download/v1.2.2/com.ps.youmute_1.2.2_iphoneos-arm.deb"
+          YOUMUTE_URL="https://github.com/thaibm92/YouMute/releases/download/v1.2.3/com.ps.youmute_1.2.3_iphoneos-arm.deb"
           echo "YouMute URL: $YOUMUTE_URL"
           YOUQUALITY_URL="https://github.com/thaibm92/YouQuality/releases/download/v1.2.1/com.ps.youquality_1.2.1_iphoneos-arm.deb"
           echo "YouQuality URL: $YOUQUALITY_URL"
