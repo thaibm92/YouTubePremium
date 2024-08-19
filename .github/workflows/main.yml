@@ -8,7 +8,7 @@ on:
     inputs:
       decrypted_youtube_url:
         description: "The direct URL to the decrypted YouTube ipa"
-        default: "https://iosmod.net/IPAs/YouTube_19.32.8.ipa"
+        default: "https://iosmod.net/IPAs/YouTube_19.33.2.ipa"
         required: true
         type: string
       bundle_id:
