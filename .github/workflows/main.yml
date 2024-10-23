@@ -8,7 +8,7 @@ on:
     inputs:
       decrypted_youtube_url:
         description: "The direct URL to the decrypted YouTube ipa"
-        default: "https://iosmod.net/IPAs/YouTube_19.41.3.ipa"
+        default: "https://iosmod.net/IPAs/YouTube_19.42.1.ipa"
         required: true
         type: string
       bundle_id:
@@ -144,6 +144,8 @@ jobs:
           echo "YouQuality URL: $YOUQUALITY_URL"
           YOUCHOOSEQUALITY_URL="https://github.com/thaibm92/YouChooseQuality/releases/download/v1.0.0/com.ps.youchoosequality_1.0.0_iphoneos-arm.deb"
           echo "YouChooseQuality URL: $YOUCHOOSEQUALITY_URL"
+          YTAUTOFULLSCREEN_URL="https://github.com/thaibm92/YTAutoFullScreen/releases/download/v1.0.4/com.ps.ytautofullscreen_1.0.4_iphoneos-arm.deb"
+          echo "YTAutoFullScreen URL: $YTAUTOFULLSCREEN_URL"
           
           echo "YOUPIP_URL=$YOUPIP_URL" >> $GITHUB_ENV
           echo "YOUTUBEDISLIKES_URL=$YOUTUBEDISLIKES_URL" >> $GITHUB_ENV
@@ -151,7 +153,8 @@ jobs:
           echo "YTVIDEOOVERLAY_URL=$YTVIDEOOVERLAY_URL" >> $GITHUB_ENV
           echo "YOUMUTE_URL=$YOUMUTE_URL" >> $GITHUB_ENV
           echo "YOUQUALITY_URL=$YOUQUALITY_URL" >> $GITHUB_ENV
-           echo "YOUCHOOSEQUALITY_URL=$YOUCHOOSEQUALITY_URL" >> $GITHUB_ENV
+          echo "YOUCHOOSEQUALITY_URL=$YOUCHOOSEQUALITY_URL" >> $GITHUB_ENV
+          echo "YTAUTOFULLSCREEN_URL=$YTAUTOFULLSCREEN_URL" >> $GITHUB_ENV
 
           
       - name: Downloading YouTube IPA & DEBs
@@ -163,6 +166,7 @@ jobs:
           wget "${{ env.YOUMUTE_URL }}" --no-verbose -O main/packages/YouMute.deb
           wget "${{ env.YOUQUALITY_URL }}" --no-verbose -O main/packages/YouQuality.deb
           wget "${{ env.YOUCHOOSEQUALITY_URL }}" --no-verbose -O main/packages/YouChooseQuality.deb
+          wget "${{ env.YTAUTOFULLSCREEN_URL }}" --no-verbose -O main/packages/YTAutoFullScreen.deb
           wget "$YOUTUBE_URL" --progress=bar:force -O main/YouTube.ipa
         env:
           YOUTUBE_URL: ${{ inputs.decrypted_youtube_url }}
