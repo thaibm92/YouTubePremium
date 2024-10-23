@@ -174,7 +174,6 @@ jobs:
           
       - name: Inject Tweak into IPA
         run: |
-          brew install coreutils
           cd ${{ github.workspace }}/main
           ./Azule/azule -i $PWD/YouTube.ipa -o $PWD/packages/YouTubePremium.ipa -f $PWD/packages/*.deb
 
