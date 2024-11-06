@@ -4,7 +4,7 @@
 @interface YTITopbarLogoRenderer : NSObject
 @property(readonly, nonatomic) YTIIcon *iconImage;
 @end
-//enable logo premium
+/*//enable logo premium
 %hook YTHeaderLogoController
 - (void)setTopbarLogoRenderer:(YTITopbarLogoRenderer *)renderer {
     YTIIcon *iconImage = renderer.iconImage;
@@ -20,7 +20,7 @@
     return YES;
 }
 %end
-
+*/
 //------new
 // YouTube Premium Logo - @arichornlover & bhackel
 %hook YTHeaderLogoController
