@@ -73,3 +73,5 @@
 // YTNoPaidPromo
 #import "YouTubeHeader/YTPlayerOverlay.h"
 #import "YouTubeHeader/YTPlayerOverlayProvider.h"
+
+#import "YouTubeHeader/YTIcon.h"
