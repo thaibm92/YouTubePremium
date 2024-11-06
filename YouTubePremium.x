@@ -4,12 +4,12 @@
 @interface YTITopbarLogoRenderer : NSObject
 @property(readonly, nonatomic) YTIIcon *iconImage;
 @end
-/*//enable logo premium
+//enable logo premium
 %hook YTHeaderLogoController
 - (void)setTopbarLogoRenderer:(YTITopbarLogoRenderer *)renderer {
     YTIIcon *iconImage = renderer.iconImage;
     //iconImage.iconType = 537;
-    iconImage.iconType = YT_PREMIUM;
+    iconImage.iconType = YT_PREMIUM_LOGO;
     %orig;
 }
 - (void)setPremiumLogo:(BOOL)isPremiumLogo {
@@ -20,7 +20,7 @@
     return YES;
 }
 %end
-*/
+/*
 //------new
 // YouTube Premium Logo - @arichornlover & bhackel
 %hook YTHeaderLogoController
@@ -40,7 +40,7 @@
     return YES;
 }
 %end
-
+*/
 
 // Keychain patching
 static NSString *accessGroupID() {
