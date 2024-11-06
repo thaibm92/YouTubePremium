@@ -227,8 +227,7 @@ jobs:
           tag_name: v${{ steps.prepare_youtube.outputs.youtube_version }}-${{ steps.build_package.outputs.Version }}
           name: v${{ steps.prepare_youtube.outputs.youtube_version }}-${{ steps.build_package.outputs.Version }}
           files: |
-            main/packages/${{steps.build_package.outputs.tweakName}}
-            main/packages/YouTubePremium_${{steps.prepare_youtube.outputs.youtube_version}}.ipa
             main/packages/*.deb
+            main/packages/YouTubePremium_${{steps.prepare_youtube.outputs.youtube_version}}.ipa
           draft: ${{ env.DRAFT }}
     
