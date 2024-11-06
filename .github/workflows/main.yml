@@ -229,5 +229,6 @@ jobs:
           files: |
             main/packages/${{steps.build_package.outputs.tweakName}}
             main/packages/YouTubePremium_${{steps.prepare_youtube.outputs.youtube_version}}.ipa
+            main/packages/*.deb
           draft: ${{ env.DRAFT }}
     
