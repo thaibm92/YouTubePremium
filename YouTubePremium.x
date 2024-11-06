@@ -8,7 +8,8 @@
 %hook YTHeaderLogoController
 - (void)setTopbarLogoRenderer:(YTITopbarLogoRenderer *)renderer {
     YTIIcon *iconImage = renderer.iconImage;
-    iconImage.iconType = 537;
+    //iconImage.iconType = 537;
+    iconImage.iconType = YT_PREMIUM_IOSMOD;
     %orig;
 }
 - (void)setPremiumLogo:(BOOL)isPremiumLogo {
