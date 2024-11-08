@@ -9,7 +9,7 @@
 - (void)setTopbarLogoRenderer:(YTITopbarLogoRenderer *)renderer {
     YTIIcon *iconImage = renderer.iconImage;
     //iconImage.iconType = 537;
-    iconImage.iconType = YT_PREMIUM_LOGO;
+    iconImage.iconType = YT_PREMIUM;
     %orig;
 }
 - (void)setPremiumLogo:(BOOL)isPremiumLogo {
