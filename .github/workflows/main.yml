@@ -108,7 +108,7 @@ jobs:
         run: |
           cd ${{ github.workspace }}/main
           git clone https://github.com/CokePokes/YoutubeExtensions.git YoutubeExtensions
-          git clone https://github.com/thaibm92/YouTubeHeader.git YouTubeHeader
+          git clone https://github.com/thaibm92/YouTubeHeader-Test.git YouTubeHeader
           
       - name: Build Tweak YouTubePremium
         id: build_package
