@@ -108,6 +108,16 @@ NSBundle *tweakBundle = YouTubePremiumBundle();
     }];
     [sectionItems addObject:playbackgroud];
 
+    YTSettingsSectionItem *ytuhd = [%c(YTSettingsSectionItem)
+    itemWithTitle:[NSString stringWithFormat:LOC(@"YTUHD")]
+    titleDescription:LOC(@"YTUHD_DESC")
+    accessibilityIdentifier:nil
+    detailTextBlock:nil
+    selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
+        return NO;
+    }];
+    [sectionItems addObject:ytuhd];
+/*
     YTSettingsSectionItem *youpip = [%c(YTSettingsSectionItem)
     itemWithTitle:[NSString stringWithFormat:LOC(@"YOUPIP")]
     titleDescription:LOC(@"YOUPIP_DESC")
@@ -127,16 +137,6 @@ NSBundle *tweakBundle = YouTubePremiumBundle();
         return NO;
     }];
     [sectionItems addObject:ryd];
-
-    YTSettingsSectionItem *ytuhd = [%c(YTSettingsSectionItem)
-    itemWithTitle:[NSString stringWithFormat:LOC(@"YTUHD")]
-    titleDescription:LOC(@"YTUHD_DESC")
-    accessibilityIdentifier:nil
-    detailTextBlock:nil
-    selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-        return NO;
-    }];
-    [sectionItems addObject:ytuhd];
 
     YTSettingsSectionItem *youquality = [%c(YTSettingsSectionItem)
     itemWithTitle:[NSString stringWithFormat:LOC(@"YOUQUALITY")]
@@ -167,7 +167,7 @@ NSBundle *tweakBundle = YouTubePremiumBundle();
         return NO;
     }];
     [sectionItems addObject:youchoosequlity];
-
+*/
 
     if ([settingsViewController respondsToSelector:@selector(setSectionItems:forCategory:title:icon:titleDescription:headerHidden:)])
         [settingsViewController setSectionItems:sectionItems forCategory:YouTubePremiumSection title:@"IOSMOD.NET" icon:nil titleDescription:LOC(@"TITLE DESCRIPTION") headerHidden:YES];
