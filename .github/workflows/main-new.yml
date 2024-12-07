@@ -181,10 +181,8 @@ jobs:
 
       - name: Inject tweak into provided IPA
         run: |
-          cd ${{ github.workspace }}/main/packages
-          tweakName=$(ls)
           cd ${{ github.workspace }}/main
-          cyan -i YouTubeMusic.ipa -o packages/YTMusicUltimate.ipa -uwsf packages/$tweakName
+          cyan -i YouTube.ipa -o packages/YouTubePremium.ipa -uwsf packages/*.deb
 
       - name: Prepare YouTube iPA
         id: prepare_youtube
