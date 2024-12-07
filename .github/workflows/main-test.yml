@@ -1,0 +1,231 @@
+# Original idea by @ISnackable. Thanks to him for handling the hardest parts!
+# https://github.com/ISnackable/YTCubePlus/blob/main/.github/workflows/Build.yml
+
+name: Build and Release YouTube Premium Test
+
+on:
+  workflow_dispatch:
+    inputs:
+      sdk_version:
+        description: "iOS SDK Version"
+        default: "17.5"
+        required: true
+        type: string
+      decrypted_youtube_url:
+        description: "The direct URL to the decrypted YouTube ipa"
+        default: "https://iosmod.net/IPAs/YouTube_19.47.7.ipa"
+        required: true
+        type: string
+      bundle_id:
+        description: "Modify the bundle ID. Not recommended"
+        default: "com.google.ios.youtube"
+        required: true
+        type: string
+      app_name:
+        description: "Modify the name of the app on the Home Screen. Not recommended"
+        default: "YouTube"
+        required: true
+        type: string
+      upload_artifact:
+        description: "Upload Artifact"
+        default: true
+        required: false
+        type: boolean
+      upload_artifact_catbox:
+        description: "Upload Artifact to Catbox"
+        default: true
+        required: false
+        type: boolean
+      create_release:
+        description: "Create a draft release"
+        default: true
+        required: false
+        type: boolean
+  
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build YouTube Premium Test
+    runs-on: macos-13
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout Main
+        uses: actions/checkout@v4.2.2
+        with:
+          path: main
+          ref: ${{ github.event.inputs.commit_id || github.ref }}
+          submodules: recursive
+
+      - name: Install Dependencies
+        run: brew install ldid dpkg make
+
+      - name: Set PATH environment variable
+        run: echo "$(brew --prefix make)/libexec/gnubin" >> $GITHUB_PATH 
+
+      - name: Setup Theos
+        uses: actions/checkout@v4.2.2
+        with:
+          repository: theos/theos
+          ref: master
+          path: theos
+          submodules: recursive
+      
+      - name: SDK Caching
+        id: SDK
+        uses: actions/cache@v4.1.2
+        env:
+          cache-name: iOS-${{ inputs.sdk_version }}-SDK
+        with:
+          path: theos/sdks/
+          key: ${{ env.cache-name }}
+          restore-keys: ${{ env.cache-name }}
+
+      - name: Download iOS SDK
+        if: steps.SDK.outputs.cache-hit != 'true'
+        run: |
+          git clone --quiet -n --depth=1 --filter=tree:0 https://github.com/aricloverALT/sdks/
+          cd sdks
+          git sparse-checkout set --no-cone iPhoneOS${{ inputs.sdk_version }}.sdk
+          git checkout
+          mv *.sdk $THEOS/sdks
+        env:
+          THEOS: ${{ github.workspace }}/theos
+
+      - name: Setup Theos Jailed
+        uses: actions/checkout@v4.2.2
+        with:
+          repository: qnblackcat/theos-jailed
+          ref: master
+          path: theos-jailed
+          submodules: recursive
+
+      - name: Install Theos Jailed
+        run: |
+          ./theos-jailed/install
+        env:
+          THEOS: ${{ github.workspace }}/theos
+
+      - name: Clone Extensions & Submodules
+        run: |
+          cd ${{ github.workspace }}/main
+          git clone https://github.com/CokePokes/YoutubeExtensions.git YoutubeExtensions
+          git clone https://github.com/thaibm92/YouTubeHeader.git YouTubeHeader
+
+      - name: Fetch Deb Latest Versions of Debs
+        id: get_latest_versions
+        run: |
+          YOUPIP_URL="https://github.com/thaibm92/YouPiP/releases/download/v1.8.19/com.ps.youpip_1.8.19_iphoneos-arm.deb"
+          echo "YouPiP URL: $YOUPIP_URL"
+          YOUTUBEDISLIKES_URL="https://github.com/thaibm92/Return-YouTube-Dislikes/releases/download/v1.12.13/weeb.lillie.youtubedislikesreturn_1.12.13_iphoneos-arm.deb"
+          echo "Return YouTube Dislikes URL: $YOUTUBEDISLIKES_URL"
+          YTUHD_URL="https://github.com/thaibm92/YTUHD/releases/download/v1.5.5/com.ps.ytuhd_1.5.5_iphoneos-arm.deb"
+          echo "YTUHD URL: $YTUHD_URL"
+          YOUQUALITY_URL="https://github.com/thaibm92/YouQuality/releases/download/v1.2.2/com.ps.youquality_1.2.2_iphoneos-arm.deb"
+          echo "YouQuality URL: $YOUQUALITY_URL"
+          YTVIDEOOVERLAY_URL="https://github.com/thaibm92/YTVideoOverlay/releases/download/v1.2.5/com.ps.ytvideooverlay_1.2.5_iphoneos-arm.deb"
+          echo "YTVideoOverlay URL: $YTVIDEOOVERLAY_URL"
+          YOUMUTE_URL="https://github.com/thaibm92/YouMute/releases/download/v1.2.4/com.ps.youmute_1.2.4_iphoneos-arm.deb"
+          echo "YouMute URL: $YOUMUTE_URL"
+          YOUCHOOSEQUALITY_URL="https://github.com/thaibm92/YouChooseQuality/releases/download/v1.0.2/com.ps.youchoosequality_1.0.2_iphoneos-arm.deb"
+          echo "YouChooseQuality URL: $YOUCHOOSEQUALITY_URL"
+          YOUGROUPSETTINGS_URL="https://github.com/thaibm92/YouGroupSettings/releases/download/v1.0.3/com.ps.yougroupsettings_1.0.3_iphoneos-arm.deb"
+          echo "YouGroupSettings URL: $YOUGROUPSETTINGS_URL"
+          YOUSPEED_URL="https://github.com/thaibm92/YouSpeed/releases/download/v1.0.0/com.ps.youspeed_1.0.0_iphoneos-arm.deb"
+          echo "YouSpeed URL: $YOUSPEED_URL"
+          YOUTUBE_X_URL="https://github.com/thaibm92/YouTube-X/releases/download/v1.7.6/com.ps.ytx_1.7.6_iphoneos-arm.deb"
+          echo "YouTube X URL: $YOUTUBE_X_URL"
+          
+          echo "YOUPIP_URL=$YOUPIP_URL" >> $GITHUB_ENV
+          echo "YOUTUBEDISLIKES_URL=$YOUTUBEDISLIKES_URL" >> $GITHUB_ENV
+          echo "YTUHD_URL=$YTUHD_URL" >> $GITHUB_ENV
+          echo "YOUQUALITY_URL=$YOUQUALITY_URL" >> $GITHUB_ENV
+          echo "YTVIDEOOVERLAY_URL=$YTVIDEOOVERLAY_URL" >> $GITHUB_ENV
+          echo "YOUMUTE_URL=$YOUMUTE_URL" >> $GITHUB_ENV
+          echo "YOUCHOOSEQUALITY_URL=$YOUCHOOSEQUALITY_URL" >> $GITHUB_ENV
+          echo "YOUGROUPSETTINGS_URL=$YOUGROUPSETTINGS_URL" >> $GITHUB_ENV
+          echo "YOUSPEED_URL=$YOUSPEED_URL" >> $GITHUB_ENV
+          echo "YOUTUBE_X_URL=$YOUTUBE_X_URL" >> $GITHUB_ENV
+          
+      - name: Downloading YouTube IPA & DEBs
+        run: |
+          wget "${{ env.YOUPIP_URL }}" --no-verbose -O main/packages/YouPiP.deb
+          wget "${{ env.YOUTUBEDISLIKES_URL }}" --no-verbose -O main/packages/YouTubeDislikesReturn.deb
+          wget "${{ env.YTUHD_URL }}" --no-verbose -O main/packages/YTUHD.deb
+          wget "${{ env.YOUQUALITY_URL }}" --no-verbose -O main/packages/YouQuality.deb
+          wget "${{ env.YTVIDEOOVERLAY_URL }}" --no-verbose -O main/packages/YTVideoOverlay.deb
+          wget "${{ env.YOUMUTE_URL }}" --no-verbose -O main/packages/YouMute.deb
+          wget "${{ env.YOUCHOOSEQUALITY_URL }}" --no-verbose -O main/packages/YouChooseQuality.deb
+          wget "${{ env.YOUGROUPSETTINGS_URL }}" --no-verbose -O main/packages/YouGroupSettings.deb
+          wget "${{ env.YOUSPEED_URL }}" --no-verbose -O main/packages/YouSpeed.deb
+          wget "${{ env.YOUTUBE_X_URL }}" --no-verbose -O main/packages/YouTube-X.deb
+          wget "$YOUTUBE_URL" --progress=bar:force -O main/YouTube.ipa
+        env:
+          YOUTUBE_URL: ${{ inputs.decrypted_youtube_url }}
+
+      - name: Install Cyan
+        run: |
+          brew install pipx
+          pipx install --force https://github.com/asdfzxcvbn/pyzule-rw/archive/main.zip
+
+      - name: Inject tweak into provided IPA
+        run: |
+          cd ${{ github.workspace }}/main
+          cyan -i YouTube.ipa -o packages/YouTubePremium.ipa -uwsf packages/*.deb
+
+      - name: Prepare YouTube iPA
+        id: prepare_youtube
+        run: |
+          mv main/packages/YouTubePremium.ipa main/packages/YouTubePremium.zip
+          unzip -q main/packages/YouTubePremium.zip -d main/packages
+          youtube_version=$(/usr/libexec/PlistBuddy -c "Print CFBundleVersion" "main/packages/Payload/YouTube.app/Info.plist")
+          echo "==> YouTube v$youtube_version Unziped!"
+          echo "youtube_version=${youtube_version}" >> $GITHUB_OUTPUT
+          rm -rf main/packages/Payload/YouTube.app/_CodeSignature/CodeResources
+          echo "==> CodeResources removed."
+          rm -rf main/packages/Payload/YouTube.app/PlugIns/*
+          echo "==> Extension removed."
+          cp -rf main/YoutubeExtensions/*.appex main/packages/Payload/YouTube.app/PlugIns
+          echo "==> Added YouTube Extension."
+          cd ${{ github.workspace }}/main/packages
+          zip -r YouTubePremium_$youtube_version.ipa Payload > /dev/null
+          echo "==> YouTubePremium_$youtube_version.ipa Ziped!"
+
+      - name: Upload Artifact
+        if: ${{ inputs.upload_artifact }}
+        uses: actions/upload-artifact@v4.3.3
+        with:
+          name: YouTubePremium_${{ steps.prepare_youtube.outputs.youtube_version }}
+          path: |
+            main/packages/${{steps.build_package.outputs.tweakName}}
+            main/packages/YouTubePremium_${{steps.prepare_youtube.outputs.youtube_version}}.ipa
+          if-no-files-found: error
+
+      - name: Upload Artifact to Catbox
+        if: ${{ inputs.upload_artifact_catbox }}
+        run: |
+          RESPONSE_IPA=$(curl -F "reqtype=fileupload" -F "fileToUpload=@main/packages/YouTubePremium_${{steps.prepare_youtube.outputs.youtube_version}}.ipa" https://catbox.moe/user/api.php)
+          CATBOX_URL_IPA=$(echo $RESPONSE_IPA | grep -o -E 'https://files.catbox.moe/[^"]*')
+          RESPONSE_DEB=$(curl -F "reqtype=fileupload" -F "fileToUpload=@main/packages/${{steps.build_package.outputs.tweakName}}" https://catbox.moe/user/api.php)
+          CATBOX_URL_DEB=$(echo $RESPONSE_DEB | grep -o -E 'https://files.catbox.moe/[^"]*')
+          echo "Uploaded .ipa artifact to $CATBOX_URL_IPA"
+          echo "Uploaded .deb artifact to $CATBOX_URL_DEB"
+      
+      - name: Create Release
+        if: ${{ inputs.create_release }}
+        id: create_release
+        uses: softprops/action-gh-release@v2.0.5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DRAFT: ${{ inputs.create_release }}
+        with:
+          tag_name: v${{ steps.prepare_youtube.outputs.youtube_version }}-${{ steps.build_package.outputs.Version }}
+          name: v${{ steps.prepare_youtube.outputs.youtube_version }}-${{ steps.build_package.outputs.Version }}
+          files: |
+            main/packages/*.deb
+            main/packages/YouTubePremium_${{steps.prepare_youtube.outputs.youtube_version}}.ipa
+          draft: ${{ env.DRAFT }}
