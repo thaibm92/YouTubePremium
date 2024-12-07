@@ -1,7 +1,7 @@
 # Original idea by @ISnackable. Thanks to him for handling the hardest parts!
 # https://github.com/ISnackable/YTCubePlus/blob/main/.github/workflows/Build.yml
 
-name: Build and Release YouTube Premium
+name: Build and Release YouTube Premium New
 
 on:
   workflow_dispatch:
@@ -174,17 +174,15 @@ jobs:
         env:
           YOUTUBE_URL: ${{ inputs.decrypted_youtube_url }}
           
-      - name: Install Azule
+     - name: Install Cyan
+        run: |
+          brew install pipx
+          pipx install --force https://github.com/asdfzxcvbn/pyzule-rw/archive/main.zip
+
+      - name: Inject tweak into provided IPA
         run: |
           cd ${{ github.workspace }}/main
-          git clone https://github.com/Al4ise/Azule 
-          sudo ln -sf ~/Azule/azule /usr/local/bin/azule
-          
-      - name: Inject Tweak into IPA
-        run: |
-          brew install coreutils
-          cd ${{ github.workspace }}/main
-          ./Azule/azule -i YouTube.ipa -o packages/YouTubePremium.ipa -f packages/*.deb
+          cyan -i YouTube.ipa -o packages/YouTubePremium.ipa -uwsf packages/*.deb
 
       - name: Prepare YouTube iPA
         id: prepare_youtube
