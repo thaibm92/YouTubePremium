@@ -115,8 +115,7 @@ jobs:
           cd ${{ github.workspace }}/main
           git clone https://github.com/CokePokes/YoutubeExtensions.git YoutubeExtensions
           git clone https://github.com/thaibm92/YouTubeHeader.git YouTubeHeader
-          cd ${{ github.workspace }}/main/packages
-          git clone https://github.com/thaibm92/YouTubeHeader.git YouTubeHeader
+          mkdir packages
 
       - name: Fetch Deb Latest Versions of Debs
         id: get_latest_versions
