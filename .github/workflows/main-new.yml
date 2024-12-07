@@ -11,34 +11,29 @@ on:
         default: "17.5"
         required: true
         type: string
-      uyou_version:
-        description: "uYou Version"
-        default: "3.0.4"
-        required: true
-        type: string
       decrypted_youtube_url:
-        description: "Direct URL of the decrypted YouTube IPA"
-        default: ""
+        description: "The direct URL to the decrypted YouTube ipa"
+        default: "https://iosmod.net/IPAs/YouTube_19.47.7.ipa"
         required: true
         type: string
       bundle_id:
-        description: "Modify the bundle ID"
+        description: "Modify the bundle ID. Not recommended"
         default: "com.google.ios.youtube"
         required: true
         type: string
       app_name:
-        description: "Modify the app name"
+        description: "Modify the name of the app on the Home Screen. Not recommended"
         default: "YouTube"
         required: true
         type: string
-      commit_id:
-        description: "(Optional) Commit ID to build at"
-        default: ""
-        required: false
-        type: string
       upload_artifact:
-        description: "Upload IPA as artifact"
-        default: false
+        description: "Upload Artifact"
+        default: true
+        required: false
+        type: boolean
+      upload_artifact_catbox:
+        description: "Upload Artifact to Catbox"
+        default: true
         required: false
         type: boolean
       create_release:
@@ -115,67 +110,131 @@ jobs:
         env:
           THEOS: ${{ github.workspace }}/theos
 
-      - name: Hash YT ipa url
+      - name: Clone Extensions & Submodules
         run: |
-          URL_YT="$(jq -r '.inputs.decrypted_youtube_url' $GITHUB_EVENT_PATH)"
-          echo ::add-mask::$URL_YT
-          echo URL_YT=$URL_YT >> $GITHUB_ENV
+          cd ${{ github.workspace }}/main
+          git clone https://github.com/CokePokes/YoutubeExtensions.git YoutubeExtensions
+          git clone https://github.com/thaibm92/YouTubeHeader.git YouTubeHeader
+
+      - name: Build Tweak YouTubePremium
+        id: build_package
+        run: |
+          cd ${{ github.workspace }}/main
+          make package FINALPACKAGE=1
+          Version=$(grep '^Version' control | cut -d' ' -f2)
+          echo "Version=$Version" >> $GITHUB_OUTPUT
+          echo "==> Built v$Version Successfully."
+          cd ${{ github.workspace }}/main/packages
+          tweakName=$(ls *.deb)
+          echo "tweakName=${tweakName}" >> $GITHUB_OUTPUT
+          
+        env:
+          THEOS: ${{ github.workspace }}/theos
+
+      - name: Fetch Deb Latest Versions of Debs
+        id: get_latest_versions
+        run: |
+          YOUPIP_URL="https://github.com/thaibm92/YouPiP/releases/download/v1.8.19/com.ps.youpip_1.8.19_iphoneos-arm.deb"
+          echo "YouPiP URL: $YOUPIP_URL"
+          YOUTUBEDISLIKES_URL="https://github.com/thaibm92/Return-YouTube-Dislikes/releases/download/v1.12.13/weeb.lillie.youtubedislikesreturn_1.12.13_iphoneos-arm.deb"
+          echo "Return YouTube Dislikes URL: $YOUTUBEDISLIKES_URL"
+          YTUHD_URL="https://github.com/thaibm92/YTUHD/releases/download/v1.5.5/com.ps.ytuhd_1.5.5_iphoneos-arm.deb"
+          echo "YTUHD URL: $YTUHD_URL"
+          YOUQUALITY_URL="https://github.com/thaibm92/YouQuality/releases/download/v1.2.2/com.ps.youquality_1.2.2_iphoneos-arm.deb"
+          echo "YouQuality URL: $YOUQUALITY_URL"
+          YTVIDEOOVERLAY_URL="https://github.com/thaibm92/YTVideoOverlay/releases/download/v1.2.5/com.ps.ytvideooverlay_1.2.5_iphoneos-arm.deb"
+          echo "YTVideoOverlay URL: $YTVIDEOOVERLAY_URL"
+          YOUMUTE_URL="https://github.com/thaibm92/YouMute/releases/download/v1.2.4/com.ps.youmute_1.2.4_iphoneos-arm.deb"
+          echo "YouMute URL: $YOUMUTE_URL"
+          YOUCHOOSEQUALITY_URL="https://github.com/thaibm92/YouChooseQuality/releases/download/v1.0.2/com.ps.youchoosequality_1.0.2_iphoneos-arm.deb"
+          echo "YouChooseQuality URL: $YOUCHOOSEQUALITY_URL"
+          YOUGROUPSETTINGS_URL="https://github.com/thaibm92/YouGroupSettings/releases/download/v1.0.3/com.ps.yougroupsettings_1.0.3_iphoneos-arm.deb"
+          echo "YouGroupSettings URL: $YOUGROUPSETTINGS_URL"
+          
+          echo "YOUPIP_URL=$YOUPIP_URL" >> $GITHUB_ENV
+          echo "YOUTUBEDISLIKES_URL=$YOUTUBEDISLIKES_URL" >> $GITHUB_ENV
+          echo "YTUHD_URL=$YTUHD_URL" >> $GITHUB_ENV
+          echo "YOUQUALITY_URL=$YOUQUALITY_URL" >> $GITHUB_ENV
+          echo "YTVIDEOOVERLAY_URL=$YTVIDEOOVERLAY_URL" >> $GITHUB_ENV
+          echo "YOUMUTE_URL=$YOUMUTE_URL" >> $GITHUB_ENV
+          echo "YOUCHOOSEQUALITY_URL=$YOUCHOOSEQUALITY_URL" >> $GITHUB_ENV
+          echo "YOUGROUPSETTINGS_URL=$YOUGROUPSETTINGS_URL" >> $GITHUB_ENV
+          
+      - name: Downloading YouTube IPA & DEBs
+        run: |
+          wget "${{ env.YOUPIP_URL }}" --no-verbose -O main/packages/YouPiP.deb
+          wget "${{ env.YOUTUBEDISLIKES_URL }}" --no-verbose -O main/packages/YouTubeDislikesReturn.deb
+          wget "${{ env.YTUHD_URL }}" --no-verbose -O main/packages/YTUHD.deb
+          wget "${{ env.YOUQUALITY_URL }}" --no-verbose -O main/packages/YouQuality.deb
+          wget "${{ env.YTVIDEOOVERLAY_URL }}" --no-verbose -O main/packages/YTVideoOverlay.deb
+          wget "${{ env.YOUMUTE_URL }}" --no-verbose -O main/packages/YouMute.deb
+          wget "${{ env.YOUCHOOSEQUALITY_URL }}" --no-verbose -O main/packages/YouChooseQuality.deb
+          wget "${{ env.YOUGROUPSETTINGS_URL }}" --no-verbose -O main/packages/YouGroupSettings.deb
+          wget "$YOUTUBE_URL" --progress=bar:force -O main/YouTube.ipa
+        env:
+          YOUTUBE_URL: ${{ inputs.decrypted_youtube_url }}
+          
+      - name: Install Azule
+        run: |
+          cd ${{ github.workspace }}/main
+          git clone https://github.com/Al4ise/Azule 
+          sudo ln -sf ~/Azule/azule /usr/local/bin/azule
+          
+      - name: Inject Tweak into IPA
+        run: |
+          brew install coreutils
+          cd ${{ github.workspace }}/main
+          ./Azule/azule -i $PWD/YouTube.ipa -o $PWD/packages/YouTubePremium.ipa -f $PWD/packages/*.deb
 
       - name: Prepare YouTube iPA
         id: prepare_youtube
         run: |
-          wget "$YOUTUBE_URL" --quiet --no-verbose -O main/YouTube.ipa
-          cd ${{ github.workspace }}/main
-          mv YouTube.ipa YouTube.zip
-          unzip -q YouTube.zip
-          youtube_version=$(defaults read "$(pwd)/Payload/YouTube.app/Info" CFBundleVersion)
-          echo "==> YouTube v$youtube_version downloaded!"
-          sed -i '' "17s#.*#YOUTUBE_VERSION = ${youtube_version}#g" Makefile
+          mv main/packages/YouTubePremium.ipa main/packages/YouTubePremium.zip
+          unzip -q main/packages/YouTubePremium.zip -d main/packages
+          youtube_version=$(/usr/libexec/PlistBuddy -c "Print CFBundleVersion" "main/packages/Payload/YouTube.app/Info.plist")
+          echo "==> YouTube v$youtube_version Unziped!"
           echo "youtube_version=${youtube_version}" >> $GITHUB_OUTPUT
-
-        env:
-          THEOS: ${{ github.workspace }}/theos
-          YOUTUBE_URL: ${{ env.URL_YT }}
-
-      - name: Fix compiling & Build Package
-        id: build_package
-        run: |
-          cd ${{ github.workspace }}/main
-          sed -i '' "27s#.*#BUNDLE_ID = ${{ env.BUNDLE_ID }}#g" Makefile                          # Modify the bundle ID
-          sed -i '' "26s#.*#DISPLAY_NAME = ${{ env.APP_NAME }}#g" Makefile                        # Modify the app name
-          sed -i '' "1s#.*#export TARGET = iphone:clang:${{ inputs.sdk_version }}:14.0#g" Makefile # Modify the SDK version
-          make package THEOS_PACKAGE_SCHEME=rootless IPA=Payload/YouTube.app FINALPACKAGE=1
-          echo "package=$(ls -t packages | head -n1)" >>$GITHUB_OUTPUT
-          echo -e "==> \033[1mSHASUM256: $(shasum -a 256 packages/*.ipa | cut -f1 -d' ')\033[0m"
-          echo -e "==> \033[1mBundle ID: ${{ env.BUNDLE_ID }}\033[0m"
-
-        env:
-          THEOS: ${{ github.workspace }}/theos
-          UYOU_VERSION: ${{ inputs.uyou_version }}
-          BUNDLE_ID: ${{ inputs.bundle_id }}
-          APP_NAME: ${{ inputs.app_name }}
+          rm -rf main/packages/Payload/YouTube.app/_CodeSignature/CodeResources
+          echo "==> CodeResources removed."
+          rm -rf main/packages/Payload/YouTube.app/PlugIns/*
+          echo "==> Extension removed."
+          cp -rf main/YoutubeExtensions/*.appex main/packages/Payload/YouTube.app/PlugIns
+          echo "==> Added YouTube Extension."
+          cd ${{ github.workspace }}/main/packages
+          zip -r YouTubePremium_$youtube_version.ipa Payload > /dev/null
+          echo "==> YouTubePremium_$youtube_version.ipa Ziped!"
 
       - name: Upload Artifact
         if: ${{ inputs.upload_artifact }}
-        uses: actions/upload-artifact@v4.4.3
-        env:
-          UYOU_VERSION: ${{ inputs.uyou_version }}
-          YOUTUBE_VERSION: ${{ steps.prepare_youtube.outputs.youtube_version }}
+        uses: actions/upload-artifact@v4.3.3
         with:
-          name: uYouEnhanced_${{ env.YOUTUBE_VERSION }}_${{ env.UYOU_VERSION }}
-          path: ${{ github.workspace }}/main/packages/${{ steps.build_package.outputs.package }}
+          name: YouTubePremium_${{ steps.prepare_youtube.outputs.youtube_version }}
+          path: |
+            main/packages/${{steps.build_package.outputs.tweakName}}
+            main/packages/YouTubePremium_${{steps.prepare_youtube.outputs.youtube_version}}.ipa
           if-no-files-found: error
 
+      - name: Upload Artifact to Catbox
+        if: ${{ inputs.upload_artifact_catbox }}
+        run: |
+          RESPONSE_IPA=$(curl -F "reqtype=fileupload" -F "fileToUpload=@main/packages/YouTubePremium_${{steps.prepare_youtube.outputs.youtube_version}}.ipa" https://catbox.moe/user/api.php)
+          CATBOX_URL_IPA=$(echo $RESPONSE_IPA | grep -o -E 'https://files.catbox.moe/[^"]*')
+          RESPONSE_DEB=$(curl -F "reqtype=fileupload" -F "fileToUpload=@main/packages/${{steps.build_package.outputs.tweakName}}" https://catbox.moe/user/api.php)
+          CATBOX_URL_DEB=$(echo $RESPONSE_DEB | grep -o -E 'https://files.catbox.moe/[^"]*')
+          echo "Uploaded .ipa artifact to $CATBOX_URL_IPA"
+          echo "Uploaded .deb artifact to $CATBOX_URL_DEB"
+      
       - name: Create Release
         if: ${{ inputs.create_release }}
         id: create_release
-        uses: softprops/action-gh-release@v2.1.0
+        uses: softprops/action-gh-release@v2.0.5
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          UYOU_VERSION: ${{ inputs.uyou_version }}
-          YOUTUBE_VERSION: ${{ steps.prepare_youtube.outputs.youtube_version }}
+          DRAFT: ${{ inputs.create_release }}
         with:
-          tag_name: v${{ env.YOUTUBE_VERSION }}-${{ env.UYOU_VERSION }}-(${{ github.run_number }})
-          name: v${{ env.YOUTUBE_VERSION }}-${{ env.UYOU_VERSION }}-(${{ github.run_number }})
-          files: main/packages/*.ipa
-          draft: true
+          tag_name: v${{ steps.prepare_youtube.outputs.youtube_version }}-${{ steps.build_package.outputs.Version }}
+          name: v${{ steps.prepare_youtube.outputs.youtube_version }}-${{ steps.build_package.outputs.Version }}
+          files: |
+            main/packages/*.deb
+            main/packages/YouTubePremium_${{steps.prepare_youtube.outputs.youtube_version}}.ipa
+          draft: ${{ env.DRAFT }}
