@@ -184,7 +184,7 @@ jobs:
         run: |
           brew install coreutils
           cd ${{ github.workspace }}/main
-          ./Azule/azule -i $PWD/YouTube.ipa -o $PWD/packages/YouTubePremium.ipa -f $PWD/packages/*.deb
+          ./Azule/azule -i YouTube.ipa -o packages/YouTubePremium.ipa -f packages/*.deb
 
       - name: Prepare YouTube iPA
         id: prepare_youtube
