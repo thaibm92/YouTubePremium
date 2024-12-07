@@ -130,15 +130,17 @@ jobs:
       - name: Fetch Deb Latest Versions of Debs
         id: get_latest_versions
         run: |
-          YOUPIP_URL="https://github.com/thaibm92/YouPiP/releases/download/v1.8.17/com.ps.youpip_1.8.17_iphoneos-arm.deb"
+          YOUPIP_URL="https://github.com/thaibm92/YouPiP/releases/download/v1.8.19/com.ps.youpip_1.8.19_iphoneos-arm.deb"
           echo "YouPiP URL: $YOUPIP_URL"
           YOUTUBEDISLIKES_URL="https://github.com/thaibm92/Return-YouTube-Dislikes/releases/download/v1.12.13/weeb.lillie.youtubedislikesreturn_1.12.13_iphoneos-arm.deb"
           echo "Return YouTube Dislikes URL: $YOUTUBEDISLIKES_URL"
           YTUHD_URL="https://github.com/thaibm92/YTUHD/releases/download/v1.5.5/com.ps.ytuhd_1.5.5_iphoneos-arm.deb"
           echo "YTUHD URL: $YTUHD_URL"
-          YTVIDEOOVERLAY_URL="https://github.com/thaibm92/YTVideoOverlay/releases/download/v1.2.3/com.ps.ytvideooverlay_1.2.3_iphoneos-arm.deb"
+          YOUQUALITY_URL="https://github.com/thaibm92/YouQuality/releases/download/v1.2.2/com.ps.youquality_1.2.2_iphoneos-arm.deb"
+          echo "YouQuality URL: $YOUQUALITY_URL"
+          YTVIDEOOVERLAY_URL="https://github.com/thaibm92/YTVideoOverlay/releases/download/v1.2.5/com.ps.ytvideooverlay_1.2.5_iphoneos-arm.deb"
           echo "YTVideoOverlay URL: $YTVIDEOOVERLAY_URL"
-          YOUMUTE_URL="https://github.com/thaibm92/YouMute/releases/download/v1.2.3/com.ps.youmute_1.2.3_iphoneos-arm.deb"
+          YOUMUTE_URL="https://github.com/thaibm92/YouMute/releases/download/v1.2.4/com.ps.youmute_1.2.4_iphoneos-arm.deb"
           echo "YouMute URL: $YOUMUTE_URL"
           YOUCHOOSEQUALITY_URL="https://github.com/thaibm92/YouChooseQuality/releases/download/v1.0.2/com.ps.youchoosequality_1.0.2_iphoneos-arm.deb"
           echo "YouChooseQuality URL: $YOUCHOOSEQUALITY_URL"
@@ -148,6 +150,7 @@ jobs:
           echo "YOUPIP_URL=$YOUPIP_URL" >> $GITHUB_ENV
           echo "YOUTUBEDISLIKES_URL=$YOUTUBEDISLIKES_URL" >> $GITHUB_ENV
           echo "YTUHD_URL=$YTUHD_URL" >> $GITHUB_ENV
+          echo "YOUQUALITY_URL=$YOUQUALITY_URL" >> $GITHUB_ENV
           echo "YTVIDEOOVERLAY_URL=$YTVIDEOOVERLAY_URL" >> $GITHUB_ENV
           echo "YOUMUTE_URL=$YOUMUTE_URL" >> $GITHUB_ENV
           echo "YOUCHOOSEQUALITY_URL=$YOUCHOOSEQUALITY_URL" >> $GITHUB_ENV
@@ -158,6 +161,7 @@ jobs:
           wget "${{ env.YOUPIP_URL }}" --no-verbose -O main/packages/YouPiP.deb
           wget "${{ env.YOUTUBEDISLIKES_URL }}" --no-verbose -O main/packages/YouTubeDislikesReturn.deb
           wget "${{ env.YTUHD_URL }}" --no-verbose -O main/packages/YTUHD.deb
+          wget "${{ env.YOUQUALITY_URL }}" --no-verbose -O main/packages/YouQuality.deb
           wget "${{ env.YTVIDEOOVERLAY_URL }}" --no-verbose -O main/packages/YTVideoOverlay.deb
           wget "${{ env.YOUMUTE_URL }}" --no-verbose -O main/packages/YouMute.deb
           wget "${{ env.YOUCHOOSEQUALITY_URL }}" --no-verbose -O main/packages/YouChooseQuality.deb
