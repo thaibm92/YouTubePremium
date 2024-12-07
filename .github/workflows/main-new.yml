@@ -173,16 +173,6 @@ jobs:
           wget "$YOUTUBE_URL" --progress=bar:force -O main/YouTube.ipa
         env:
           YOUTUBE_URL: ${{ inputs.decrypted_youtube_url }}
-          
-     - name: Install Cyan
-        run: |
-          brew install pipx
-          pipx install --force https://github.com/asdfzxcvbn/pyzule-rw/archive/main.zip
-
-      - name: Inject tweak into provided IPA
-        run: |
-          cd ${{ github.workspace }}/main
-          cyan -i YouTube.ipa -o packages/YouTubePremium.ipa -uwsf packages/*.deb
 
       - name: Prepare YouTube iPA
         id: prepare_youtube
