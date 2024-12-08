@@ -41,7 +41,7 @@
 }
 %end
 */
-
+/*
 // Keychain patching
 static NSString *accessGroupID() {
     NSDictionary *query = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -81,7 +81,7 @@ static NSString *accessGroupID() {
     return accessGroupID();
 }
 %end
-
+*/
 // Hide Upgrade Dialog
 %hook YTGlobalConfig
 //- (BOOL)shouldBlockUpgradeDialog { return YES; }
