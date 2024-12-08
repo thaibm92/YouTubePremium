@@ -6,7 +6,7 @@ include $(THEOS)/makefiles/common.mk
 
 TWEAK_NAME = YouTubePremium
 
-$(TWEAK_NAME)_FILES = Tweak.x Settings.x YouTubePremium.x
+$(TWEAK_NAME)_FILES = Tweak.x YouTubePremium.x
 $(TWEAK_NAME)_CFLAGS = -fobjc-arc
 
 include $(THEOS_MAKE_PATH)/tweak.mk
