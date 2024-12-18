@@ -13,7 +13,7 @@ on:
         type: string
       decrypted_youtube_url:
         description: "The direct URL to the decrypted YouTube ipa"
-        default: "https://iosmod.net/IPAs/YouTube_19.47.7.ipa"
+        default: "https://iosmod.net/IPAs/YouTube_19.49.7.ipa"
         required: true
         type: string
       bundle_id:
@@ -136,9 +136,9 @@ jobs:
         run: |
           YOUPIP_URL="https://github.com/thaibm92/YouPiP/releases/download/v1.8.19/com.ps.youpip_1.8.19_iphoneos-arm.deb"
           echo "YouPiP URL: $YOUPIP_URL"
-          YOUTUBEDISLIKES_URL="https://github.com/thaibm92/Return-YouTube-Dislikes/releases/download/v1.12.13/weeb.lillie.youtubedislikesreturn_1.12.13_iphoneos-arm.deb"
+          YOUTUBEDISLIKES_URL="https://github.com/thaibm92/Return-YouTube-Dislikes/releases/download/v1.13.1/weeb.lillie.youtubedislikesreturn_1.13.1_iphoneos-arm.deb"
           echo "Return YouTube Dislikes URL: $YOUTUBEDISLIKES_URL"
-          YTUHD_URL="https://github.com/thaibm92/YTUHD/releases/download/v1.5.5/com.ps.ytuhd_1.5.5_iphoneos-arm.deb"
+          YTUHD_URL="https://github.com/thaibm92/YTUHD/releases/download/v1.5.6/com.ps.ytuhd_1.5.6_iphoneos-arm.deb"
           echo "YTUHD URL: $YTUHD_URL"
           YOUQUALITY_URL="https://github.com/thaibm92/YouQuality/releases/download/v1.2.2/com.ps.youquality_1.2.2_iphoneos-arm.deb"
           echo "YouQuality URL: $YOUQUALITY_URL"
