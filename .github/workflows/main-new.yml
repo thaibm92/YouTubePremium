@@ -144,13 +144,13 @@ jobs:
           echo "YouQuality URL: $YOUQUALITY_URL"
           YTVIDEOOVERLAY_URL="https://github.com/thaibm92/YTVideoOverlay/releases/download/v2.1.0/com.ps.ytvideooverlay_2.1.0_iphoneos-arm.deb"
           echo "YTVideoOverlay URL: $YTVIDEOOVERLAY_URL"
-          YOUMUTE_URL="https://github.com/thaibm92/YouMute/releases/download/v1.2.4/com.ps.youmute_1.2.4_iphoneos-arm.deb"
+          YOUMUTE_URL="https://github.com/thaibm92/YouMute/releases/download/v1.3.1/com.ps.youmute_1.3.1_iphoneos-arm.deb"
           echo "YouMute URL: $YOUMUTE_URL"
           YOUCHOOSEQUALITY_URL="https://github.com/thaibm92/YouChooseQuality/releases/download/v1.0.4/com.ps.youchoosequality_1.0.4_iphoneos-arm.deb"
           echo "YouChooseQuality URL: $YOUCHOOSEQUALITY_URL"
           YOUGROUPSETTINGS_URL="https://github.com/thaibm92/YouGroupSettings/releases/download/v1.0.3/com.ps.yougroupsettings_1.0.3_iphoneos-arm.deb"
           echo "YouGroupSettings URL: $YOUGROUPSETTINGS_URL"
-          YOUSPEED_URL="https://github.com/thaibm92/YouSpeed/releases/download/v1.1.2/com.ps.youspeed_1.1.2_iphoneos-arm.deb"
+          YOUSPEED_URL="https://github.com/thaibm92/YouSpeed/releases/download/v1.0.0/com.ps.youspeed_1.0.0_iphoneos-arm.deb"
           echo "YouSpeed URL: $YOUSPEED_URL"
           
           echo "YOUPIP_URL=$YOUPIP_URL" >> $GITHUB_ENV
