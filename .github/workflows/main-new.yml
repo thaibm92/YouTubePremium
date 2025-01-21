@@ -150,7 +150,7 @@ jobs:
           echo "YouChooseQuality URL: $YOUCHOOSEQUALITY_URL"
           YOUGROUPSETTINGS_URL="https://github.com/thaibm92/YouGroupSettings/releases/download/v1.0.3/com.ps.yougroupsettings_1.0.3_iphoneos-arm.deb"
           echo "YouGroupSettings URL: $YOUGROUPSETTINGS_URL"
-          YOUSPEED_URL="https://github.com/thaibm92/YouSpeed/releases/download/v1.1.2/com.ps.youspeed_1.1.2_iphoneos-arm.deb"
+          YOUSPEED_URL="https://github.com/thaibm92/YouSpeed/releases/download/v1.1.3/com.ps.youspeed_1.1.3_iphoneos-arm.deb"
           echo "YouSpeed URL: $YOUSPEED_URL"
           
           echo "YOUPIP_URL=$YOUPIP_URL" >> $GITHUB_ENV
