@@ -27,7 +27,7 @@ NSBundle *YouTubePremiumBundle() {
 /*
 NSBundle *tweakBundle = YouTubePremiumBundle();
 
-// Settings Search Bar
+// Settings Search Bar 
 %hook YTSettingsViewController
 - (void)loadWithModel:(id)model fromView:(UIView *)view {
     %orig;
