@@ -8,7 +8,7 @@
 
 %hook YTVersionUtils
 
-// Works down to 16.29.4
+// Works down to 16.29.4 
 + (NSString *)appVersion {
     NSString *appVersion = %orig;
     if ([appVersion compare:@"17.33.2" options:NSNumericSearch] == NSOrderedAscending)
