@@ -77,7 +77,7 @@ jobs:
       
       - name: SDK Caching
         id: SDK
-        uses: actions/cache@v4.1.2
+        uses: actions/cache@v4.2.2
         env:
           cache-name: iOS-${{ inputs.sdk_version }}-SDK
         with:
