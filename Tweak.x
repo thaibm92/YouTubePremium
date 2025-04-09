@@ -3,16 +3,19 @@
 #import <YouTubeHeader/YTInnerTubeCollectionViewController.h>
 #import <YouTubeHeader/YTISectionListRenderer.h>
 #import <YouTubeHeader/YTIShelfRenderer.h>
+#import <YouTubeHeader/YTIWatchNextResponse.h>
+#import <YouTubeHeader/YTPlayerOverlay.h>
+#import <YouTubeHeader/YTPlayerOverlayProvider.h>
 #import <YouTubeHeader/YTReelModel.h>
 #import <HBLog.h>
 
 %hook YTVersionUtils
 
-// Works down to 16.29.4 
-+ (NSString *)appVersion {
+// Works down to 17.x.x
++ (NSString *)appVersionLong {
     NSString *appVersion = %orig;
-    if ([appVersion compare:@"17.33.2" options:NSNumericSearch] == NSOrderedAscending)
-        return @"17.33.2";
+    if ([appVersion compare:@"19.01.1" options:NSNumericSearch] == NSOrderedAscending)
+        return @"19.01.1";
     return appVersion;
 }
 
@@ -129,6 +132,40 @@
     %orig;
 }
 
+%end
+
+static BOOL isProductList(YTICommand *command) {
+    if ([command respondsToSelector:@selector(yt_showEngagementPanelEndpoint)]) {
+        YTIShowEngagementPanelEndpoint *endpoint = [command yt_showEngagementPanelEndpoint];
+        return [endpoint.identifier.tag isEqualToString:@"PAproduct_list"];
+    }
+    return NO;
+}
+
+%hook YTWatchNextResponseViewController
+
+- (void)loadWithModel:(YTIWatchNextResponse *)model {
+    YTICommand *onUiReady = model.onUiReady;
+    if ([onUiReady respondsToSelector:@selector(yt_commandExecutorCommand)]) {
+        YTICommandExecutorCommand *commandExecutorCommand = [onUiReady yt_commandExecutorCommand];
+        NSMutableArray <YTICommand *> *commandsArray = commandExecutorCommand.commandsArray;
+        [commandsArray removeObjectsAtIndexes:[commandsArray indexesOfObjectsPassingTest:^BOOL(YTICommand *command, NSUInteger idx, BOOL *stop) {
+            return isProductList(command);
+        }]];
+    }
+    if (isProductList(onUiReady))
+        model.onUiReady = nil;
+    %orig;
+}
+
+%end
+
+%hook YTMainAppVideoPlayerOverlayViewController
+
+- (void)playerOverlayProvider:(YTPlayerOverlayProvider *)provider didInsertPlayerOverlay:(YTPlayerOverlay *)overlay {
+    if ([[overlay overlayIdentifier] isEqualToString:@"player_overlay_product_in_video"]) return;
+    %orig;
+}
 %end
 
 NSString *getAdString(NSString *description) {
