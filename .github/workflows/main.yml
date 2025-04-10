@@ -152,6 +152,8 @@ jobs:
           echo "YouGroupSettings URL: $YOUGROUPSETTINGS_URL"
           YOUSPEED_URL="https://github.com/thaibm92/YouSpeed/releases/download/v1.3.0/com.ps.youspeed_1.3.0_iphoneos-arm.deb"
           echo "YouSpeed URL: $YOUSPEED_URL"
+          YOUSLIDER_URL="https://github.com/thaibm92/YouSlider/releases/download/v1.1.1/com.ps.youslider_1.1.1_iphoneos-arm.deb"
+          echo "YouSlider URL: $YOUSLIDER_URL"
           
           echo "YOUPIP_URL=$YOUPIP_URL" >> $GITHUB_ENV
           echo "YOUTUBEDISLIKES_URL=$YOUTUBEDISLIKES_URL" >> $GITHUB_ENV
@@ -162,6 +164,7 @@ jobs:
           echo "YOUCHOOSEQUALITY_URL=$YOUCHOOSEQUALITY_URL" >> $GITHUB_ENV
           echo "YOUGROUPSETTINGS_URL=$YOUGROUPSETTINGS_URL" >> $GITHUB_ENV
           echo "YOUSPEED_URL=$YOUSPEED_URL" >> $GITHUB_ENV
+          echo "YOUSLIDER_URL=$YOUSLIDER_URL" >> $GITHUB_ENV
           
       - name: Downloading YouTube IPA & DEBs
         run: |
@@ -174,6 +177,7 @@ jobs:
           wget "${{ env.YOUCHOOSEQUALITY_URL }}" --no-verbose -O main/packages/YouChooseQuality.deb
           wget "${{ env.YOUGROUPSETTINGS_URL }}" --no-verbose -O main/packages/YouGroupSettings.deb
           wget "${{ env.YOUSPEED_URL }}" --no-verbose -O main/packages/YouSpeed.deb
+          wget "${{ env.YOUSLIDER_URL }}" --no-verbose -O main/packages/YouSlider.deb
           wget "$YOUTUBE_URL" --progress=bar:force -O main/YouTube.ipa
         env:
           YOUTUBE_URL: ${{ inputs.decrypted_youtube_url }}
