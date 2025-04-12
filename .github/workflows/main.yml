@@ -219,6 +219,10 @@ jobs:
           
           wget "${{ env.Alderis_URL }}" --no-verbose -O main/packages/Alderis.deb
           wget "${{ env.YOUSLIDER_URL }}" --no-verbose -O main/packages/YouSlider.deb
+
+          wget "${{ env.YouLoop_URL }}" --no-verbose -O main/packages/YouLoop.deb
+
+          wget "${{ env.YouTimeStamp_URL }}" --no-verbose -O main/packages/YouTimeStamp.deb
           
           wget "$YOUTUBE_URL" --progress=bar:force -O main/YouTube.ipa
         env:
