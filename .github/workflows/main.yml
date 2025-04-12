@@ -165,6 +165,12 @@ jobs:
           echo "Alderis URL: $Alderis_URL"
           YOUSLIDER_URL="https://github.com/thaibm92/YouSlider/releases/download/v1.1.1/com.ps.youslider_1.1.1_iphoneos-arm.deb"
           echo "YouSlider URL: $YOUSLIDER_URL"
+
+          YouLoop_URL="https://github.com/thaibm92/YouLoop/releases/download/v1.1.0/com.bhackel.youloop_1.1.0_iphoneos-arm.deb"
+          echo "YouLoop URL: $YouLoop_URL"
+
+          YouTimeStamp_URL="https://github.com/thaibm92/YouTimeStamp/releases/download/v1.1.0/com.arichornlover.youtimestamp_1.1.0_iphoneos-arm.deb"
+          echo "YouTimeStamp URL: $YouTimeStamp_URL"
           
           echo "YOUPIP_URL=$YOUPIP_URL" >> $GITHUB_ENV
           
@@ -186,6 +192,10 @@ jobs:
           
           echo "Alderis_URL=$Alderis_URL" >> $GITHUB_ENV
           echo "YOUSLIDER_URL=$YOUSLIDER_URL" >> $GITHUB_ENV
+
+          echo "YouLoop_URL=$YouLoop_URL" >> $GITHUB_ENV
+
+          echo "YouTimeStamp_URL=$YouTimeStamp_URL" >> $GITHUB_ENV
           
       - name: Downloading YouTube IPA & DEBs
         run: |
