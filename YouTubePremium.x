@@ -96,10 +96,12 @@ static NSString *accessGroupID() {
 %end
 
 // NOYTPremium
+// Alert
 %hook YTCommerceEventGroupHandler
 - (void)addEventHandlers {}
 %end
 
+// Full-screen
 %hook YTInterstitialPromoEventGroupHandler
 - (void)addEventHandlers {}
 %end
@@ -115,19 +117,22 @@ static NSString *accessGroupID() {
 %end
 
 %hook YTIShowFullscreenInterstitialCommand
-- (BOOL)shouldThrottleInterstitial { return YES; }
+- (BOOL)shouldThrottleInterstitial {
+    if (self.hasModalClientThrottlingRules)
+        self.modalClientThrottlingRules.throttledAfterRecentSignIn = YES;
+    return %orig;
+}
 %end
 
+// "Try new features" in settings
+%hook YTSettingsSectionItemManager
+- (void)updatePremiumEarlyAccessSectionWithEntry:(id)arg1 {}
+%end
+// Survey
 %hook YTSurveyController
 - (void)showSurveyWithRenderer:(id)arg1 surveyParentResponder:(id)arg2 {}
 %end
-
-%hook YTIOfflineabilityFormat
-%new
-- (int)availabilityType { return 1; }
-%new
-- (BOOL)savedSettingShouldExpire { return NO; }
-%end
+//-----NOYTPremium-------------------
 
 // YTNoPaidPromo https://github.com/PoomSmart/YTNoPaidPromo
 %hook YTMainAppVideoPlayerOverlayViewController
