@@ -73,5 +73,7 @@
 // YTNoPaidPromo
 #import "YouTubeHeader/YTPlayerOverlay.h"
 #import "YouTubeHeader/YTPlayerOverlayProvider.h"
+//NoYTPremium
+#import "YouTubeHeader/YTIShowFullscreenInterstitialCommand.h"
 
 #import "YouTubeHeader/YTIIcon.h"
