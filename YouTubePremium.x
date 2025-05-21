@@ -119,7 +119,7 @@ static NSString *accessGroupID() {
 %hook YTIShowFullscreenInterstitialCommand
 - (BOOL)shouldThrottleInterstitial {
     if (self.hasModalClientThrottlingRules)
-        self.modalClientThrottlingRules.throttledAfterRecentSignIn = YES;
+        self.modalClientThrottlingRules.oncePerTimeWindow = YES;
     return %orig;
 }
 %end
@@ -128,6 +128,7 @@ static NSString *accessGroupID() {
 %hook YTSettingsSectionItemManager
 - (void)updatePremiumEarlyAccessSectionWithEntry:(id)arg1 {}
 %end
+
 // Survey
 %hook YTSurveyController
 - (void)showSurveyWithRenderer:(id)arg1 surveyParentResponder:(id)arg2 {}
