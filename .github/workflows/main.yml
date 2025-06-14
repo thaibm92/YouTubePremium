@@ -11,6 +11,24 @@ on:
         type: boolean
         required: true
         default: false
+
+        enable_ytuhd:
+        description: "Integrate YTUHD"
+        type: boolean
+        required: true
+        default: false
+
+      enable_yq:
+        description: "Integrate YouQuality"
+        type: boolean
+        required: true
+        default: false
+
+      enable_ryd:
+        description: "Integrate Return YouTube Dislikes"
+        type: boolean
+        required: true
+        default: false
         
       sdk_version:
         description: "iOS SDK Version"
