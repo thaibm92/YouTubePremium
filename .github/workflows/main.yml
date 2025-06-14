@@ -6,13 +6,6 @@ name: Build and Release YouTube Premium
 on:
   workflow_dispatch:
     inputs:
-    
-      sdk_version:
-        description: "iOS SDK Version"
-        default: "17.5"
-        required: true
-        type: string
-        
       sdk_version:
         description: "iOS SDK Version"
         default: "17.5"
