@@ -6,36 +6,67 @@ name: Build and Release YouTube Premium
 on:
   workflow_dispatch:
     inputs:
+
+     enable_youpip:
+        description: "Integrate YouPiP"
+        type: boolean
+        required: true
+        default: false
+
+      enable_ytuhd:
+        description: "Integrate YTUHD"
+        type: boolean
+        required: true
+        default: false
+
+      enable_yq:
+        description: "Integrate YouQuality"
+        type: boolean
+        required: true
+        default: false
+
+      enable_ryd:
+        description: "Integrate Return YouTube Dislikes"
+        type: boolean
+        required: true
+        default: false
+        
       sdk_version:
         description: "iOS SDK Version"
         default: "17.5"
         required: true
         type: string
+        
       decrypted_youtube_url:
         description: "The direct URL to the decrypted YouTube ipa"
         default: "https://iosmod.net/IPAs/YouTube_20.20.7.ipa"
         required: true
         type: string
+        
       bundle_id:
         description: "Modify the bundle ID. Not recommended"
         default: "com.google.ios.youtube"
         required: true
         type: string
+        
       app_name:
         description: "Modify the name of the app on the Home Screen. Not recommended"
         default: "YouTube"
         required: true
         type: string
+        
       upload_artifact:
         description: "Upload Artifact"
         default: true
         required: false
         type: boolean
+        
       upload_artifact_catbox:
         description: "Upload Artifact to Catbox"
         default: true
         required: false
         type: boolean
+        
       create_release:
         description: "Create a draft release"
         default: true
