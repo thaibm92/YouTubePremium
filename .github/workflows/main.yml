@@ -12,12 +12,6 @@ on:
         required: true
         default: false
 
-      enable_youpip:
-        description: "Integrate YouPiP"
-        type: boolean
-        required: true
-        default: false
-        
       sdk_version:
         description: "iOS SDK Version"
         default: "17.5"
