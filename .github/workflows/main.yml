@@ -6,6 +6,12 @@ name: Build and Release YouTube Premium
 on:
   workflow_dispatch:
     inputs:
+      enable_youpip:
+        description: "Integrate YouPiP"
+        type: boolean
+        required: true
+        default: false
+        
       sdk_version:
         description: "iOS SDK Version"
         default: "17.5"
