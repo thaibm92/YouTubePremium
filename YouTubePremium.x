@@ -2,25 +2,6 @@
 #import <dlfcn.h>
 #import <Foundation/Foundation.h>
 
-// Premium logo
-%hook UIImageView
-- (void)setImage:(UIImage *)image {
-
-    NSString *resourcesPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Frameworks/Module_Framework.framework/Innertube_Resources.bundle"];
-    NSBundle *frameworkBundle = [NSBundle bundleWithPath:resourcesPath];
-
-    if ([[image description] containsString:@"Resources: youtube_logo)"]) {
-        image = [UIImage imageNamed:@"youtube_premium_logo" inBundle:frameworkBundle compatibleWithTraitCollection:nil];
-    }
-
-    else if ([[image description] containsString:@"Resources: youtube_logo_dark)"]) {
-        image = [UIImage imageNamed:@"youtube_premium_logo_white" inBundle:frameworkBundle compatibleWithTraitCollection:nil];
-    }
-
-    %orig(image);
-}
-%end
-
 
 // YouTube Premium Logo - @arichornlover & @bhackel
 @interface YTITopbarLogoRenderer : NSObject
@@ -42,6 +23,26 @@
     return YES;
 }
 %end
+
+// Premium logo
+%hook UIImageView
+- (void)setImage:(UIImage *)image {
+
+    NSString *resourcesPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Frameworks/Module_Framework.framework/Innertube_Resources.bundle"];
+    NSBundle *frameworkBundle = [NSBundle bundleWithPath:resourcesPath];
+
+    if ([[image description] containsString:@"Resources: youtube_logo)"]) {
+        image = [UIImage imageNamed:@"youtube_premium_logo" inBundle:frameworkBundle compatibleWithTraitCollection:nil];
+    }
+
+    else if ([[image description] containsString:@"Resources: youtube_logo_dark)"]) {
+        image = [UIImage imageNamed:@"youtube_premium_logo_white" inBundle:frameworkBundle compatibleWithTraitCollection:nil];
+    }
+
+    %orig(image);
+}
+%end
+
 /*
 //------new
 // YouTube Premium Logo - @arichornlover & bhackel
