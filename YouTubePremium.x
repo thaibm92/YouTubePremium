@@ -21,7 +21,7 @@
 }
 %end
 
-/*
+
 // YouTube Premium Logo - @arichornlover & @bhackel
 @interface YTITopbarLogoRenderer : NSObject
 @property(readonly, nonatomic) YTIIcon *iconImage;
@@ -42,7 +42,7 @@
     return YES;
 }
 %end
-
+/*
 //------new
 // YouTube Premium Logo - @arichornlover & bhackel
 %hook YTHeaderLogoController
