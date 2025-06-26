@@ -1,12 +1,12 @@
 #import "Header.h"
 #import <dlfcn.h>
 #import <Foundation/Foundation.h>
-/*
+
 // YouTube Premium Logo - @arichornlover & @bhackel
 @interface YTITopbarLogoRenderer : NSObject
 @property(readonly, nonatomic) YTIIcon *iconImage;
 @end
-//enable logo premium
+/*//enable logo premium
 %hook YTHeaderLogoController
 - (void)setTopbarLogoRenderer:(YTITopbarLogoRenderer *)renderer {
     YTIIcon *iconImage = renderer.iconImage;
