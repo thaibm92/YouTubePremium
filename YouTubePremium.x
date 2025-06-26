@@ -5,6 +5,7 @@
 // YouTube Premium Logo - @arichornlover & @bhackel
 @interface YTITopbarLogoRenderer : NSObject
 @property(readonly, nonatomic) YTIIcon *iconImage;
+@property(readonly, nonatomic) YTIIcon *icon;
 @end
 //enable logo premium
 %hook YTHeaderLogoController
