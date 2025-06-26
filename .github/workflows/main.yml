@@ -250,6 +250,11 @@ jobs:
         if: ${{ inputs.enable_ytlite }}
         run: |
           wget "https://github.com/dayanch96/YTLite/releases/download/v5.2b1/com.dvntm.ytlite_5.2b1_iphoneos-arm.deb" --no-verbose -O main/packages/YTLite.deb
+
+      - name: Download YTIcons
+        if: ${{ inputs.add_YTIcons }}
+        run: |
+          wget "https://github.com/thaibm92/YTIcons/releases/download/v1.0.0/com.ps.yticons_1.0.0_iphoneos-arm.deb" --no-verbose -O main/packages/YTIcons.deb
           
       - name: Install Cyan
         run: |
