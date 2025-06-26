@@ -10,8 +10,9 @@
 %hook YTHeaderLogoController
 - (void)setTopbarLogoRenderer:(YTITopbarLogoRenderer *)renderer {
     YTIIcon *iconImage = renderer.iconImage;
-    iconImage.iconType = 537;
+    //iconImage.iconType = 537;
     //iconImage.iconType = YT_PREMIUM_LOGO;
+    iconImage.iconType = YT_PREMIERE_LOGO_SHORT;
     %orig;
 }
 - (void)setPremiumLogo:(BOOL)isPremiumLogo {
@@ -23,14 +24,15 @@
 }
 %end
 
-/*
+
 //------new
 // YouTube Premium Logo - @arichornlover & bhackel
 %hook YTHeaderLogoController
 - (void)setTopbarLogoRenderer:(YTITopbarLogoRenderer *)renderer {
     // Modify the type of the icon before setting the renderer
     YTIIcon *icon = [%c(YTIIcon) new];
-    icon.iconType = YT_PREMIUM_LOGO; // magic number (537) for Premium icon, hopefully it doesnt change. 158 (YT_DEFAULT_LOGO) is default logo.
+    //icon.iconType = YT_PREMIUM_LOGO; // magic number (537) for Premium icon, hopefully it doesnt change. 158 (YT_DEFAULT_LOGO) is default logo.
+    iconImage.iconType = YT_PREMIERE_LOGO_SHORT;
     // Use this modified renderer
     %orig;
 }
@@ -43,7 +45,7 @@
     return YES;
 }
 %end
-*/
+
 
 // Keychain patching
 static NSString *accessGroupID() {
