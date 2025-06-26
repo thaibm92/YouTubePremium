@@ -12,6 +12,12 @@ on:
         required: true
         default: false
 
+      add_YTIcons:
+        description: "Add YTIcons"
+        type: boolean
+        required: true
+        default: false
+
       sdk_version:
         description: "iOS SDK Version"
         default: "17.5"
