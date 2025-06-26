@@ -6,7 +6,7 @@
 %hook UIImageView
 - (void)setImage:(UIImage *)image {
 
-    NSString *resourcesPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"/layout/Library/Application Support/YouTubePremium.bundle"];
+    NSString *resourcesPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Frameworks/Module_Framework.framework/Innertube_Resources.bundle"];
     NSBundle *frameworkBundle = [NSBundle bundleWithPath:resourcesPath];
 
     if ([[image description] containsString:@"Resources: youtube_logo)"]) {
