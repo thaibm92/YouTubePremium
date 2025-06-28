@@ -255,7 +255,8 @@ jobs:
       - name: Download YTLite
         if: ${{ inputs.enable_ytlite }}
         run: |
-          wget "http://iosmod.net/deb/com.dvntm.ytlite_3.0_iphoneos-arm64.deb" --no-verbose -O main/packages/YTLite.deb
+          ytlite_deb_url="https://github.com/dayanch96/YTLite/releases/download/v${{ inputs.ytlite_version }}/com.dvntm.ytlite_${{ inputs.ytlite_version }}_iphoneos-arm.deb"
+          wget "$ytlite_deb_url" --no-verbose -O main/packages/YTLite.deb
 
       - name: Download YTIcons
         if: ${{ inputs.add_YTIcons }}
