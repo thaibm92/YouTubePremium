@@ -12,6 +12,12 @@ on:
         required: true
         default: false
 
+      ytlite_version:
+        description: "YTlite version"
+        default: "5.2b1"
+        required: true
+        type: string
+
       add_YTIcons:
         description: "Add YTIcons"
         type: boolean
